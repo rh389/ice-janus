@@ -60,5 +60,5 @@ swiftmailer:
 
 fos_user:
     db_driver: orm
-    firewall_name: main
+    firewall_name: fos_user_firewall
     user_class: Ice\ExternalUserBundle\Entity\User
