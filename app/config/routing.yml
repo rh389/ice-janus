@@ -2,3 +2,6 @@
 #_internal:
 #    resource: "@FrameworkBundle/Resources/config/routing/internal.xml"
 #    prefix:   /_internal
+ice_user:
+    resource: "@IceExternalUserBundle/Resources/config/routing.yml"
+    prefix:   /
