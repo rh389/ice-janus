@@ -11,6 +11,19 @@ use FOS\UserBundle\Entity\User as BaseUser;
  *
  * @ORM\Table(name="ice_user")
  * @ORM\Entity(repositoryClass="Ice\ExternalUserBundle\Entity\UserRepository")
+ * @ORM\AttributeOverrides({
+ *  @ORM\AttributeOverride(name="email",
+ *      column=@ORM\Column(
+ *          nullable = true
+ *      )
+ *  ),
+ * @ORM\AttributeOverride(name="emailCanonical",
+ *      column=@ORM\Column(
+ *          name = "email_canonical",
+ *          nullable = true
+ *      )
+ *  ),
+ * })
  */
 class User extends BaseUser
 {
