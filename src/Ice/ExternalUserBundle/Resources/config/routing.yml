@@ -1,3 +1,8 @@
 hello:
     pattern:  /hello/{name}
     defaults: { _controller: IceExternalUserBundle:Default:index }
+
+users_api:
+    type:       rest
+    resource:   Ice\ExternalUserBundle\Controller\UsersController
+    prefix:     /api
