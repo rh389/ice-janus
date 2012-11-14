@@ -14,13 +14,15 @@ use FOS\UserBundle\Entity\User as BaseUser;
  * @ORM\AttributeOverrides({
  *  @ORM\AttributeOverride(name="email",
  *      column=@ORM\Column(
- *          nullable = true
+ *          nullable = true,
+ *          unique = true
  *      )
  *  ),
  * @ORM\AttributeOverride(name="emailCanonical",
  *      column=@ORM\Column(
  *          name = "email_canonical",
- *          nullable = true
+ *          nullable = true,
+ *          unique = true
  *      )
  *  ),
  * })
@@ -41,4 +43,5 @@ class User extends BaseUser
     {
         parent::__construct();
     }
+
 }

@@ -62,6 +62,11 @@ fos_user:
     db_driver: orm
     firewall_name: fos_user_firewall
     user_class: Ice\ExternalUserBundle\Entity\User
+    registration:
+        form:
+            type: ice_external_user_registration
+    service:
+        email_canonicalizer:    ice_external_user.email_canonicalizer
 
 fos_rest:
     routing_loader:
