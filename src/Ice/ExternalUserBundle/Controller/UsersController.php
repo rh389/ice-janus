@@ -51,7 +51,9 @@ class UsersController extends FOSRestController
         $form->bind($this->getRequest());
 
         if ($form->isValid()) {
-            $user->setUsername(uniqid());
+            $user
+                ->setUsername(uniqid())
+                ->setEnabled(true);
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($user);
@@ -64,4 +66,6 @@ class UsersController extends FOSRestController
 
         return $this->handleView($view, 400);
     }
+
+
 }
