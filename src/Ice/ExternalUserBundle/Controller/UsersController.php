@@ -67,5 +67,13 @@ class UsersController extends FOSRestController
         return $this->handleView($view, 400);
     }
 
+    public function getUsersAuthenticateAction()
+    {
+        $username = $this->getUser()->getUsername();
+
+        $user = $this->getDoctrine()->getRepository('IceExternalUserBundle:User')->findOneBy(array('username' => $username));
+
+        return new RedirectResponse($this->generateUrl('get_user', array('user' => $user->getId()), true));
+    }
 
 }

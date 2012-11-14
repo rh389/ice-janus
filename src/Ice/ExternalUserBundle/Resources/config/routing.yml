@@ -2,6 +2,10 @@ hello:
     pattern:  /hello/{name}
     defaults: { _controller: IceExternalUserBundle:Default:index }
 
+users_authenticate:
+    pattern:    /api/users/authenticate
+    defaults:   { _controller: IceExternalUserBundle:Users:getUsersAuthenticate }
+
 users_api:
     type:       rest
     resource:   Ice\ExternalUserBundle\Controller\UsersController

@@ -21,6 +21,15 @@ security:
             logout:       true
             anonymous:    true
 
+        user_authenticate:
+            pattern: ^/api/users/authenticate$
+            anonymous: false
+            form_login: false
+            provider: fos_userbundle
+            http_basic:
+                realm: "ICE user authentication"
+
+
     role_hierarchy:
         ROLE_ADMIN:       ROLE_USER
         ROLE_SUPER_ADMIN: ROLE_ADMIN
