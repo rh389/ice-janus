@@ -38,10 +38,44 @@ class User extends BaseUser
      */
     protected $id;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="first_names", type="string")
+     */
+    protected $firstNames;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="last_name", type="string")
+     */
+    protected $lastName;
 
     public function __construct()
     {
         parent::__construct();
     }
 
+    public function setFirstNames($firstNames)
+    {
+        $this->firstNames = $firstNames;
+        return $this;
+    }
+
+    public function getFirstNames()
+    {
+        return $this->firstNames;
+    }
+
+    public function setLastName($lastName)
+    {
+        $this->lastName = $lastName;
+        return $this;
+    }
+
+    public function getLastName()
+    {
+        return $this->lastName;
+    }
 }

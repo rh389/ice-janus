@@ -1,0 +1,9 @@
+Ice\ExternalUserBundle\Entity\User:
+    exclusion_policy: ALL
+    properties:
+        firstNames:
+            expose: true
+            serialized_name: firstNames
+        lastName:
+            expose: true
+            serialized_name: lastName

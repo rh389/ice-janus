@@ -16,6 +16,8 @@ class RegistrationFormType extends BaseType
         $builder
             ->add('plainPassword', 'password')
             ->add('email', 'email')
+            ->add('firstNames')
+            ->add('lastName')
         ;
     }
 
@@ -24,11 +26,12 @@ class RegistrationFormType extends BaseType
         $resolver->setDefaults(array(
             'data_class' => 'Ice\ExternalUserBundle\Entity\User',
             'csrf_protection' => false,
+            'validation_groups' => array('Registration'),
         ));
     }
 
     public function getName()
     {
-        return 'registration';
+        return 'register';
     }
 }
