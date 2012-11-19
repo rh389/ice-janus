@@ -14,13 +14,25 @@ class RegistrationFormType extends BaseType
 //        parent::buildForm($builder, $options);
 
         $builder
-            ->add('plainPassword', 'password')
-            ->add('email', 'email')
-            ->add('title')
-            ->add('firstNames')
-            ->add('lastName')
+            ->add('plainPassword', 'password', array(
+                'description' => 'Plain text password. Encoded before new user is persisted.',
+            ))
+            ->add('email', 'email', array(
+                'description' => 'Email address. Must be unique.',
+            ))
+            ->add('title', 'text', array(
+                'description' => 'Salutation.',
+            ))
+            ->add('firstNames', 'text', array(
+                'description' => 'First name(s).',
+            ))
+            ->add('lastName', 'text', array(
+                'description' => 'Last name.',
+            ))
             ->add('dob', 'date', array(
                 'widget' => 'single_text',
+                'description' => 'Date of birth.',
+                'required' => false,
             ))
         ;
     }
