@@ -1,2 +1,26 @@
-Ice\ExternalUserBundle\User:
-    getters:
+Ice\ExternalUserBundle\Entity\User:
+    properties:
+        firstNames:
+            - NotBlank:
+                groups:  [rest_register]
+                message: Please provide your first name(s)
+
+        lastName:
+            - NotBlank:
+                groups: [rest_register]
+                message: Please provide your last name
+
+
+        email:
+            - NotBlank:
+                groups: [rest_register]
+                message: Please provide an email address
+            - Email:
+                groups: [rest_register]
+                message: Please provide a valid email address
+
+
+        plainPassword:
+            - NotBlank:
+                groups: [rest_register]
+                message: Please provide a password

@@ -6,6 +6,8 @@ use Doctrine\ORM\Mapping as ORM;
 
 use FOS\UserBundle\Entity\User as BaseUser;
 
+use Symfony\Component\Validator\Constraints as Assert;
+
 /**
  * Ice\ExternalUserBundle\Entity\User
  *
@@ -42,6 +44,8 @@ class User extends BaseUser
      * @var string
      *
      * @ORM\Column(name="first_names", type="string")
+     *
+     * @Assert\NotBlank()
      */
     protected $firstNames;
 

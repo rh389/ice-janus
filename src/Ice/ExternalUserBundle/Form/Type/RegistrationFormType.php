@@ -26,7 +26,7 @@ class RegistrationFormType extends BaseType
         $resolver->setDefaults(array(
             'data_class' => 'Ice\ExternalUserBundle\Entity\User',
             'csrf_protection' => false,
-            'validation_groups' => array('Registration'),
+            'validation_groups' => array('rest_register'),
         ));
     }
 
