@@ -87,3 +87,6 @@ jms_serializer:
             FOSUserBundle:
                 namespace_prefix: "FOS\\UserBundle"
                 path: "@IceExternalUserBundle/Resources/config/serializer/fos"
+
+nelmio_api_doc:
+    name:   ICE identity management API documentation

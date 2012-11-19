@@ -1,12 +1,23 @@
-hello:
-    pattern:  /hello/{name}
-    defaults: { _controller: IceExternalUserBundle:Default:index }
-
-users_authenticate:
+user_authenticate:
     pattern:    /api/users/authenticate
     defaults:   { _controller: IceExternalUserBundle:Users:getUsersAuthenticate }
+    requirements:
+        _method:    GET
 
-users_api:
-    type:       rest
-    resource:   Ice\ExternalUserBundle\Controller\UsersController
-    prefix:     /api
+user_get:
+    pattern:    /api/users/{user}
+    defaults:   { _controller: IceExternalUserBundle:Users:getUser }
+    requirements:
+        _method:    GET
+
+users_get:
+    pattern:    /api/users
+    defaults:   { _controller: IceExternalUserBundle:Users:getUsers }
+    requirements:
+        _method:    GET
+
+user_register:
+    pattern:    /api/users
+    defaults:   { _controller: IceExternalUserBundle:Users:postUsers }
+    requirements:
+        _method:    POST

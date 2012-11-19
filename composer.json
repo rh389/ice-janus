@@ -21,7 +21,8 @@
         "doctrine/doctrine-migrations-bundle": "dev-master",
         "friendsofsymfony/user-bundle": "*",
         "elnur/blowfish-password-encoder-bundle": "dev-master",
-        "friendsofsymfony/rest-bundle": "dev-master"
+        "friendsofsymfony/rest-bundle": "dev-master",
+        "nelmio/api-doc-bundle": "dev-master"
     },
     "scripts": {
         "post-install-cmd": [
