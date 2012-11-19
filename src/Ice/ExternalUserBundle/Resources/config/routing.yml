@@ -9,6 +9,7 @@ user_get:
     defaults:   { _controller: IceExternalUserBundle:Users:getUser }
     requirements:
         _method:    GET
+        user:    \d+
 
 users_get:
     pattern:    /api/users

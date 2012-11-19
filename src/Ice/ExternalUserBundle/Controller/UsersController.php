@@ -18,7 +18,7 @@ class UsersController extends FOSRestController
     /**
      * @ApiDoc(
      *  resource=true,
-     *  description="Get a list of all users"
+     *  description="Returns a collection of User"
      * )
      * @return \Symfony\Component\HttpFoundation\Response
      */
@@ -34,7 +34,7 @@ class UsersController extends FOSRestController
     /**
      * @ApiDoc(
      *   resource=true,
-     *   description="Get a single user",
+     *   description="Returns a single User",
      *   return="Ice\ExternalUserBundle\Entity\User"
      * )
      *
@@ -56,7 +56,7 @@ class UsersController extends FOSRestController
     /**
      * @ApiDoc(
      *   resource=true,
-     *   description="Create a new user",
+     *   description="Create a new User",
      *   input="Ice\ExternalUserBundle\Form\Type\RegistrationFormType",
      *   statusCodes={
      *      201="Returned when user successfully created",
@@ -98,7 +98,7 @@ class UsersController extends FOSRestController
     /**
      * @ApiDoc(
      *   resource=true,
-     *   description="Authenticate an existing user using HTTP basic",
+     *   description="Authenticate an existing User using HTTP basic authentication",
      *   statusCodes={
      *      302="Returned when authentication is successful",
      *      401="Returned when authentication is not successful"
