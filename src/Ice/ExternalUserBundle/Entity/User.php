@@ -43,6 +43,13 @@ class User extends BaseUser
     /**
      * @var string
      *
+     * @ORM\Column(type="string")
+     */
+    protected $title;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="first_names", type="string")
      *
      * @Assert\NotBlank()
@@ -56,9 +63,27 @@ class User extends BaseUser
      */
     protected $lastName;
 
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(type="date", nullable=true)
+     */
+    protected $dob;
+
     public function __construct()
     {
         parent::__construct();
+    }
+
+    public function setTitle($title)
+    {
+        $this->title = $title;
+        return $this;
+    }
+
+    public function getTitle()
+    {
+        return $this->title;
     }
 
     public function setFirstNames($firstNames)
@@ -81,5 +106,16 @@ class User extends BaseUser
     public function getLastName()
     {
         return $this->lastName;
+    }
+
+    public function setDob(\DateTime $dob = null)
+    {
+        $this->dob = $dob;
+        return $this;
+    }
+
+    public function getDob()
+    {
+        return $this->dob;
     }
 }

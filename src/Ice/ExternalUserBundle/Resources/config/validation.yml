@@ -1,5 +1,10 @@
 Ice\ExternalUserBundle\Entity\User:
     properties:
+        title:
+            - NotBlank:
+                groups: [rest_register]
+                message: Please provide your title
+
         firstNames:
             - NotBlank:
                 groups:  [rest_register]
@@ -10,6 +15,10 @@ Ice\ExternalUserBundle\Entity\User:
                 groups: [rest_register]
                 message: Please provide your last name
 
+        dob:
+            - Date:
+                groups: [rest_register]
+                message: Please provide a valid date of birth
 
         email:
             - NotBlank:
@@ -18,7 +27,6 @@ Ice\ExternalUserBundle\Entity\User:
             - Email:
                 groups: [rest_register]
                 message: Please provide a valid email address
-
 
         plainPassword:
             - NotBlank:

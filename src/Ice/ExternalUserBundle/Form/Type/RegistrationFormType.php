@@ -16,8 +16,10 @@ class RegistrationFormType extends BaseType
         $builder
             ->add('plainPassword', 'password')
             ->add('email', 'email')
+            ->add('title')
             ->add('firstNames')
             ->add('lastName')
+            ->add('dob', 'date')
         ;
     }
 
