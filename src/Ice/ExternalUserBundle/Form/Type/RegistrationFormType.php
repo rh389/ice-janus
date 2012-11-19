@@ -19,7 +19,9 @@ class RegistrationFormType extends BaseType
             ->add('title')
             ->add('firstNames')
             ->add('lastName')
-            ->add('dob', 'date')
+            ->add('dob', 'date', array(
+                'widget' => 'single_text',
+            ))
         ;
     }
 
