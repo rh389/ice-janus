@@ -24,3 +24,8 @@ Ice\ExternalUserBundle\Entity\User:
             - NotBlank:
                 groups: [rest_register]
                 message: Please provide a password
+    constraints:
+        - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity:
+            fields: [emailCanonical]
+            groups: [rest_register]
+            message: This email address is already associated with another account
