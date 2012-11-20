@@ -126,7 +126,12 @@ class UsersController extends FOSRestController
     {
         $username = $this->getUser()->getUsername();
 
+        /** @var $user User */
         $user = $this->getDoctrine()->getRepository('IceExternalUserBundle:User')->findOneBy(array('username' => $username));
+        $user->setLastLogin(new \DateTime());
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($user);
+        $em->flush();
 
         return new RedirectResponse($this->generateUrl('get_user', array('user' => $user->getId()), true));
     }
