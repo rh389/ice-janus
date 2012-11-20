@@ -99,12 +99,12 @@ class UsersController extends FOSRestController
             $em->persist($user);
             $em->flush();
 
-            return new RedirectResponse($this->generateUrl('get_user', array('user' => $user->getId()), true), $statusCode);
+            $view = $this->view($user, $statusCode);
+        } else {
+            $view = $this->view($form, 400);
         }
 
-        $view = $this->view($form);
-
-        return $this->handleView($view, 400);
+        return $this->handleView($view);
     }
 
     /**

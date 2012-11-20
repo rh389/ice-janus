@@ -36,10 +36,6 @@ class UsersControllerTest extends WebTestCase
 
         $response = $client->getResponse();
         $this->assertJsonResponse($response, 201);
-
-        $client->followRedirect();
-        $response = $client->getResponse();
-        $this->assertJsonResponse($response);
     }
 
     public function testGetUsersAuthenticateAction()
