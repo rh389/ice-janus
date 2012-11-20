@@ -60,3 +60,4 @@ task :upload_parameters do
 end
 
 after 'deploy:setup', 'upload_parameters'
+after 'deploy:migrations', 'deploy:cleanup'
