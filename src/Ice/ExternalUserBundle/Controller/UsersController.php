@@ -11,7 +11,8 @@ use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use Symfony\Component\HttpFoundation\Response,
     Symfony\Component\HttpFoundation\RedirectResponse;
 
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter,
+    Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 
 class UsersController extends FOSRestController
 {
@@ -20,6 +21,7 @@ class UsersController extends FOSRestController
      *  resource=true,
      *  description="Returns a collection of User"
      * )
+     *
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function getUsersAction()
