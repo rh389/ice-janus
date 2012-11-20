@@ -48,6 +48,6 @@ class RegistrationFormType extends BaseType
 
     public function getName()
     {
-        return 'register';
+        return '';
     }
 }
