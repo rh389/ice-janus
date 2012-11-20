@@ -74,6 +74,10 @@ fos_rest:
             json: fos_rest.decoder.json
     routing_loader:
         default_format: json
+    format_listener:
+        default_priorities: ['json', html, '*/*']
+        fallback_format: json
+        prefer_extension: true
     view:
         formats:
             json: true
