@@ -32,6 +32,10 @@ Ice\ExternalUserBundle\Entity\User:
             - NotBlank:
                 groups: [rest_register]
                 message: Please provide a password
+            - Length:
+                groups: [rest_register]
+                min: 6
+                minMessage: Your password must be at least six characters long
     constraints:
         - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity:
             fields: [emailCanonical]
