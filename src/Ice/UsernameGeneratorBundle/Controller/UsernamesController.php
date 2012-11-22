@@ -35,6 +35,11 @@ class UsernamesController extends FOSRestController
             /** @var $repository \Ice\UsernameGeneratorBundle\Entity\UsernameRepository */
             $repository = $this->getDoctrine()->getRepository('IceUsernameGeneratorBundle:Username');
 
+            // There is potential for a race condition here, whereby two clients could request a
+            // username for the same initials before the first clients request had been persisted, causing
+            // an integrity constraint violation.
+            //
+            // This part of the controller keeps trying to persist a new username until it is successful.
             $usernameSuccessfullyGenerated = false;
             do {
                 $result = $repository->findCurrentSequenceForInitials($initials);
