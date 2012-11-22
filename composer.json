@@ -22,7 +22,8 @@
         "friendsofsymfony/user-bundle": "*",
         "elnur/blowfish-password-encoder-bundle": "dev-master",
         "friendsofsymfony/rest-bundle": "dev-master",
-        "nelmio/api-doc-bundle": "dev-master"
+        "nelmio/api-doc-bundle": "dev-master",
+        "misd/guzzle-bundle": "dev-master"
     },
     "scripts": {
         "post-install-cmd": [

@@ -1,5 +1,5 @@
 {
-    "hash": "6ee02f6220ccdb2c66755be644524140",
+    "hash": "d05e3782baaf77ad6205e5927081b836",
     "packages": [
         {
             "name": "dflydev/markdown",
@@ -18,7 +18,7 @@
             "require": {
                 "php": ">=5.3"
             },
-            "time": "1342369887",
+            "time": "2012-07-15 16:31:27",
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -126,7 +126,7 @@
                 "annotations",
                 "persistence"
             ],
-            "time": "1348120518"
+            "time": "2012-09-20 05:55:18"
         },
         {
             "name": "doctrine/dbal",
@@ -146,7 +146,7 @@
                 "php": ">=5.3.2",
                 "doctrine/common": "2.3.*"
             },
-            "time": "1350419590",
+            "time": "2012-10-16 20:33:10",
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -257,7 +257,7 @@
                 "persistence",
                 "dbal"
             ],
-            "time": "1350120716"
+            "time": "2012-10-13 09:31:56"
         },
         {
             "name": "doctrine/doctrine-migrations-bundle",
@@ -280,7 +280,7 @@
                 "symfony/framework-bundle": ">=2.1.0,<2.3-dev",
                 "doctrine/doctrine-bundle": "1.0.*"
             },
-            "time": "1350561870",
+            "time": "2012-10-18 12:04:30",
             "type": "symfony-bundle",
             "installation-source": "source",
             "autoload": {
@@ -338,7 +338,7 @@
             "suggest": {
                 "symfony/console": "to run the migration from the console"
             },
-            "time": "1350643044",
+            "time": "2012-10-19 10:37:24",
             "type": "library",
             "installation-source": "source",
             "autoload": {
@@ -435,7 +435,7 @@
                 "database",
                 "orm"
             ],
-            "time": "1350071385"
+            "time": "2012-10-12 19:49:45"
         },
         {
             "name": "elnur/blowfish-password-encoder-bundle",
@@ -457,7 +457,7 @@
                 "symfony/framework-bundle": ">=2.0,<2.3",
                 "symfony/security-bundle": ">=2.0,<2.3"
             },
-            "time": "1351977570",
+            "time": "2012-11-03 21:19:30",
             "type": "symfony-bundle",
             "installation-source": "source",
             "autoload": {
@@ -502,7 +502,7 @@
                 "php": ">=5.3.2",
                 "symfony/http-foundation": ">=2.0,<2.3-dev"
             },
-            "time": "1347135166",
+            "time": "2012-09-08 20:12:46",
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -564,7 +564,7 @@
             "suggest": {
                 "sensio/framework-extra-bundle": "Add support for route annotations"
             },
-            "time": "1352375626",
+            "time": "2012-11-08 11:53:46",
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
@@ -634,7 +634,7 @@
                 "doctrine/doctrine-bundle": "*",
                 "doctrine/mongodb-odm-bundle": "*"
             },
-            "time": "1351955784",
+            "time": "2012-11-03 15:16:24",
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
@@ -669,6 +669,93 @@
             "homepage": "http://friendsofsymfony.github.com",
             "keywords": [
                 "User management"
+            ]
+        },
+        {
+            "name": "guzzle/guzzle",
+            "version": "v3.0.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/guzzle/guzzle",
+                "reference": "v3.0.5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/guzzle/guzzle/archive/v3.0.5.zip",
+                "reference": "v3.0.5",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.2",
+                "ext-curl": "*",
+                "symfony/event-dispatcher": "2.1.*"
+            },
+            "replace": {
+                "guzzle/batch": "self.version",
+                "guzzle/cache": "self.version",
+                "guzzle/common": "self.version",
+                "guzzle/http": "self.version",
+                "guzzle/inflection": "self.version",
+                "guzzle/iterator": "self.version",
+                "guzzle/log": "self.version",
+                "guzzle/parser": "self.version",
+                "guzzle/plugin": "self.version",
+                "guzzle/plugin-async": "self.version",
+                "guzzle/plugin-backoff": "self.version",
+                "guzzle/plugin-cache": "self.version",
+                "guzzle/plugin-cookie": "self.version",
+                "guzzle/plugin-curlauth": "self.version",
+                "guzzle/plugin-history": "self.version",
+                "guzzle/plugin-log": "self.version",
+                "guzzle/plugin-md5": "self.version",
+                "guzzle/plugin-mock": "self.version",
+                "guzzle/plugin-oauth": "self.version",
+                "guzzle/service": "self.version",
+                "guzzle/stream": "self.version"
+            },
+            "require-dev": {
+                "doctrine/common": "*",
+                "symfony/class-loader": "*",
+                "monolog/monolog": "1.*",
+                "zendframework/zend-cache": "2.0.*",
+                "zendframework/zend-log": "2.0.*",
+                "zend/zend-log1": "1.12",
+                "zend/zend-cache1": "1.12",
+                "phpunit/phpunit": "3.7.*"
+            },
+            "time": "2012-11-19 00:15:33",
+            "type": "library",
+            "installation-source": "dist",
+            "autoload": {
+                "psr-0": {
+                    "Guzzle\\Tests": "tests/",
+                    "Guzzle": "src/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Michael Dowling",
+                    "email": "mtdowling@gmail.com",
+                    "homepage": "https://github.com/mtdowling"
+                },
+                {
+                    "name": "Guzzle Community",
+                    "homepage": "https://github.com/guzzle/guzzle/contributors"
+                }
+            ],
+            "description": "Guzzle is a PHP HTTP client library and framework for building RESTful web service clients",
+            "homepage": "http://guzzlephp.org/",
+            "keywords": [
+                "framework",
+                "curl",
+                "http",
+                "rest",
+                "http client",
+                "client",
+                "web service"
             ]
         },
         {
@@ -815,7 +902,7 @@
                 "dependency injection",
                 "annotations"
             ],
-            "time": "1348217792"
+            "time": "2012-09-21 08:56:32"
         },
         {
             "name": "jms/metadata",
@@ -924,7 +1011,7 @@
                 "secure",
                 "expression"
             ],
-            "time": "1346947943"
+            "time": "2012-09-06 16:12:23"
         },
         {
             "name": "jms/serializer-bundle",
@@ -961,7 +1048,7 @@
             "suggest": {
                 "symfony/framework-bundle": "2.*"
             },
-            "time": "1352924640",
+            "time": "2012-11-14 20:24:00",
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
@@ -1059,7 +1146,54 @@
                 "compression",
                 "minification"
             ],
-            "time": "1351079542"
+            "time": "2012-10-24 11:52:22"
+        },
+        {
+            "name": "misd/guzzle-bundle",
+            "version": "dev-master",
+            "target-dir": "Misd/GuzzleBundle",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/misd-service-development/guzzle-bundle.git",
+                "reference": "e03b204018694d76c3cf0d0768b275ca8bdf8b60"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/misd-service-development/guzzle-bundle/archive/e03b204018694d76c3cf0d0768b275ca8bdf8b60.zip",
+                "reference": "e03b204018694d76c3cf0d0768b275ca8bdf8b60",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.2",
+                "symfony/framework-bundle": ">=2.0,<2.2-dev",
+                "guzzle/guzzle": "3.0.*"
+            },
+            "suggest": {
+                "jms/serializer-bundle": "Serialize/deserialize objects to/from XML, JSON and YAML."
+            },
+            "time": "2012-11-20 14:29:31",
+            "type": "symfony-bundle",
+            "installation-source": "source",
+            "autoload": {
+                "psr-0": {
+                    "Misd\\GuzzleBundle": ""
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Chris Wilkinson",
+                    "email": "chris.wilkinson@admin.cam.ac.uk"
+                }
+            ],
+            "description": "Integrates Guzzle into your Symfony2 application",
+            "homepage": "https://github.com/misd-service-development/guzzle-bundle",
+            "keywords": [
+                "bundle",
+                "Guzzle"
+            ]
         },
         {
             "name": "monolog/monolog",
@@ -1115,7 +1249,7 @@
                 "log",
                 "logging"
             ],
-            "time": "1351084926"
+            "time": "2012-10-24 13:22:06"
         },
         {
             "name": "nelmio/api-doc-bundle",
@@ -1146,7 +1280,7 @@
                 "symfony/validator": ">=2.1,<2.3-dev",
                 "symfony/yaml": ">=2.1,<2.3-dev"
             },
-            "time": "1353320602",
+            "time": "2012-11-19 10:23:22",
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
@@ -1224,7 +1358,7 @@
                 "distribution",
                 "configuration"
             ],
-            "time": "1347340208"
+            "time": "2012-09-11 05:10:08"
         },
         {
             "name": "sensio/framework-extra-bundle",
@@ -1245,7 +1379,7 @@
                 "symfony/framework-bundle": "2.1.*",
                 "doctrine/common": ">=2.1,<2.4-dev"
             },
-            "time": "1350448707",
+            "time": "2012-10-17 04:38:27",
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
@@ -1319,7 +1453,7 @@
                 }
             ],
             "description": "This bundle generates code for you",
-            "time": "1348030981"
+            "time": "2012-09-19 05:03:01"
         },
         {
             "name": "swiftmailer/swiftmailer",
@@ -1431,7 +1565,7 @@
                 "compression",
                 "minification"
             ],
-            "time": "1350864366"
+            "time": "2012-10-22 00:06:06"
         },
         {
             "name": "symfony/monolog-bundle",
@@ -1486,7 +1620,7 @@
             ],
             "description": "Symfony MonologBundle",
             "homepage": "http://symfony.com",
-            "time": "1348137624"
+            "time": "2012-09-20 10:40:24"
         },
         {
             "name": "symfony/swiftmailer-bundle",
@@ -1514,7 +1648,7 @@
                 "symfony/config": ">=2.1.0,<2.3-dev",
                 "symfony/yaml": ">=2.1.0,<2.3-dev"
             },
-            "time": "1350447491",
+            "time": "2012-10-17 04:18:11",
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
@@ -1603,7 +1737,7 @@
                 "propel/propel1": "dev-master",
                 "monolog/monolog": "1.*"
             },
-            "time": "1351584854",
+            "time": "2012-10-30 08:14:14",
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -1681,7 +1815,7 @@
                 "i18n",
                 "text"
             ],
-            "time": "1349889206"
+            "time": "2012-10-10 17:13:26"
         },
         {
             "name": "twig/twig",
@@ -1700,7 +1834,7 @@
             "require": {
                 "php": ">=5.2.4"
             },
-            "time": "1351434618",
+            "time": "2012-10-28 14:30:18",
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -1742,6 +1876,7 @@
         "doctrine/doctrine-migrations-bundle": 20,
         "elnur/blowfish-password-encoder-bundle": 20,
         "friendsofsymfony/rest-bundle": 20,
-        "nelmio/api-doc-bundle": 20
+        "nelmio/api-doc-bundle": 20,
+        "misd/guzzle-bundle": 20
     }
 }
