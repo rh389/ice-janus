@@ -1,3 +1,8 @@
+ice_janus_username_client:
+    resource: "@IceJanusUsernameClientBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
 ice_username_generator:
     resource: "@IceUsernameGeneratorBundle/Controller/"
     type:     annotation

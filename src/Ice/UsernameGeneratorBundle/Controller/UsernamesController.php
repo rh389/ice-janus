@@ -85,9 +85,15 @@ class UsernamesController extends FOSRestController
      * @Route("/api/usernames/{username}", name="get_username")
      * @Method("GET")
      */
-    public function getUsernameAction(Username $username)
+    public function getUsernameAction($username)
     {
-        $view = $this->view($username);
+        $foundUsername = $this->getDoctrine()->getRepository('IceUsernameGeneratorBundle:Username')->findOneBy(array('generatedUsername' => $username));
+
+        if (!$foundUsername) {
+            throw new \Symfony\Component\HttpKernel\Exception\NotFoundHttpException(sprintf("Username with username '%s' could not be found", $username));
+        }
+
+        $view = $this->view($foundUsername);
         return $this->handleView($view);
     }
 }
