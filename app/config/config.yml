@@ -72,17 +72,20 @@ fos_rest:
     body_listener:
         decoders:
             json: fos_rest.decoder.json
-    routing_loader:
-        default_format: json
-    format_listener:
-        default_priorities: ['json', html, '*/*']
-        fallback_format: json
-        prefer_extension: true
     view:
+        view_response_listener: force
         formats:
             json: true
-        mime_types:
-            json: ['application/json', 'application/x-json']
+            xml: true
+    format_listener:
+        default_priorities:
+            - json
+            - xml
+        fallback_format: json
+
+sensio_framework_extra:
+    view:    { annotations: false }
+    router:  { annotations: true }
 
 jms_serializer:
   metadata:
