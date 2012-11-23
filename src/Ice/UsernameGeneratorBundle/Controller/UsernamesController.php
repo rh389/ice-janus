@@ -12,11 +12,19 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route,
     Sensio\Bundle\FrameworkExtraBundle\Configuration\Method,
     Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
+use Nelmio\ApiDocBundle\Annotation\ApiDoc;
+
 class UsernamesController extends FOSRestController
 {
     /**
      * @Route("/api/usernames", name="generate_username")
      * @Method("POST")
+     *
+     * @ApiDoc(
+     *  resource=true,
+     *  description="Create a new Username",
+     *  input="Ice\UsernameGeneratorBundle\Form\Type\RequestUsernameFormType"
+     * )
      */
     public function postUsernamesAction()
     {
@@ -82,8 +90,20 @@ class UsernamesController extends FOSRestController
     }
 
     /**
-     * @Route("/api/usernames/{username}", name="get_username")
+     * @Route(
+     *   "/api/usernames/{username}",
+     *   name="get_username",
+     *   requirements={
+     *     "username": "[a-z]{2,}[0-9]+"
+     *   }
+     * )
      * @Method("GET")
+     *
+     * @ApiDoc(
+     *   resource=true,
+     *   description="Returns a single Username",
+     *   output="Ice\UsernameGeneratorBundle\Entity\Username"
+     * )
      */
     public function getUsernameAction($username)
     {
