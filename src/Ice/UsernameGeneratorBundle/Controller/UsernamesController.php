@@ -28,6 +28,7 @@ class UsernamesController extends FOSRestController
      */
     public function postUsernamesAction()
     {
+        $this->get('logger')->info($this->getRequest()->request->all());
         $form = $this->createForm(new RequestUsernameFormType());
         $form->bind($this->getRequest());
 
@@ -82,10 +83,11 @@ class UsernamesController extends FOSRestController
                 }
             } while($usernameSuccessfullyGenerated !== true);
 
-            return new RedirectResponse($this->generateUrl("get_username", array("username" => $username->getGeneratedUsername())), 201);
+            $view = $this->view($username, 201);
+        } else {
+            $view = $this->view($form, 400);
         }
 
-        $view = $this->view($form, 400);
         return $this->handleView($view);
     }
 

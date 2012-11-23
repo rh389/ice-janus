@@ -1,0 +1,54 @@
+{
+    "name": "Janus username",
+    "baseUrl": "http://janus.dev.ice.internal.admin.cam.ac.uk/app_dev.php/api",
+    "description": "Janus username is an API to generate ICE usernames",
+    "operations": {
+        "GetUsername": {
+            "httpMethod": "GET",
+            "uri": "usernames/{username}",
+            "curl.options": {
+                "debug": true
+            },
+            "summary": "Get a Username",
+            "responseClass": "GetUsernameOutput",
+            "parameters": {
+                "username": {
+                    "location": "uri",
+                    "type": "string",
+                    "description": "Username to retrieve by username",
+                    "required": true
+                }
+            }
+        },
+        "RegisterUsername": {
+            "httpMethod": "POST",
+            "uri": "usernames",
+            "curl.options": {
+                "debug": true
+            },
+            "summary": "Registers a new Username for a given set of initials",
+            "responseClass": "RegisterUsernameOutput",
+            "parameters": {
+                "initials": {
+                    "location": "json",
+                    "type": "string"
+                }
+            }
+        }
+    },
+    "models": {
+        "CreateUserOutput": {
+            "type": "object",
+            "properties": {
+                "username": {
+                    "location": "json",
+                    "type": "string"
+                },
+                "generated_at": {
+                    "location": "json",
+                    "type": "string"
+                }
+            }
+        }
+    }
+}

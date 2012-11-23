@@ -28,6 +28,7 @@ class AppKernel extends Kernel
             new Nelmio\ApiDocBundle\NelmioApiDocBundle(),
             new Ice\UsernameGeneratorBundle\IceUsernameGeneratorBundle(),
             new Ice\JanusUsernameClientBundle\IceJanusUsernameClientBundle(),
+            new Misd\GuzzleBundle\MisdGuzzleBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

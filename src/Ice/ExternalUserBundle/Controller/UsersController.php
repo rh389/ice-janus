@@ -91,8 +91,17 @@ class UsersController extends FOSRestController
         $form->bind($this->getRequest());
 
         if ($form->isValid()) {
+            /** @var $usernameClient \Guzzle\Service\Client */
+            $usernameClient = $this->get('janus_username.client');
+            $command = $usernameClient->getCommand('RegisterUsername', array('initials' => $user->getInitials()));
+            $command->prepare();
+            $command->getRequest()->setHeader('Content-Type', 'application/json');
+            $usernameClient->execute($command);
+            $response = $command->getResult();
+            $username = $response['username'];
+
             $user
-                ->setUsername(uniqid())
+                ->setUsername($username)
                 ->setEnabled(true);
 
             $em = $this->getDoctrine()->getManager();

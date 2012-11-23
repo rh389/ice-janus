@@ -118,4 +118,19 @@ class User extends BaseUser
     {
         return $this->dob;
     }
+
+    public function getInitials()
+    {
+        $initials = array();
+        $firstNames = explode(" ", $this->getFirstNames());
+
+        foreach ($firstNames as $name) {
+            $initials[] = substr($name, 0, 1);
+        }
+
+        $initials[] = substr($this->getLastName(), 0, 1);
+
+        $initials = implode("", $initials);
+        return strtolower($initials);
+    }
 }
