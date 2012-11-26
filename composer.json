@@ -23,7 +23,14 @@
         "elnur/blowfish-password-encoder-bundle": "dev-master",
         "friendsofsymfony/rest-bundle": "dev-master",
         "nelmio/api-doc-bundle": "dev-master",
-        "misd/guzzle-bundle": "dev-master"
+        "misd/guzzle-bundle": "dev-master",
+        "sonata-project/cache-bundle": "dev-master",
+        "sonata-project/block-bundle": "dev-master",
+        "sonata-project/jquery-bundle": "dev-master",
+        "knplabs/knp-menu-bundle": "1.1.*",
+        "sonata-project/exporter": "dev-master",
+        "sonata-project/admin-bundle": "dev-master",
+        "sonata-project/doctrine-orm-admin-bundle": "dev-master"
     },
     "scripts": {
         "post-install-cmd": [
