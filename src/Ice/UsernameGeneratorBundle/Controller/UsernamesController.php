@@ -36,7 +36,8 @@ class UsernamesController extends FOSRestController
             $data = $form->getData();
             $initials = $data['initials'];
 
-            $username = new Username();
+            $usernameFormat = $this->container->getParameter('ice_username_generator.username_format');
+            $username = new Username($usernameFormat);
             $username->setInitials($initials);
 
             $em = $this->getDoctrine()->getManager();
@@ -57,7 +58,8 @@ class UsernamesController extends FOSRestController
                 if ($sequence) {
                     $username->setSequence($sequence + 1);
                 } else {
-                    $username->setSequence(1);
+                    $sequence = $this->container->getParameter('ice_username_generator.sequence_start');
+                    $username->setSequence($sequence);
                 }
 
                 $em->persist($username);

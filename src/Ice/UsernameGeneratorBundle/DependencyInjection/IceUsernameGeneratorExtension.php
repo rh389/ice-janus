@@ -22,6 +22,9 @@ class IceUsernameGeneratorExtension extends Extension
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);
 
+        $container->setParameter('ice_username_generator.username_format', $config['username_format']);
+        $container->setParameter('ice_username_generator.sequence_start', $config['sequence_start']);
+
         $loader = new Loader\XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.xml');
     }

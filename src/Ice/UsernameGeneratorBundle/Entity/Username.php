@@ -55,6 +55,18 @@ class Username
     private $generatedAt;
 
     /**
+     * @var string
+     *
+     * A printf formatted string with a single %s placeholder
+     */
+    private $usernameFormat;
+
+    public function __construct($username_format)
+    {
+        $this->usernameFormat = $username_format;
+    }
+
+    /**
      * Set initials
      *
      * @param string $initials
@@ -151,7 +163,8 @@ class Username
     {
         $this->setGeneratedAt(new \DateTime());
 
-        $generatedUsername = sprintf("%s%s", $this->getInitials(), $this->getSequence());
+        $username = sprintf("%s%s", $this->getInitials(), $this->getSequence());
+        $generatedUsername = sprintf($this->usernameFormat, $username);
         $this->setGeneratedUsername($generatedUsername);
     }
 }
