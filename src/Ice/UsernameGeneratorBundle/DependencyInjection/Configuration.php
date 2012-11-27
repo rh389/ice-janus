@@ -29,8 +29,8 @@ class Configuration implements ConfigurationInterface
             ->scalarNode('sequence_start')
             ->validate()
             ->ifTrue(function ($v) {
-            return !is_int($v);
-        })
+                return !is_int($v);
+            })
             ->thenInvalid('Must be an integer but %s found.')
             ->end()
             ->defaultValue(1)
