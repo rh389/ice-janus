@@ -28,7 +28,6 @@ class UsernamesController extends FOSRestController
      */
     public function postUsernamesAction()
     {
-        $this->get('logger')->info($this->getRequest()->request->all());
         $form = $this->createForm(new RequestUsernameFormType());
         $form->bind($this->getRequest());
 
