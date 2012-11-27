@@ -28,10 +28,10 @@ class Configuration implements ConfigurationInterface
             ->end()
             ->scalarNode('sequence_start')
             ->validate()
-            ->ifTrue(function ($v) {
-                return !is_int($v);
-            })
-            ->thenInvalid('Must be an integer but %s found.')
+                ->ifTrue(function ($v) {
+                    return !is_int($v);
+                })
+                ->thenInvalid('Must be an integer but %s found.')
             ->end()
             ->defaultValue(1)
             ->info('The lowest number that will be appended to the User\'s initials to form their username.')
