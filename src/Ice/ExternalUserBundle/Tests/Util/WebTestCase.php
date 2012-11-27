@@ -2,8 +2,9 @@
 
 namespace Ice\ExternalUserBundle\Tests\Util;
 
-use Symfony\Bundle\FrameworkBundle\Test\WebTestCase AS BaseWebTestCase,
-    Symfony\Component\HttpFoundation\Response;
+use Liip\FunctionalTestBundle\Test\WebTestCase AS BaseWebTestCase;
+
+use Symfony\Component\HttpFoundation\Response;
 
 class WebTestCase extends BaseWebTestCase
 {

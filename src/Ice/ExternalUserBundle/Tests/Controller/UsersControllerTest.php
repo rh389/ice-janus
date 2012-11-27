@@ -6,6 +6,15 @@ use Ice\ExternalUserBundle\Tests\Util\WebTestCase;
 
 class UsersControllerTest extends WebTestCase
 {
+    public function setUp()
+    {
+        $classes = array(
+            'Ice\ExternalUserBundle\DataFixtures\ORM\LoadUserData',
+        );
+
+        $this->loadFixtures($classes);
+    }
+
     public function testGetUsersAction()
     {
         $client = $this->getJsonClient();
@@ -18,7 +27,7 @@ class UsersControllerTest extends WebTestCase
     public function testGetUserAction()
     {
         $client = $this->getJsonClient();
-        $crawler = $client->request('GET', '/api/users/1');
+        $crawler = $client->request('GET', '/api/users/abc12');
 
         $response = $client->getResponse();
         $this->assertJsonResponse($response);
@@ -41,7 +50,7 @@ class UsersControllerTest extends WebTestCase
     public function testGetUsersAuthenticateAction()
     {
         $client = $this->getJsonClient();
-        $client->setServerParameter('PHP_AUTH_USER', '50ab8d5225994');
+        $client->setServerParameter('PHP_AUTH_USER', 'abc12');
         $client->setServerParameter('PHP_AUTH_PW', 'password');
 
         $crawler = $client->request('GET', '/api/users/authenticate');
