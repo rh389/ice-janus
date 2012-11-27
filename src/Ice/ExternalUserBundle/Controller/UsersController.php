@@ -42,7 +42,7 @@ class UsersController extends FOSRestController
      * @param \Ice\ExternalUserBundle\Entity\User $user
      * @return \Symfony\Component\HttpFoundation\Response|\Symfony\Component\HttpKernel\Exception\NotFoundHttpException
      *
-     * @Route("/users/{user}", requirements={"user"="\d+"}, defaults={"_format"="json"}, name="get_user")
+     * @Route("/users/{username}", requirements={"username"="[a-z]{2,}[0-9]+"}, defaults={"_format"="json"}, name="get_user")
      * @Method("GET")
      * @ParamConverter("user", class="IceExternalUserBundle:User")
      *
@@ -142,7 +142,7 @@ class UsersController extends FOSRestController
         $em->persist($user);
         $em->flush();
 
-        return new RedirectResponse($this->generateUrl('get_user', array('user' => $user->getId()), true));
+        return new RedirectResponse($this->generateUrl('get_user', array('user' => $user->getUsername()), true));
     }
 
 }
