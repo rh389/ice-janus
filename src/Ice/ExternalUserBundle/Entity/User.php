@@ -133,4 +133,14 @@ class User extends BaseUser
         $initials = implode("", $initials);
         return strtolower($initials);
     }
+
+    public function getFullName()
+    {
+        return sprintf("%s %s %s", $this->getTitle(), $this->getFirstNames(), $this->getLastName());
+    }
+
+    public function __toString()
+    {
+        return $this->getFullName();
+    }
 }
