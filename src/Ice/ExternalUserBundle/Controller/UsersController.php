@@ -142,7 +142,7 @@ class UsersController extends FOSRestController
         $em->persist($user);
         $em->flush();
 
-        return new RedirectResponse($this->generateUrl('get_user', array('user' => $user->getUsername()), true));
+        return new RedirectResponse($this->generateUrl('get_user', array('username' => $user->getUsername()), true));
     }
 
 }
