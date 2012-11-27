@@ -22,20 +22,20 @@ class Configuration implements ConfigurationInterface
 
         $rootNode
             ->children()
-            ->scalarNode('username_format')
-            ->defaultValue('%s')
-            ->info('A printf formatted string with a single %s placeholder.')
-            ->end()
-            ->scalarNode('sequence_start')
-            ->validate()
-                ->ifTrue(function ($v) {
-                    return !is_int($v);
-                })
-                ->thenInvalid('Must be an integer but %s found.')
-            ->end()
-            ->defaultValue(1)
-            ->info('The lowest number that will be appended to the User\'s initials to form their username.')
-            ->end()
+                ->scalarNode('username_format')
+                    ->defaultValue('%s')
+                    ->info('A printf formatted string with a single %s placeholder.')
+                ->end()
+                ->scalarNode('sequence_start')
+                    ->validate()
+                        ->ifTrue(function ($v) {
+                            return !is_int($v);
+                        })
+                        ->thenInvalid('Must be an integer but %s found.')
+                    ->end()
+                    ->defaultValue(1)
+                    ->info('The lowest number that will be appended to the User\'s initials to form their username.')
+                ->end()
             ->end();
 
         return $treeBuilder;
