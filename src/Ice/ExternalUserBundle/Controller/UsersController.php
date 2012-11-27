@@ -73,7 +73,7 @@ class UsersController extends FOSRestController
      *   description="Create a new User",
      *   input="Ice\ExternalUserBundle\Form\Type\RegistrationFormType",
      *   statusCodes={
-     *      201="Returned when user successfully created",
+     *      201="Returned when User successfully created",
      *      400="Returned when there is a validation error"
      *   }
      * )
@@ -81,6 +81,28 @@ class UsersController extends FOSRestController
     public function postUsersAction()
     {
         return $this->processForm(new User());
+    }
+
+    /**
+     * @param \Ice\ExternalUserBundle\Entity\User $user
+     * @return \Symfony\Component\HttpFoundation\Response
+     *
+     * @Route("/users/{username}", requirements={"username"="[a-z]{2,}[0-9]+"}, name="update_user")
+     * @Method("PUT")
+     *
+     * @ApiDoc(
+     *   resource=true,
+     *   description="Update an existing User",
+     *   input="Ice\ExternalUserBundle\Form\Type\RegistrationFormType",
+     *   statusCodes={
+     *     204="Returned when User successfully updated",
+     *     400="Returned when there is a validation error"
+     *   }
+     * )
+     */
+    public function putUsersAction(User $user)
+    {
+        return $this->processForm($user);
     }
 
     private function processForm(User $user)
