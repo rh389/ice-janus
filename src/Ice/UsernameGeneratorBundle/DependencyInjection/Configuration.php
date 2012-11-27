@@ -23,7 +23,7 @@ class Configuration implements ConfigurationInterface
         $rootNode
             ->children()
             ->scalarNode('username_format')
-            ->defaultValue('%s@ice')
+            ->defaultValue('%s')
             ->info('A printf formatted string with a single %s placeholder.')
             ->end()
             ->scalarNode('sequence_start')
