@@ -94,12 +94,13 @@ class UsernamesController extends FOSRestController
 
     /**
      * @Route(
-     *   "/api/usernames/{username}",
+     *   "/api/usernames/{generatedUsername}",
      *   name="get_username",
      *   requirements={
-     *     "username": "[a-z]{2,}[0-9]+"
+     *     "generatedUsername": "[a-z]{2,}[0-9]+"
      *   }
      * )
+     *
      * @Method("GET")
      *
      * @ApiDoc(
@@ -108,15 +109,9 @@ class UsernamesController extends FOSRestController
      *   output="Ice\UsernameGeneratorBundle\Entity\Username"
      * )
      */
-    public function getUsernameAction($username)
+    public function getUsernameAction(Username $username)
     {
-        $foundUsername = $this->getDoctrine()->getRepository('IceUsernameGeneratorBundle:Username')->findOneBy(array('generatedUsername' => $username));
-
-        if (!$foundUsername) {
-            throw new \Symfony\Component\HttpKernel\Exception\NotFoundHttpException(sprintf("Username with username '%s' could not be found", $username));
-        }
-
-        $view = $this->view($foundUsername);
+        $view = $this->view($username);
         return $this->handleView($view);
     }
 }
