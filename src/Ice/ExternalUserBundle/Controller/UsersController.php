@@ -80,7 +80,8 @@ class UsersController extends FOSRestController
      */
     public function postUsersAction()
     {
-        return $this->processForm(new User());
+        $formName = $this->container->get('ice_external_user.registration.form.type');
+        return $this->processForm($formName, new User());
     }
 
     /**
@@ -93,7 +94,7 @@ class UsersController extends FOSRestController
      * @ApiDoc(
      *   resource=true,
      *   description="Update an existing User",
-     *   input="Ice\ExternalUserBundle\Form\Type\RegistrationFormType",
+     *   input="Ice\ExternalUserBundle\Form\Type\UpdateFormType",
      *   statusCodes={
      *     204="Returned when User successfully updated",
      *     400="Returned when there is a validation error"
@@ -102,29 +103,33 @@ class UsersController extends FOSRestController
      */
     public function putUsersAction(User $user)
     {
-        return $this->processForm($user);
+        $formName = $this->container->get('ice_external_user.update.form.type');
+        return $this->processForm($formName, $user);
     }
 
-    private function processForm(User $user)
+    private function processForm($formName, User $user)
     {
         $statusCode = $this->getRequest()->isMethod('POST') ? 201 : 204;
 
-        $form = $this->createForm($this->container->get('ice_external_user.registration.form.type'), $user);
+        $form = $this->createForm($formName, $user);
         $form->bind($this->getRequest());
 
         if ($form->isValid()) {
-            /** @var $usernameClient \Guzzle\Service\Client */
-            $usernameClient = $this->get('janus_username.client');
-            $command = $usernameClient->getCommand('RegisterUsername', array('initials' => $user->getInitials()));
-            $command->prepare();
-            $command->getRequest()->setHeader('Content-Type', 'application/json');
-            $usernameClient->execute($command);
-            $response = $command->getResult();
-            $username = $response['username'];
+            // Only generate a username on the original registration
+            if ($this->getRequest()->isMethod('POST')) {
+                /** @var $usernameClient \Guzzle\Service\Client */
+                $usernameClient = $this->get('janus_username.client');
+                $command = $usernameClient->getCommand('RegisterUsername', array('initials' => $user->getInitials()));
+                $command->prepare();
+                $command->getRequest()->setHeader('Content-Type', 'application/json');
+                $usernameClient->execute($command);
+                $response = $command->getResult();
+                $username = $response['username'];
 
-            $user
-                ->setUsername($username)
-                ->setEnabled(true);
+                $user
+                    ->setUsername($username)
+                    ->setEnabled(true); // User won't need to be enabled on update
+            }
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($user);
