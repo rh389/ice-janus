@@ -89,7 +89,7 @@ sensio_framework_extra:
     router:  { annotations: true }
 
 jms_serializer:
-  metadata:
+    metadata:
         auto_detection: true
         directories:
             FOSUserBundle:
