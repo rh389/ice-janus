@@ -1,4 +1,4 @@
 users_api:
-    resource:   "@IceExternalUserBundle/Controller/UsersController.php"
+    resource:   "@IceExternalUserBundle/Controller"
     type:       annotation
     prefix:     /api

@@ -4,11 +4,14 @@ namespace Ice\ExternalUserBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
+use Symfony\Component\Validator\Constraints as Assert;
+
 /**
  * Ice\ExternalUserBundle\Entity\Attribute
  *
  * @ORM\Table(name="ice_user_attribute")
  * @ORM\Entity
+ * @ORM\HasLifecycleCallbacks()
  */
 class Attribute
 {
@@ -25,6 +28,8 @@ class Attribute
      * @var string $fieldName
      *
      * @ORM\Column(name="field_name", type="string", length=255)
+     *
+     * @Assert\NotBlank(groups={"rest_create", "rest_update"}, message="Field name must be specified")
      */
     private $fieldName;
 
@@ -53,6 +58,8 @@ class Attribute
      * @var string $updatedBy
      *
      * @ORM\Column(name="updated_by", type="string", length=255, nullable=true)
+     *
+     * @Assert\NotBlank(groups={"rest_update"}, message="Updated by must be specified")
      */
     private $updatedBy;
 
@@ -187,5 +194,38 @@ class Attribute
     public function getUpdatedBy()
     {
         return $this->updatedBy;
+    }
+
+    public function setUser(User $user)
+    {
+        $this->user = $user;
+        return $this->user;
+    }
+
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * Before the entity is first persisted:
+     * * Set created to now
+     *
+     * @ORM\PrePersist
+     */
+    public function doPrePersistLifecycleCallbacks()
+    {
+        $this->setCreated(new \DateTime());
+    }
+
+    /**
+     * Before the entity is updated:
+     * * Set updated to now
+     *
+     * @ORM\PreUpdate
+     */
+    public function doPreUpdateLifecycleCallbacks()
+    {
+        $this->setUpdated(new \DateTime());
     }
 }

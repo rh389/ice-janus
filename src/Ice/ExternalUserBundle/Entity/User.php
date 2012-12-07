@@ -185,4 +185,30 @@ class User extends BaseUser
     {
         return $this->getFullName();
     }
+
+    public function getAttributes()
+    {
+        return $this->attributes;
+    }
+
+    /**
+     * @param $fieldName
+     * @return Attribute
+     */
+    public function getAttributeByFieldName($fieldName)
+    {
+        return $this->getAttributes()->filter(function($attribute) use ($fieldName) {
+            return $attribute->getFieldName() === $fieldName;
+        })->first(); // There will only be one matching element
+    }
+
+    /**
+     * @param Attribute $attribute
+     * @return User
+     */
+    public function addAttribute(Attribute $attribute)
+    {
+        $this->getAttributes()->add($attribute);
+        return $this;
+    }
 }
