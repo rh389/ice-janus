@@ -72,17 +72,16 @@ fos_rest:
     body_listener:
         decoders:
             json: fos_rest.decoder.json
+    format_listener:
+        default_priorities:
+            - json
+            - xml
+        fallback_format: json
     view:
         view_response_listener: force
         formats:
             json: true
             xml: true
-    format_listener:
-        default_priorities:
-            - html
-            - json
-            - xml
-        fallback_format: json
 
 sensio_framework_extra:
     view:    { annotations: false }
