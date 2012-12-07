@@ -13,7 +13,9 @@ use JMS\SerializerBundle\Annotation\ExclusionPolicy,
 /**
  * Ice\ExternalUserBundle\Entity\Attribute
  *
- * @ORM\Table(name="ice_user_attribute")
+ * @ORM\Table(name="ice_user_attribute",
+ *      uniqueConstraints={@ORM\UniqueConstraint(name="user_fieldname", columns={"user_id", "field_name"})}
+ * )
  * @ORM\Entity
  * @ORM\HasLifecycleCallbacks()
  *
