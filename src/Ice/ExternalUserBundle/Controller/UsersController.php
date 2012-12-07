@@ -20,7 +20,7 @@ class UsersController extends FOSRestController
     /**
      * @return \Symfony\Component\HttpFoundation\Response
      *
-     * @Route("/users", name="get_users", defaults={"_format"="json"})
+     * @Route("/users", name="get_users")
      * @Method("GET")
      *
      * @ApiDoc(
@@ -31,10 +31,7 @@ class UsersController extends FOSRestController
     public function getUsersAction()
     {
         $users = $this->getDoctrine()->getRepository('IceExternalUserBundle:User')->findAll();
-
-        $view = $this->view($users, 200);
-
-        return $this->handleView($view);
+        return $this->view($users);
     }
 
 
@@ -42,9 +39,8 @@ class UsersController extends FOSRestController
      * @param \Ice\ExternalUserBundle\Entity\User $user
      * @return \Symfony\Component\HttpFoundation\Response|\Symfony\Component\HttpKernel\Exception\NotFoundHttpException
      *
-     * @Route("/users/{username}", requirements={"username"="[a-z]{2,}[0-9]+"}, defaults={"_format"="json"}, name="get_user")
+     * @Route("/users/{username}", requirements={"username"="[a-z]{2,}[0-9]+"}, name="get_user")
      * @Method("GET")
-     * @ParamConverter("user", class="IceExternalUserBundle:User")
      *
      * @ApiDoc(
      *   resource=true,
@@ -54,12 +50,7 @@ class UsersController extends FOSRestController
      */
     public function getUserAction(User $user)
     {
-        if (!$user) {
-            return new \Symfony\Component\HttpKernel\Exception\NotFoundHttpException("User with ID %s does not exist.", $id);
-        }
-
-        $view = $this->view($user, 200);
-        return $this->handleView($view);
+        return $this->view($user, 200);
     }
 
     /**
@@ -117,17 +108,12 @@ class UsersController extends FOSRestController
         if ($form->isValid()) {
             // Only generate a username on the original registration
             if ($this->getRequest()->isMethod('POST')) {
-                /** @var $usernameClient \Guzzle\Service\Client */
-                $usernameClient = $this->get('janus_username.client');
-                $command = $usernameClient->getCommand('RegisterUsername', array('initials' => $user->getInitials()));
-                $command->prepare();
-                $command->getRequest()->setHeader('Content-Type', 'application/json');
-                $usernameClient->execute($command);
-                $response = $command->getResult();
-                $username = $response['username'];
+                /** @var $generator \Ice\UsernameGeneratorBundle\UsernameGenerator */
+                $generator = $this->get('ice_username.generator');
+                $username = $generator->getUsernameForInitials($user->getInitials());
 
                 $user
-                    ->setUsername($username)
+                    ->setUsername($username->getGeneratedUsername())
                     ->setEnabled(true); // User won't need to be enabled on update
             }
 
@@ -135,12 +121,10 @@ class UsersController extends FOSRestController
             $em->persist($user);
             $em->flush();
 
-            $view = $this->view($user, $statusCode);
-        } else {
-            $view = $this->view($form, 400);
+            return $this->view($user, $statusCode);
         }
 
-        return $this->handleView($view);
+        return $this->view($form, 400);
     }
 
     /**
