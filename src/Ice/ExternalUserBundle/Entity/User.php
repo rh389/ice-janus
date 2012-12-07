@@ -2,7 +2,8 @@
 
 namespace Ice\ExternalUserBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping as ORM,
+    Doctrine\Common\Collections\ArrayCollection;
 
 use FOS\UserBundle\Entity\User as BaseUser;
 
@@ -96,8 +97,19 @@ class User extends BaseUser
      */
     protected $lastNames;
 
+    /**
+     * @var Attribute[]
+     *
+     * @ORM\OneToMany(targetEntity="Attribute", mappedBy="user")
+     *
+     * @Expose
+     */
+    protected $attributes;
+
     public function __construct()
     {
+        $this->attributes = new ArrayCollection();
+
         parent::__construct();
     }
 
