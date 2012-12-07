@@ -6,12 +6,18 @@ use Doctrine\ORM\Mapping as ORM;
 
 use Symfony\Component\Validator\Constraints as Assert;
 
+use JMS\SerializerBundle\Annotation\ExclusionPolicy,
+    JMS\SerializerBundle\Annotation\Expose,
+    JMS\SerializerBundle\Annotation\SerializedName;
+
 /**
  * Ice\ExternalUserBundle\Entity\Attribute
  *
  * @ORM\Table(name="ice_user_attribute")
  * @ORM\Entity
  * @ORM\HasLifecycleCallbacks()
+ *
+ * @ExclusionPolicy("all")
  */
 class Attribute
 {
@@ -30,6 +36,9 @@ class Attribute
      * @ORM\Column(name="field_name", type="string", length=255)
      *
      * @Assert\NotBlank(groups={"rest_create", "rest_update"}, message="Field name must be specified")
+     *
+     * @Expose
+     * @SerializedName("fieldName")
      */
     private $fieldName;
 
@@ -37,6 +46,8 @@ class Attribute
      * @var string $value
      *
      * @ORM\Column(name="value", type="text", nullable=true)
+     *
+     * @Expose
      */
     private $value;
 
@@ -44,6 +55,8 @@ class Attribute
      * @var \DateTime $created
      *
      * @ORM\Column(name="created", type="datetime")
+     *
+     * @Expose
      */
     private $created;
 
@@ -51,6 +64,8 @@ class Attribute
      * @var \DateTime $updated
      *
      * @ORM\Column(name="updated", type="datetime", nullable=true)
+     *
+     * @Expose
      */
     private $updated;
 
