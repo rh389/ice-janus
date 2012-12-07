@@ -45,14 +45,14 @@ class Attribute
     /**
      * @var \DateTime $updated
      *
-     * @ORM\Column(name="updated", type="datetime")
+     * @ORM\Column(name="updated", type="datetime", nullable=true)
      */
     private $updated;
 
     /**
      * @var string $updatedBy
      *
-     * @ORM\Column(name="updated_by", type="string", length=255)
+     * @ORM\Column(name="updated_by", type="string", length=255, nullable=true)
      */
     private $updatedBy;
 
