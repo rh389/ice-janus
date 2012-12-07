@@ -1,25 +1,5 @@
 Ice\ExternalUserBundle\Entity\User:
     properties:
-        title:
-            - NotBlank:
-                groups: [rest_register, rest_update]
-                message: Please provide your title
-
-        firstNames:
-            - NotBlank:
-                groups:  [rest_register, rest_update]
-                message: Please provide your first name(s)
-
-        lastName:
-            - NotBlank:
-                groups: [rest_register, rest_update]
-                message: Please provide your last name
-
-        dob:
-            - Date:
-                groups: [rest_register, rest_update]
-                message: Please provide a valid date of birth
-
         email:
             - NotBlank:
                 groups: [rest_register, rest_update]
@@ -36,8 +16,3 @@ Ice\ExternalUserBundle\Entity\User:
                 groups: [rest_register]
                 min: 6
                 minMessage: Your password must be at least six characters long
-    constraints:
-        - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity:
-            fields: [emailCanonical]
-            groups: [rest_register, rest_update]
-            message: This email address is already associated with another account

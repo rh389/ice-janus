@@ -70,8 +70,8 @@ class UsersControllerTest extends WebTestCase
             "email" => "test11222621@blah.com",
             "title" => "Mr",
             "firstNames" => "First Names",
-            "lastName" => "Lastname",
-            "dob" => "1900-01-01",
+            "middleNames" => "Middle Names",
+            "lastNames" => "Lastname",
         );
 
         return json_encode($body);

@@ -21,13 +21,12 @@ class UpdateFormType extends BaseType
             ->add('firstNames', 'text', array(
                 'description' => 'First name(s).',
             ))
-            ->add('lastName', 'text', array(
-                'description' => 'Last name.',
-            ))
-            ->add('dob', 'date', array(
-                'widget' => 'single_text',
-                'description' => 'Date of birth.',
+            ->add('middleNames', 'text', array(
+                'description' => 'Middle name(s).',
                 'required' => false,
+            ))
+            ->add('lastNames', 'text', array(
+                'description' => 'Last name.',
             ))
         ;
     }

@@ -16,7 +16,8 @@ class LoadUserData implements FixtureInterface
             ->setUsername('abc12')
             ->setTitle('Mr')
             ->setFirstNames('First Names')
-            ->setLastName('Lastname')
+            ->setMiddleNames('Middle Names')
+            ->setLastNames('Lastname')
             ->setEmail('test@example.org')
             ->setPlainPassword('password')
             ->setEnabled(true);
