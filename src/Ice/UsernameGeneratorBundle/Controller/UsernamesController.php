@@ -35,54 +35,9 @@ class UsernamesController extends FOSRestController
             $data = $form->getData();
             $initials = $data['initials'];
 
-            $usernameFormat = $this->container->getParameter('ice_username_generator.username_format');
-            $username = new Username($usernameFormat);
-            $username->setInitials($initials);
-
-            $em = $this->getDoctrine()->getManager();
-
-            /** @var $repository \Ice\UsernameGeneratorBundle\Entity\UsernameRepository */
-            $repository = $this->getDoctrine()->getRepository('IceUsernameGeneratorBundle:Username');
-
-            // There is potential for a race condition here, whereby two clients could request a
-            // username for the same initials before the first clients request had been persisted, causing
-            // an integrity constraint violation.
-            //
-            // This part of the controller keeps trying to persist a new username until it is successful.
-            $usernameSuccessfullyGenerated = false;
-            do {
-                $result = $repository->findCurrentSequenceForInitials($initials);
-                $sequence = $result[1];
-
-                if ($sequence) {
-                    $username->setSequence($sequence + 1);
-                } else {
-                    $sequence = $this->container->getParameter('ice_username_generator.sequence_start');
-                    $username->setSequence($sequence);
-                }
-
-                $em->persist($username);
-
-                try {
-                    $em->flush();
-                    $usernameSuccessfullyGenerated = true;
-                } catch(\Doctrine\DBAL\DBALException $e) {
-                    // Get the previous exception, which will be a PDOException if there was an integrity constraint
-                    // violation
-                    $previousException = $e->getPrevious();
-
-                    // Integrity constraint violation as a result of a race condition.
-                    // The loop will continue to retry until it is successful
-                    if ("PDOException" === get_class($previousException) && 23000 == $previousException->getCode()) {
-                        // EntityManager will closed due to the exception.
-                        // Reset so it can be used during the next iteration of the loop.
-                        $this->getDoctrine()->resetManager();
-                        $em = $this->getDoctrine()->getManager();
-                    }
-
-                    throw $e;
-                }
-            } while($usernameSuccessfullyGenerated !== true);
+            /** @var $generator \Ice\UsernameGeneratorBundle\UsernameGenerator */
+            $generator = $this->get('ice_username.generator');
+            $username = $generator->getUsernameForInitials($initials);
 
             $view = $this->view($username, 201);
         } else {
