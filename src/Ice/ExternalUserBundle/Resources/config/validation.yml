@@ -10,9 +10,9 @@ Ice\ExternalUserBundle\Entity\User:
 
         plainPassword:
             - NotBlank:
-                groups: [rest_register]
+                groups: [rest_register, rest_set_password]
                 message: Please provide a password
             - Length:
-                groups: [rest_register]
+                groups: [rest_register, rest_set_password]
                 min: 6
                 minMessage: Your password must be at least six characters long

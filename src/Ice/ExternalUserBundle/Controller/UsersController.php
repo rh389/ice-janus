@@ -4,7 +4,8 @@ namespace Ice\ExternalUserBundle\Controller;
 
 use FOS\RestBundle\Controller\FOSRestController;
 
-use Ice\ExternalUserBundle\Entity\User;
+use Ice\ExternalUserBundle\Entity\User,
+    Ice\ExternalUserBundle\Form\Type\SetPasswordFormType;
 
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 
@@ -154,6 +155,35 @@ class UsersController extends FOSRestController
         $em->flush();
 
         return new RedirectResponse($this->generateUrl('get_user', array('username' => $user->getUsername()), true));
+    }
+
+    /**
+     * @Route("/users/{username}/password", requirements={"username"="[a-z]{2,}[0-9]+"}, name="set_password_user")
+     * @Method("PUT")
+     *
+     * @ApiDoc(
+     *   resource=true,
+     *   description="Set the password for an existing User",
+     *   statusCodes={
+     *      204="Returned when User successfully updated",
+     *      400="Returned when there is a validation error"
+     *   }
+     * )
+     */
+    public function putUsersPasswordAction(User $user)
+    {
+        $form = $this->createForm(new SetPasswordFormType(), $user);
+        $form->bind($this->getRequest());
+
+        if ($form->isValid()) {
+            /** @var $manager \FOS\UserBundle\Model\UserManager */
+            $manager = $this->get('fos_user.user_manager');
+            $manager->updateUser($user);
+
+            return $this->view($user, 204);
+        }
+
+        return $this->view($form, 400);
     }
 
 }

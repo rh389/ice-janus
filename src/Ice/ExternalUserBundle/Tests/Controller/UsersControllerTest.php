@@ -47,7 +47,7 @@ class UsersControllerTest extends WebTestCase
         $this->assertJsonResponse($response, 201);
     }
 
-    public function testGetUsersAuthenticateAction($username = 'abc12', $password = 'password')
+    public function testGetUsersAuthenticateAction($username = 'abc123', $password = 'password')
     {
         $client = $this->getJsonClient();
         $client->setServerParameter('PHP_AUTH_USER', $username);
@@ -71,6 +71,18 @@ class UsersControllerTest extends WebTestCase
 
         $response = $client->getResponse();
         $this->assertJsonResponse($response, 204);
+    }
+
+    public function testUpdatePassword()
+    {
+        $client = $this->getJsonClient();
+
+        $crawler = $client->request('PUT', '/api/users/abc12/password', array(), array(), array(), $this->createJsonUserUpdatePasswordBody());
+
+        $response = $client->getResponse();
+        $this->assertJsonResponse($response, 204);
+
+        $this->testGetUsersAuthenticateAction('abc12', 'newpassword');
     }
 
     protected function createCompleteJsonRegisterBody()
@@ -104,6 +116,15 @@ class UsersControllerTest extends WebTestCase
             "title" => "Mrs",
             "firstNames" => "New User",
             "lastNames" => "Details",
+        );
+
+        return json_encode($body);
+    }
+
+    protected function createJsonUserUpdatePasswordBody()
+    {
+        $body = array(
+            "plainPassword" => "newpassword",
         );
 
         return json_encode($body);
