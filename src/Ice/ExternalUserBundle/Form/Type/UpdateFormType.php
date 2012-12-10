@@ -14,12 +14,15 @@ class UpdateFormType extends BaseType
         $builder
             ->add('email', 'email', array(
                 'description' => 'Email address. Must be unique.',
+                'required' => true,
             ))
             ->add('title', 'text', array(
                 'description' => 'Salutation.',
+                'required' => true,
             ))
             ->add('firstNames', 'text', array(
                 'description' => 'First name(s).',
+                'required' => true,
             ))
             ->add('middleNames', 'text', array(
                 'description' => 'Middle name(s).',
@@ -27,6 +30,7 @@ class UpdateFormType extends BaseType
             ))
             ->add('lastNames', 'text', array(
                 'description' => 'Last name.',
+                'required' => true,
             ))
         ;
     }

@@ -47,11 +47,11 @@ class UsersControllerTest extends WebTestCase
         $this->assertJsonResponse($response, 201);
     }
 
-    public function testGetUsersAuthenticateAction()
+    public function testGetUsersAuthenticateAction($username = 'abc12', $password = 'password')
     {
         $client = $this->getJsonClient();
-        $client->setServerParameter('PHP_AUTH_USER', 'abc12');
-        $client->setServerParameter('PHP_AUTH_PW', 'password');
+        $client->setServerParameter('PHP_AUTH_USER', $username);
+        $client->setServerParameter('PHP_AUTH_PW', $password);
 
         $crawler = $client->request('GET', '/api/users/authenticate');
 
@@ -61,6 +61,16 @@ class UsersControllerTest extends WebTestCase
         $client->followRedirect();
         $response = $client->getResponse();
         $this->assertJsonResponse($response);
+    }
+
+    public function testUpdateUser()
+    {
+        $client = $this->getJsonClient();
+
+        $crawler = $client->request('PUT', '/api/users/abc12', array(), array(), array(), $this->createJsonUserUpdateBody());
+
+        $response = $client->getResponse();
+        $this->assertJsonResponse($response, 204);
     }
 
     protected function createCompleteJsonRegisterBody()
@@ -82,6 +92,18 @@ class UsersControllerTest extends WebTestCase
         $body = array(
             "plainPassword" => "password",
             "email" => "test@blah.com",
+        );
+
+        return json_encode($body);
+    }
+
+    protected function createJsonUserUpdateBody()
+    {
+        $body = array(
+            "email" => "test2@blah.com",
+            "title" => "Mrs",
+            "firstNames" => "New User",
+            "lastNames" => "Details",
         );
 
         return json_encode($body);
