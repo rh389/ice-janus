@@ -76,6 +76,7 @@ fos_rest:
         default_priorities:
             - json
             - xml
+            - html
         fallback_format: json
     view:
         view_response_listener: force
