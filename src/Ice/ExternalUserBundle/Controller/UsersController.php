@@ -164,6 +164,7 @@ class UsersController extends FOSRestController
      * @ApiDoc(
      *   resource=true,
      *   description="Set the password for an existing User",
+     *   input="Ice\ExternalUserBundle\Form\Type\SetPasswordFormType",
      *   statusCodes={
      *      204="Returned when User successfully updated",
      *      400="Returned when there is a validation error"
