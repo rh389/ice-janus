@@ -6,9 +6,9 @@ use Doctrine\ORM\Mapping as ORM;
 
 use Symfony\Component\Validator\Constraints as Assert;
 
-use JMS\SerializerBundle\Annotation\ExclusionPolicy,
-    JMS\SerializerBundle\Annotation\Expose,
-    JMS\SerializerBundle\Annotation\SerializedName;
+use JMS\Serializer\Annotation\ExclusionPolicy,
+    JMS\Serializer\Annotation\Expose,
+    JMS\Serializer\Annotation\SerializedName;
 
 /**
  * Ice\ExternalUserBundle\Entity\Attribute

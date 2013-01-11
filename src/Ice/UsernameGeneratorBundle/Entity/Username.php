@@ -4,9 +4,9 @@ namespace Ice\UsernameGeneratorBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
-use JMS\SerializerBundle\Annotation\SerializedName,
-    JMS\SerializerBundle\Annotation\Expose,
-    JMS\SerializerBundle\Annotation\ExclusionPolicy;
+use JMS\Serializer\Annotation\SerializedName,
+    JMS\Serializer\Annotation\Expose,
+    JMS\Serializer\Annotation\ExclusionPolicy;
 
 /**
  * Ice\UsernameGeneratorBundle\Entity\Username

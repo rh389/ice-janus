@@ -10,9 +10,9 @@ use FOS\UserBundle\Entity\User as BaseUser;
 use Symfony\Component\Validator\Constraints as Assert,
     Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
-use JMS\SerializerBundle\Annotation\ExclusionPolicy,
-    JMS\SerializerBundle\Annotation\Expose,
-    JMS\SerializerBundle\Annotation\SerializedName;
+use JMS\Serializer\Annotation\ExclusionPolicy,
+    JMS\Serializer\Annotation\Expose,
+    JMS\Serializer\Annotation\SerializedName;
 
 use Ice\ExternalUserBundle\Util\String as StringUtil;
 
