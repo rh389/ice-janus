@@ -27,7 +27,6 @@ class AppKernel extends Kernel
             new FOS\RestBundle\FOSRestBundle(),
             new Nelmio\ApiDocBundle\NelmioApiDocBundle(),
             new Ice\UsernameGeneratorBundle\IceUsernameGeneratorBundle(),
-            new Ice\JanusUsernameClientBundle\IceJanusUsernameClientBundle(),
             new Misd\GuzzleBundle\MisdGuzzleBundle(),
             new Sonata\CacheBundle\SonataCacheBundle(),
             new Sonata\BlockBundle\SonataBlockBundle(),
