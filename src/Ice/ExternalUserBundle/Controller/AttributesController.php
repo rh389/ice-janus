@@ -8,7 +8,8 @@ use Symfony\Component\Form\FormTypeInterface;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method,
     Sensio\Bundle\FrameworkExtraBundle\Configuration\Route,
-    Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+    Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter,
+    Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
 
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 
@@ -17,6 +18,13 @@ use Ice\ExternalUserBundle\Entity\User,
     Ice\ExternalUserBundle\Form\Type\CreateAttributeType,
     Ice\ExternalUserBundle\Form\Type\UpdateAttributeType;
 
+/**
+ * @Cache(
+ *  expires="15 minutes",
+ *  smaxage="900",
+ *  maxage="900"
+ * )
+ */
 class AttributesController extends FOSRestController
 {
     /**

@@ -14,8 +14,16 @@ use Symfony\Component\HttpFoundation\Response,
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter,
     Sensio\Bundle\FrameworkExtraBundle\Configuration\Route,
-    Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+    Sensio\Bundle\FrameworkExtraBundle\Configuration\Method,
+    Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
 
+/**
+ * @Cache(
+ *  expires="15 minutes",
+ *  smaxage="900",
+ *  maxage="900"
+ * )
+ */
 class UsersController extends FOSRestController
 {
     /**
