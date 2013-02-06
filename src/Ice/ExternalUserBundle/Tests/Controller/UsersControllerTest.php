@@ -24,7 +24,7 @@ class UsersControllerTest extends WebTestCase
         $this->assertJsonResponse($response, 200);
     }
 
-    public function testGetUserAction()
+    public function testGetUserByUsername()
     {
         $client = $this->getJsonClient();
         $crawler = $client->request('GET', '/api/users/abc12');
@@ -36,6 +36,13 @@ class UsersControllerTest extends WebTestCase
         $content = $response->getContent();
         json_decode($content);
         $this->assertEmpty(json_last_error());
+    }
+
+    public function testGetUserByEmailAddress()
+    {
+        $client = $this->getJsonClient();
+        $client->request('GET', '/api/users/test@example.org');
+        $this->assertJsonResponse($client->getResponse());
     }
 
     public function testPostUsersAction()

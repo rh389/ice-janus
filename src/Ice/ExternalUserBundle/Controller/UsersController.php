@@ -45,10 +45,11 @@ class UsersController extends FOSRestController
 
 
     /**
-     * @param \Ice\ExternalUserBundle\Entity\User $user
-     * @return \Symfony\Component\HttpFoundation\Response|\Symfony\Component\HttpKernel\Exception\NotFoundHttpException
+     * @param $username
+     * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
+     * @return \Symfony\Component\HttpFoundation\Response
      *
-     * @Route("/users/{username}", requirements={"username"="[a-z]{2,}[0-9]+"}, name="get_user")
+     * @Route("/users/{username}", requirements={"username"="[a-z]{2,}[0-9]+|.+@.+"}, name="get_user")
      * @Method("GET")
      *
      * @ApiDoc(
@@ -57,8 +58,14 @@ class UsersController extends FOSRestController
      *   return="Ice\ExternalUserBundle\Entity\User"
      * )
      */
-    public function getUserAction(User $user)
+    public function getUserAction($username)
     {
+        $user = $this->getUserManager()->findUserByUsernameOrEmail($username);
+
+        if (!$user) {
+            throw $this->createNotFoundException();
+        }
+
         return $this->view($user, 200);
     }
 
@@ -85,10 +92,11 @@ class UsersController extends FOSRestController
     }
 
     /**
-     * @param \Ice\ExternalUserBundle\Entity\User $user
+     * @param $username
+     * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
      * @return \Symfony\Component\HttpFoundation\Response
      *
-     * @Route("/users/{username}", requirements={"username"="[a-z]{2,}[0-9]+"}, name="update_user")
+     * @Route("/users/{username}", requirements={"username"="[a-z]{2,}[0-9]+|.+@.+"}, name="update_user")
      * @Method("PUT")
      *
      * @ApiDoc(
@@ -101,8 +109,14 @@ class UsersController extends FOSRestController
      *   }
      * )
      */
-    public function putUsersAction(User $user)
+    public function putUsersAction($username)
     {
+        $user = $this->getUserManager()->findUserByUsernameOrEmail($username);
+
+        if (!$user) {
+            throw $this->createNotFoundException();
+        }
+
         $formName = $this->container->get('ice_external_user.update.form.type');
         return $this->processForm($formName, $user);
     }
@@ -166,7 +180,7 @@ class UsersController extends FOSRestController
     }
 
     /**
-     * @Route("/users/{username}/password", requirements={"username"="[a-z]{2,}[0-9]+"}, name="set_password_user")
+     * @Route("/users/{username}/password", requirements={"username"="[a-z]{2,}[0-9]+|.+@.+"}, name="set_password_user")
      * @Method("PUT")
      *
      * @ApiDoc(
@@ -179,8 +193,14 @@ class UsersController extends FOSRestController
      *   }
      * )
      */
-    public function putUsersPasswordAction(User $user)
+    public function putUsersPasswordAction($username)
     {
+        $user = $this->getUserManager()->findUserByUsernameOrEmail($username);
+
+        if (!$user) {
+            throw $this->createNotFoundException();
+        }
+
         $form = $this->createForm(new SetPasswordFormType(), $user);
         $form->bind($this->getRequest());
 
@@ -195,4 +215,11 @@ class UsersController extends FOSRestController
         return $this->view($form, 400);
     }
 
+    /**
+     * @return \FOS\UserBundle\Doctrine\UserManager
+     */
+    private function getUserManager()
+    {
+        return $this->get('fos_user.user_manager');
+    }
 }
