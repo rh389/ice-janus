@@ -14,7 +14,7 @@ set :deploy_via,   :copy
 set :model_manager, "doctrine"
 
 role :web,        domain                         # Your HTTP server, Apache/etc
-role :app,        domain                         # This may be the same as your `Web` server
+role :app,        domain, :primary => true       # This may be the same as your `Web` server
 role :db,         domain, :primary => true       # This is where Symfony2 migrations will run
 
 set :use_sudo,      false
