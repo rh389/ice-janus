@@ -16,7 +16,7 @@ class UpdateAttributeType extends AbstractType
                 'description' => 'Value of attribute',
                 'required' => true,
             ))
-            ->add('updated_by', 'text', array(
+            ->add('updatedBy', 'text', array(
                 'description' => 'Username of User who initiated the update',
                 'required' => true,
             ))
