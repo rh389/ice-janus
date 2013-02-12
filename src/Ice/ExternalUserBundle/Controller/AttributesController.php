@@ -85,7 +85,7 @@ class AttributesController extends FOSRestController
     {
         $status = $this->getRequest()->isMethod('POST') ? 201 : 204;
 
-        $form = $this->createForm(new UpdateAttributeType(), $attribute);
+        $form = $this->createForm($form, $attribute);
         $form->bind($this->getRequest());
 
         if ($form->isValid()) {
