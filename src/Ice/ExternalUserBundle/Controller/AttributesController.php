@@ -60,7 +60,6 @@ class AttributesController extends FOSRestController
 
     /**
      * @param \Ice\ExternalUserBundle\Entity\User $user
-     * @param $fieldName
      * @return \FOS\RestBundle\View\View
      *
      * @Route("users/{username}/attributes", name="put_attribute")
@@ -77,7 +76,7 @@ class AttributesController extends FOSRestController
      *   }
      * )
      */
-    public function postAttributesController(User $user, $fieldName)
+    public function postAttributesController(User $user)
     {
         return $this->processForm(new CreateAttributeType(), $user, new Attribute());
     }
