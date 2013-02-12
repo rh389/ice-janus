@@ -47,7 +47,7 @@ class AttributesController extends FOSRestController
      *   }
      * )
      */
-    public function putAttributesController(User $user, $fieldName)
+    public function putAttributesAction(User $user, $fieldName)
     {
         $existingAttribute = $user->getAttributeByFieldName($fieldName);
 
@@ -76,7 +76,7 @@ class AttributesController extends FOSRestController
      *   }
      * )
      */
-    public function postAttributesController(User $user)
+    public function postAttributesAction(User $user)
     {
         return $this->processForm(new CreateAttributeType(), $user, new Attribute());
     }
@@ -127,7 +127,7 @@ class AttributesController extends FOSRestController
      *   }
      * )
      */
-    public function getAttributeController(User $user, $fieldName)
+    public function getAttributeAction(User $user, $fieldName)
     {
         $attribute = $user->getAttributeByFieldName($fieldName);
 
