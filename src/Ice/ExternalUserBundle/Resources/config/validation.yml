@@ -1,9 +1,6 @@
 Ice\ExternalUserBundle\Entity\User:
     properties:
         email:
-            - NotBlank:
-                groups: [rest_register, rest_update]
-                message: Please provide an email address
             - Email:
                 groups: [rest_register, rest_update]
                 message: Please provide a valid email address
