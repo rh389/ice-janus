@@ -2,7 +2,10 @@
 
 namespace Ice\ExternalUserBundle\Entity;
 
-use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\EntityRepository,
+    Doctrine\ORM\QueryBuilder;
+
+use Ice\ExternalUserBundle\Entity\User;
 
 /**
  * UserRepository
@@ -12,4 +15,78 @@ use Doctrine\ORM\EntityRepository;
  */
 class UserRepository extends EntityRepository
 {
+    /**
+     * @var QueryBuilder
+     */
+    private $qb;
+
+    public function findByFiltered(array $filters) {
+        $this->qb = $this->getBaseQueryBuilder();
+
+        if (isset($filters['attributeName'])) {
+            $this->addAttributeName($filters['attributeName']);
+        }
+
+        if (isset($filters['attributeValue'])) {
+            $this->addAttributeValue($filters['attributeValue']);
+        }
+
+        return $this->getAll();
+    }
+
+    /**
+     * @return \Doctrine\ORM\QueryBuilder
+     */
+    private function getBaseQueryBuilder()
+    {
+        $qb = $this->getEntityManager()->createQueryBuilder();
+
+        $qb
+            ->select('
+                User, Attributes
+            ')
+            ->from('IceExternalUserBundle:User', 'User')
+            ->leftJoin('User.attributes', 'Attributes')
+        ;
+
+        return $qb;
+    }
+
+    private function addAttributeName($name)
+    {
+        $this->qb
+            ->andWhere('Attributes.fieldName = :name')
+            ->setParameter('name', $name);
+    }
+
+    private function addAttributeValue($value)
+    {
+        $this->qb
+            ->andWhere('Attributes.value = :value')
+            ->setParameter('value', $value);
+    }
+
+    /**
+     * @return array|null
+     */
+    private function getAll()
+    {
+        try {
+            return $this->qb->getQuery()->getResult();
+        } catch (\Doctrine\ORM\NoResultException $e) {
+            return null;
+        }
+    }
+
+    /**
+     * @return User|null
+     */
+    private function getOne()
+    {
+        try {
+            return $this->qb->getQuery()->getSingleResult();
+        } catch (\Doctrine\ORM\NoResultException $e) {
+            return null;
+        }
+    }
 }

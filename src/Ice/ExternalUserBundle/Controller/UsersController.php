@@ -2,7 +2,9 @@
 
 namespace Ice\ExternalUserBundle\Controller;
 
-use FOS\RestBundle\Controller\FOSRestController;
+use FOS\RestBundle\Controller\FOSRestController,
+    FOS\RestBundle\Controller\Annotations\QueryParam,
+    FOS\RestBundle\Request\ParamFetcher;
 
 use Ice\ExternalUserBundle\Entity\User,
     Ice\ExternalUserBundle\Form\Type\SetPasswordFormType;
@@ -17,29 +19,32 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter,
     Sensio\Bundle\FrameworkExtraBundle\Configuration\Method,
     Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
 
-/**
- * @Cache(
- *  expires="15 minutes",
- *  smaxage="900",
- *  maxage="900"
- * )
- */
 class UsersController extends FOSRestController
 {
     /**
+     * @param \FOS\RestBundle\Request\ParamFetcher $paramFetcher
      * @return \Symfony\Component\HttpFoundation\Response
      *
      * @Route("/users", name="get_users")
      * @Method("GET")
+     *
+     * @QueryParam(name="attributeName", description="Attribute name")
+     * @QueryParam(name="attributeValue", description="Attribute value")
      *
      * @ApiDoc(
      *  resource=true,
      *  description="Returns a collection of User"
      * )
      */
-    public function getUsersAction()
+    public function getUsersAction(ParamFetcher $paramFetcher)
     {
-        $users = $this->getDoctrine()->getRepository('IceExternalUserBundle:User')->findAll();
+        $name = $paramFetcher->get('attributeName');
+        $value = $paramFetcher->get('attributeValue');
+
+        $users = $this->getDoctrine()->getRepository('IceExternalUserBundle:User')->findByFiltered(array(
+            'attributeName' => $name,
+            'attributeValue' => $value
+        ));
         return $this->view($users);
     }
 
