@@ -28,6 +28,7 @@ class Username
      * @ORM\Column(name="initials", type="string", length=10)
      *
      * @Assert\NotBlank(message="Initials cannot be blank")
+     * @Assert\Regex(pattern="/^\p{L}+$/u", message="Initials can only contain letters")
      */
     private $initials;
 
@@ -49,7 +50,7 @@ class Username
      * @Expose()
      * @SerializedName("username")
      *
-     * @Assert\Regex(pattern="/\p{L}+[0-9]+/")
+     * @Assert\Regex(pattern="/^\p{L}+[0-9]+$/u")
      */
     private $generatedUsername;
 
