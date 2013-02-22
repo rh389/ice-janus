@@ -14,12 +14,15 @@ class String
      */
     public static function getInitials($string)
     {
+        // remove any non-alpha characters
+        $string = preg_replace('/[^\p{L} ]/u', '', $string);
+
         $initials = array();
 
-        $stringParts = explode(" ", $string);
+        $stringParts = mb_split("\s", $string);
 
         foreach ($stringParts as $part) {
-            $initials[] = substr($part, 0, 1);
+            $initials[] = mb_substr($part, 0, 1, 'UTF-8');
         }
 
         return implode("", $initials);
