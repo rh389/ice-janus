@@ -8,6 +8,8 @@ use JMS\Serializer\Annotation\SerializedName,
     JMS\Serializer\Annotation\Expose,
     JMS\Serializer\Annotation\ExclusionPolicy;
 
+use Symfony\Component\Validator\Constraints as Assert;
+
 /**
  * Ice\UsernameGeneratorBundle\Entity\Username
  *
@@ -24,6 +26,8 @@ class Username
      *
      * @ORM\Id()
      * @ORM\Column(name="initials", type="string", length=10)
+     *
+     * @Assert\NotBlank(message="Initials cannot be blank")
      */
     private $initials;
 
@@ -32,6 +36,8 @@ class Username
      *
      * @ORM\Id()
      * @ORM\Column(name="sequence", type="integer")
+     *
+     * @Assert\Min(limit="1")
      */
     private $sequence;
 
@@ -42,6 +48,8 @@ class Username
      *
      * @Expose()
      * @SerializedName("username")
+     *
+     * @Assert\Regex(pattern="/\p{L}+[0-9]+/")
      */
     private $generatedUsername;
 

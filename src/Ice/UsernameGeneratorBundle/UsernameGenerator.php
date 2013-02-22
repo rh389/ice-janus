@@ -2,8 +2,9 @@
 
 namespace Ice\UsernameGeneratorBundle;
 
-use Doctrine\ORM\EntityManager,
-    Doctrine\Bundle\DoctrineBundle\Registry;
+use Doctrine\ORM\EntityManager;
+
+use Symfony\Bridge\Doctrine\RegistryInterface;
 
 use Ice\UsernameGeneratorBundle\Entity\UsernameRepository,
     Ice\UsernameGeneratorBundle\Entity\Username;
@@ -11,7 +12,7 @@ use Ice\UsernameGeneratorBundle\Entity\UsernameRepository,
 class UsernameGenerator
 {
     /**
-     * @var \Doctrine\Bundle\DoctrineBundle\Registry
+     * @var RegistryInterface
      */
     private $registry;
 
@@ -35,7 +36,7 @@ class UsernameGenerator
      */
     private $sequenceStart = 1;
 
-    public function __construct(Registry $registry, EntityManager $em, UsernameRepository $repository)
+    public function __construct(RegistryInterface $registry, EntityManager $em, UsernameRepository $repository)
     {
         $this->registry = $registry;
         $this->em = $em;
