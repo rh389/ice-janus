@@ -159,12 +159,15 @@ class User extends BaseUser
 
     public function getInitials()
     {
-        $initials = array();
-        $initials[] = StringUtil::getInitials($this->getFirstNames());
-        $initials[] = StringUtil::getInitials($this->getMiddleNames());
-        $initials[] = substr($this->getLastNames(), 0, 1);
-        $initials = implode("", $initials);
-        return strtolower($initials);
+        $names = array(
+            $this->getFirstNames(),
+            $this->getMiddleNames(),
+            $this->getLastNames(),
+        );
+
+        $name = implode(" ", $names);
+        $name = mb_strtolower($name, 'UTF-8');
+        return StringUtil::getInitials($name);
     }
 
     public function getFullName()
