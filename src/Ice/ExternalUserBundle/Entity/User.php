@@ -98,6 +98,17 @@ class User extends BaseUser
     protected $lastNames;
 
     /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="dob", type="date", nullable=true)
+     *
+     * @Assert\Date
+     *
+     * @Expose
+     */
+    protected $dob;
+
+    /**
      * @var Attribute[]
      *
      * @ORM\OneToMany(targetEntity="Attribute", mappedBy="user")
@@ -213,5 +224,23 @@ class User extends BaseUser
     {
         $this->getAttributes()->add($attribute);
         return $this;
+    }
+
+    /**
+     * @param \DateTime $dob
+     * @return User
+     */
+    public function setDob($dob)
+    {
+        $this->dob = $dob;
+        return $this;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getDob()
+    {
+        return $this->dob;
     }
 }

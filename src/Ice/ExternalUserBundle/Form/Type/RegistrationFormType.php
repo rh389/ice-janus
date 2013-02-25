@@ -33,6 +33,10 @@ class RegistrationFormType extends BaseType
             ->add('lastNames', 'text', array(
                 'description' => 'Last name.',
             ))
+            ->add('dob', 'date', array(
+                'widget' => 'single_text',
+                'description' => 'Date of birth.',
+            ))
         ;
     }
 

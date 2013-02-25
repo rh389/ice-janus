@@ -101,6 +101,7 @@ class UsersControllerTest extends WebTestCase
             "firstNames" => "First Names",
             "middleNames" => "Middle Names",
             "lastNames" => "Lastname",
+            "dob" => "1900-01-01",
         );
 
         return json_encode($body);
