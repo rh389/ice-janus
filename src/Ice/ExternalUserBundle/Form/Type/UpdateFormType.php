@@ -32,7 +32,7 @@ class UpdateFormType extends BaseType
                 'description' => 'Last name.',
                 'required' => true,
             ))
-            ->add('dob', 'text', array(
+            ->add('dob', 'birthday', array(
                 'widget' => 'single_text',
                 'description' => 'Date of birth.',
             ))
