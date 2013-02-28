@@ -92,6 +92,23 @@ class UsersControllerTest extends WebTestCase
         $this->testGetUsersAuthenticateAction('abc12', 'newpassword');
     }
 
+    public function testCreateUserWithNoLettersInNamesFails()
+    {
+        $request = array(
+            'plainPassword' => 'password',
+            'email' => 'email@blah.com',
+            'title' => 'Mr',
+            'firstNames' => '$£',
+            'lastNames' => '$£',
+        );
+
+        $client = $this->getJsonClient();
+
+        $client->request('POST', '/api/users', array(), array(), array(), json_encode($request));
+
+        $this->assertJsonResponse($client->getResponse(), 400);
+    }
+
     protected function createCompleteJsonRegisterBody()
     {
         $body = array(

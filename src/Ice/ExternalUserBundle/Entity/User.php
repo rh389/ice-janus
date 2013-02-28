@@ -69,6 +69,7 @@ class User extends BaseUser
      * @ORM\Column(name="first_names", type="string")
      *
      * @Assert\NotBlank(message="Please provide your first name(s)", groups={"rest_register", "rest_update"})
+     * @Assert\Regex(pattern="/\p{L}+/u", message="First name(s) must include at least one letter", groups={"rest_register", "rest_update"})
      *
      * @Expose()
      * @SerializedName("firstNames")
@@ -91,6 +92,7 @@ class User extends BaseUser
      * @ORM\Column(name="last_names", type="string")
      *
      * @Assert\NotBlank(message="Please provide your last name(s)", groups={"rest_register", "rest_update"})
+     * @Assert\Regex(pattern="/\p{L}+/u", message="Last name(s) must include at least one letter", groups={"rest_register", "rest_update"})
      *
      * @Expose()
      * @SerializedName("lastNames")
