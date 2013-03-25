@@ -5,7 +5,10 @@ namespace Ice\ExternalUserBundle\Entity;
 use Doctrine\ORM\EntityRepository,
     Doctrine\ORM\QueryBuilder;
 
+use Doctrine\ORM\NoResultException;
 use Ice\ExternalUserBundle\Entity\User;
+use Lexik\Bundle\FormFilterBundle\Filter\FilterBuilderUpdaterInterface;
+use Symfony\Component\Form\FormInterface;
 
 /**
  * UserRepository
@@ -21,7 +24,7 @@ class UserRepository extends EntityRepository
     private $qb;
 
     public function findByFiltered(array $filters) {
-        $this->qb = $this->getBaseQueryBuilder();
+        $this->qb = $this->getFindAllQueryBuilder();
 
         if (isset($filters['attributeName'])) {
             $this->addAttributeName($filters['attributeName']);
@@ -31,13 +34,13 @@ class UserRepository extends EntityRepository
             $this->addAttributeValue($filters['attributeValue']);
         }
 
-        return $this->getAll();
+        return $this->fetchAll();
     }
 
     /**
      * @return \Doctrine\ORM\QueryBuilder
      */
-    private function getBaseQueryBuilder()
+    private function getFindAllQueryBuilder()
     {
         $qb = $this->getEntityManager()->createQueryBuilder();
 
@@ -66,14 +69,21 @@ class UserRepository extends EntityRepository
             ->setParameter('value', $value);
     }
 
+    public function findAllFiltered(FilterBuilderUpdaterInterface $filter, FormInterface $form)
+    {
+        $this->qb = $this->getFindAllQueryBuilder();
+        $filter->addFilterConditions($form, $this->qb);
+        return $this->fetchAll();
+    }
+
     /**
      * @return array|null
      */
-    private function getAll()
+    private function fetchAll()
     {
         try {
             return $this->qb->getQuery()->getResult();
-        } catch (\Doctrine\ORM\NoResultException $e) {
+        } catch (NoResultException $e) {
             return null;
         }
     }
@@ -81,11 +91,11 @@ class UserRepository extends EntityRepository
     /**
      * @return User|null
      */
-    private function getOne()
+    private function fetchOne()
     {
         try {
             return $this->qb->getQuery()->getSingleResult();
-        } catch (\Doctrine\ORM\NoResultException $e) {
+        } catch (NoResultException $e) {
             return null;
         }
     }

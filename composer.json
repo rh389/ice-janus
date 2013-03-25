@@ -33,7 +33,8 @@
         "sonata-project/doctrine-orm-admin-bundle": "dev-master",
         "doctrine/doctrine-fixtures-bundle": "dev-master",
         "liip/functional-test-bundle": "dev-master",
-        "jms/serializer-bundle": "1.0.*@dev"
+        "jms/serializer-bundle": "1.0.*@dev",
+        "lexik/form-filter-bundle": "~1.2.0"
     },
     "scripts": {
         "post-install-cmd": [

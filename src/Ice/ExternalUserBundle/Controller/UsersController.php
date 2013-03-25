@@ -9,6 +9,7 @@ use FOS\RestBundle\Controller\FOSRestController,
 use Ice\ExternalUserBundle\Entity\User,
     Ice\ExternalUserBundle\Form\Type\SetPasswordFormType;
 
+use Ice\ExternalUserBundle\Filter\UserFilter;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 
 use Symfony\Component\HttpFoundation\Response,
@@ -22,29 +23,38 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter,
 class UsersController extends FOSRestController
 {
     /**
-     * @param \FOS\RestBundle\Request\ParamFetcher $paramFetcher
      * @return \Symfony\Component\HttpFoundation\Response
      *
      * @Route("/users", name="get_users")
      * @Method("GET")
-     *
-     * @QueryParam(name="attributeName", description="Attribute name")
-     * @QueryParam(name="attributeValue", description="Attribute value")
      *
      * @ApiDoc(
      *  resource=true,
      *  description="Returns a collection of User"
      * )
      */
-    public function getUsersAction(ParamFetcher $paramFetcher)
+    public function getUsersAction()
     {
-        $name = $paramFetcher->get('attributeName');
-        $value = $paramFetcher->get('attributeValue');
+        $form = $this->createForm(new UserFilter());
 
-        $users = $this->getDoctrine()->getRepository('IceExternalUserBundle:User')->findByFiltered(array(
-            'attributeName' => $name,
-            'attributeValue' => $value
-        ));
+        if ($this->getRequest()->query->count()) {
+            $form->bind($this->getRequest());
+
+            if (!$form->isValid()) {
+                return $this->view($form, 401);
+            }
+
+            $filter = $this->get('lexik_form_filter.query_builder_updater');
+
+            $users = $this->getDoctrine()
+                ->getRepository('IceExternalUserBundle:User')
+                ->findAllFiltered($filter, $form);
+        } else {
+            $users = $this->getDoctrine()
+                ->getRepository('IceExternalUserBundle:User')
+                ->findAll();
+        }
+
         return $this->view($users);
     }
 
