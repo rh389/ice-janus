@@ -9,7 +9,7 @@ use FOS\RestBundle\Controller\FOSRestController,
 use Ice\ExternalUserBundle\Entity\User,
     Ice\ExternalUserBundle\Form\Type\SetPasswordFormType;
 
-use Ice\ExternalUserBundle\Filter\UserFilter;
+use Ice\ExternalUserBundle\Filter\UserFilterType;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 
 use Symfony\Component\HttpFoundation\Response,
@@ -35,7 +35,7 @@ class UsersController extends FOSRestController
      */
     public function getUsersAction()
     {
-        $form = $this->createForm(new UserFilter());
+        $form = $this->createForm(new UserFilterType());
 
         if ($this->getRequest()->query->count()) {
             $form->bind($this->getRequest());
