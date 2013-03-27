@@ -76,6 +76,21 @@ class UserRepository extends EntityRepository
         return $this->fetchAll();
     }
 
+    public function search($term)
+    {
+        $this->qb = $this->getFindAllQueryBuilder();
+        $this->qb
+            ->andWhere($this->qb->expr()->orX(
+                $this->qb->expr()->like('User.firstNames', ':term'),
+                $this->qb->expr()->like('User.middleNames', ':term'),
+                $this->qb->expr()->like('User.lastNames', ':term')
+            ))
+            ->setParameter('term', '%'.$term.'%')
+        ;
+
+        return $this->fetchAll();
+    }
+
     /**
      * @return array|null
      */

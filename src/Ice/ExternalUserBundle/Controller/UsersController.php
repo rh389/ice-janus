@@ -58,6 +58,25 @@ class UsersController extends FOSRestController
         return $this->view($users);
     }
 
+    /**
+     * @param string $term Search term
+     * @return \FOS\RestBundle\View\View
+     *
+     * @Route("/users/search/{term}", name="search_users")
+     * @Method("GET")
+     *
+     * @ApiDoc(
+     *   resource=true,
+     *   description="Returns a collection of Users which match the search term"
+     * )
+     */
+    public function searchUsersAction($term)
+    {
+        $users = $this->getDoctrine()->getRepository('IceExternalUserBundle:User')->search($term);
+
+        return $this->view($users);
+    }
+
 
     /**
      * @param $username
