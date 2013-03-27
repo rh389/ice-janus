@@ -46,10 +46,10 @@ class UserRepository extends EntityRepository
 
         $qb
             ->select('
-                User, Attributes
+                User
             ')
             ->from('IceExternalUserBundle:User', 'User')
-            ->leftJoin('User.attributes', 'Attributes')
+//            ->leftJoin('User.attributes', 'Attributes')
         ;
 
         return $qb;

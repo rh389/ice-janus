@@ -25,6 +25,7 @@ class UserFilterType extends AbstractType
             ->add('email', 'filter_text', array(
                 'condition_pattern' => FilterOperands::STRING_BOTH,
             ))
+            ->add('attributes', new UserAttributeFilterType())
         ;
     }
 
