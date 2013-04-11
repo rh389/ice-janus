@@ -14,13 +14,13 @@ class UserFilterType extends AbstractType
     {
         $builder
             ->add('firstNames', 'filter_text', array(
-                'condition_pattern' => FilterOperands::STRING_STARTS,
+                'condition_pattern' => FilterOperands::STRING_BOTH,
             ))
             ->add('middleNames', 'filter_text', array(
-                'condition_pattern' => FilterOperands::STRING_STARTS,
+                'condition_pattern' => FilterOperands::STRING_BOTH,
             ))
             ->add('lastNames', 'filter_text', array(
-                'condition_pattern' => FilterOperands::STRING_STARTS,
+                'condition_pattern' => FilterOperands::STRING_BOTH,
             ))
             ->add('email', 'filter_text', array(
                 'condition_pattern' => FilterOperands::STRING_BOTH,
