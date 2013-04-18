@@ -31,11 +31,6 @@ class UserAttributeFilterType extends AbstractType implements FilterTypeSharedab
 
     public function addShared(FilterBuilderExecuterInterface $qbe)
     {
-        $closure = function(QueryBuilder $filterBuilder, $alias, $joinAlias, Expr $expr) {
-            $filterBuilder->leftJoin($alias . '.attributes', 'Attributes');
-        };
-
-        $qbe->addOnce($qbe->getAlias() . '.attributes', 'Attributes', $closure);
-
+        // Joins have already been made
     }
 }
