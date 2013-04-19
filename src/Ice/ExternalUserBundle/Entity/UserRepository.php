@@ -78,13 +78,17 @@ class UserRepository extends EntityRepository
 
     public function search($term)
     {
+        $parts = array_filter(explode(" ", $term));
+        $term = implode("%", $parts);
+
         $this->qb = $this->getFindAllQueryBuilder();
         $this->qb
-            ->andWhere($this->qb->expr()->orX(
-                $this->qb->expr()->like('User.firstNames', ':term'),
-                $this->qb->expr()->like('User.middleNames', ':term'),
-                $this->qb->expr()->like('User.lastNames', ':term')
-            ))
+            ->andWhere(
+                $this->qb->expr()->like(
+                    "CONCAT(User.firstNames, CONCAT(COALESCE(User.middleNames, ''), User.lastNames))",
+                    ':term'
+                )
+            )
             ->setParameter('term', '%'.$term.'%')
         ;
 
