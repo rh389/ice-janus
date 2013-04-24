@@ -41,7 +41,7 @@ class UsersController extends FOSRestController
             $form->bind($this->getRequest());
 
             if (!$form->isValid()) {
-                return $this->view($form, 401);
+                return $this->view($form, 400);
             }
 
             $filter = $this->get('lexik_form_filter.query_builder_updater');
