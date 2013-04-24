@@ -46,7 +46,8 @@ class UserRepository extends EntityRepository
 
         $qb
             ->select('
-                User
+                User,
+                Attributes
             ')
             ->from('IceExternalUserBundle:User', 'User')
             ->leftJoin('User.attributes', 'Attributes')
@@ -71,7 +72,12 @@ class UserRepository extends EntityRepository
 
     public function findAllFiltered(FilterBuilderUpdaterInterface $filter, FormInterface $form)
     {
-        $this->qb = $this->getFindAllQueryBuilder();
+        $this->qb = $this
+            ->getEntityManager()
+            ->createQueryBuilder()
+            ->select('User')
+            ->from('IceExternalUserBundle:User', 'User')
+        ;
         $filter->addFilterConditions($form, $this->qb);
         return $this->fetchAll();
     }
