@@ -1,5 +1,10 @@
+set :stage_dir,   "app/config/deploy"
+require "capistrano/ext/multistage"
+
+set(:stage_app_server) { "#{app_server}" }
+set(:stage_parameters_file) { "#{parameters_file}" }
+
 set :application, "janus"
-set :domain,      "rope.internal.admin.cam.ac.uk"
 set :deploy_to,   "/home/httpd/sites/#{application}.ice"
 set :app_path,    "app"
 
@@ -13,12 +18,8 @@ set :deploy_via,   :copy
 
 set :model_manager, "doctrine"
 
-role :web,        domain                         # Your HTTP server, Apache/etc
-role :app,        domain, :primary => true       # This may be the same as your `Web` server
-role :db,         domain, :primary => true       # This is where Symfony2 migrations will run
-
 set :use_sudo,      false
-set :keep_releases, 3
+set :keep_releases, 5
 
 # Symfony2 specific settings
 set :shared_files,      ["app/config/parameters.yml"]
@@ -38,8 +39,18 @@ end
 # Be more verbose by uncommenting the following line
 #logger.level = Logger::MAX_LEVEL
 
+# Set execute bit for app/console
+after "deploy:finalize_update" do
+  run "chmod +x #{latest_release}/#{app_path}/console"
+end
 
-set :parameters_file, "parameters_prod.yml"
+# Copy correct front controller
+before "symfony:project:clear_controllers" do
+  if not symfony_env_prod.eql?("prod")
+    run "cp #{latest_release}/#{web_path}/app_#{symfony_env_prod}.php #{latest_release}/#{web_path}/app.php"
+  end
+end
+
 set :parameters_dir,  "app/config/parameters"
 
 task :upload_parameters do
