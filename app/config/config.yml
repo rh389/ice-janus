@@ -103,12 +103,6 @@ jms_serializer:
 nelmio_api_doc:
     name:   ICE identity management API documentation
 
-sonata_cache:
-    caches:
-        apc:
-            token: J2ep5rjn2SKBvUyp
-            prefix: janus
-
 sonata_block:
     default_contexts: [admin]
     blocks:
