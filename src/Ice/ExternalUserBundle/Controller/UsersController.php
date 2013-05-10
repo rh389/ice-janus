@@ -185,7 +185,7 @@ class UsersController extends FOSRestController
     }
 
     /**
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @return \Symfony\Component\HttpFoundation\Response
      *
      * @Route("/users/authenticate", name="authenticate_user")
      * @Method("GET")
@@ -193,8 +193,9 @@ class UsersController extends FOSRestController
      * @ApiDoc(
      *   resource=true,
      *   description="Authenticate an existing User using HTTP basic authentication",
+     *   return="Ice\ExternalUserBundle\Entity\User",
      *   statusCodes={
-     *      302="Returned when authentication is successful",
+     *      200="Returned when authentication is successful",
      *      401="Returned when authentication is not successful"
      *   }
      * )
@@ -210,7 +211,7 @@ class UsersController extends FOSRestController
         $em->persist($user);
         $em->flush();
 
-        return new RedirectResponse($this->generateUrl('get_user', array('username' => $user->getUsername()), true));
+        return $this->view($user, 200);
     }
 
     /**
