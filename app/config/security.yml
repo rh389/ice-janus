@@ -9,7 +9,7 @@ security:
         api_memory:
             memory:
                 users:
-                    janus: { password: 1234, roles: [ROLE_API_CONSUMER]}
+                    janus: { password: "%janus_api_password%", roles: [ROLE_API_CONSUMER]}
 
     encoders:
         FOS\UserBundle\Model\UserInterface:
