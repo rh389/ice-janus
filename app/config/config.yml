@@ -118,3 +118,6 @@ sonata_admin:
         blocks:
             # display a dashboard block
             - { position: left, type: sonata.admin.block.admin_list }
+
+elnur_blowfish_password_encoder:
+    cost: 10
