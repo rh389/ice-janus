@@ -23,8 +23,14 @@ class WebTestCase extends BaseWebTestCase
     protected function getJsonClient()
     {
         $client = static::createClient();
-        $client->setServerParameter('CONTENT_TYPE','application/json');
-        $client->setServerParameter('HTTP_ACCEPT', 'application/json');
+
+        $client->setServerParameters(array(
+            'CONTENT_TYPE'  => 'application/json',
+            'HTTP_ACCEPT'   => 'application/json',
+            'HTTPS'         => true,
+            'PHP_AUTH_USER' => 'janus',
+            'PHP_AUTH_PW'   => 'AmjtP*GHfBKqG5bv^#uCTkaHp7WPEC',
+        ));
         return $client;
     }
 }

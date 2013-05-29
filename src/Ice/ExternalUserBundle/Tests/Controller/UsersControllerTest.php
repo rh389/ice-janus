@@ -63,11 +63,7 @@ class UsersControllerTest extends WebTestCase
         $crawler = $client->request('GET', '/api/users/authenticate');
 
         $response = $client->getResponse();
-        $this->assertJsonResponse($response, 302);
-
-        $client->followRedirect();
-        $response = $client->getResponse();
-        $this->assertJsonResponse($response);
+        $this->assertJsonResponse($response, 200);
     }
 
     public function testUpdateUser()
