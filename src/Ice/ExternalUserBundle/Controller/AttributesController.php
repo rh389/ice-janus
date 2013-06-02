@@ -43,19 +43,21 @@ class AttributesController extends FOSRestController
      *   output="Ice\ExternalUserBundle\Entity\Attribute",
      *   statusCodes={
      *     204="Returned on success",
-     *     404="Returned when the User or Attribute does not exist"
+     *     404="Returned when the User does not exist"
      *   }
      * )
      */
     public function putAttributesAction(User $user, $fieldName)
     {
-        $existingAttribute = $user->getAttributeByFieldName($fieldName);
+        $attribute = $user->getAttributeByFieldName($fieldName);
 
-        if (!$existingAttribute) {
-            throw $this->createNotFoundException(sprintf("Attribute \"%s\" for user \"%s\" does not exist.", $fieldName, $user->getUsername()));
+        if (!$attribute) {
+            $attribute = new Attribute();
+            $attribute->setFieldName($fieldName);
+            $attribute->setUser($user);
         }
 
-        return $this->processForm(new UpdateAttributeType(), $user, $existingAttribute);
+        return $this->processForm(new UpdateAttributeType(), $user, $attribute);
     }
 
     /**
