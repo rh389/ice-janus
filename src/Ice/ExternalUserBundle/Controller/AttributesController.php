@@ -52,6 +52,10 @@ class AttributesController extends FOSRestController
         $attribute = $user->getAttributeByFieldName($fieldName);
 
         if (!$attribute) {
+            //This amounts to using a PUT to create a new resource, which isn't particularly restful. However, in the
+            //context of attributes it's useful to be able to set a value without caring whether the attribute existed
+            //previously. Doing this instead of returning a 404 doesn't seem like such a terrible thing.
+
             $attribute = new Attribute();
             $attribute->setFieldName($fieldName);
             $attribute->setUser($user);
