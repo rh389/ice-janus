@@ -1,0 +1,4 @@
+mail_api:
+    resource:   "@IceMailerBundle/Controller"
+    type:       annotation
+    prefix:     /api
