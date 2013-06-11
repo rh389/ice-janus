@@ -9,6 +9,9 @@ web_profiler:
     toolbar: true
     intercept_redirects: false
 
+swiftmailer:
+    delivery_address: 'webmaster@ice.cam.ac.uk'
+
 monolog:
     handlers:
         main:
@@ -21,6 +24,3 @@ monolog:
 
 assetic:
     use_controller: true
-
-#swiftmailer:
-#    delivery_address: me@example.com

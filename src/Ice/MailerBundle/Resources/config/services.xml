@@ -3,4 +3,25 @@
 <container xmlns="http://symfony.com/schema/dic/services"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+        <service id="ice_mailer" class="Ice\MailerBundle\Service\MailerService" public="true">
+            <tag name="kernel.event_subscriber" />
+            <call method="setDoctrine">
+                <argument type="service" id="doctrine"/>
+            </call>
+            <call method="setTemplateManager">
+                <argument type="service" id="ice_mailer.template_manager"/>
+            </call>
+            <call method="setSwiftMailer">
+                <argument type="service" id="mailer"/>
+            </call>
+        </service>
+        <service id="ice_mailer.template_manager" class="Ice\MailerBundle\Template\Manager" public="true">
+            <call method="setTemplating">
+                <argument type="service" id="templating"/>
+            </call>
+        </service>
+    </services>
+
 </container>
