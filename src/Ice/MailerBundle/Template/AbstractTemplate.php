@@ -14,6 +14,29 @@ abstract class AbstractTemplate implements TemplateInterface
     protected $vars;
 
     /**
+     * @var string
+     */
+    protected $templateName;
+
+    /**
+     * @param string $templateName
+     * @return AbstractTemplate
+     */
+    public function setTemplateName($templateName)
+    {
+        $this->templateName = $templateName;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTemplateName()
+    {
+        return $this->templateName;
+    }
+
+    /**
      * @param \Ice\MailerBundle\Template\Manager $manager
      * @return AbstractTemplate
      */
@@ -48,4 +71,48 @@ abstract class AbstractTemplate implements TemplateInterface
     {
         return $this->vars;
     }
+
+    /**
+     * Returns an array in the form:
+     *
+     * array('john@doe.com' => 'John Doe')
+     *
+     * @return array
+     */
+    public function getFrom()
+    {
+        return [
+            'no-reply@ice.cam.ac.uk' => 'Institute of Continuing Education'
+        ];
+    }
+
+    /**
+     * Returns an array in the form:
+     *
+     * array(
+     *      array('john@doe.com' => 'John Doe')
+     * )
+     *
+     * @return array
+     */
+    public function getCC()
+    {
+        return [];
+    }
+
+    /**
+     * Returns an array in the form:
+     *
+     * array(
+     *      array('john@doe.com' => 'John Doe')
+     * )
+     *
+     * @return array
+     */
+    public function getBCC()
+    {
+        return [];
+    }
+
+
 }

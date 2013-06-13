@@ -127,6 +127,7 @@ class MailerService implements EventSubscriberInterface
 
             $mail->setCompiledBodyPlain($template->getBodyPlain());
             $mail->setCompiledSubject($template->getSubject());
+            $mail->setFromArray($template->getFrom());
             $mail->setCompiled(new \DateTime());
         }
     }
@@ -138,7 +139,7 @@ class MailerService implements EventSubscriberInterface
     {
         $message = \Swift_Message::newInstance()
             ->setSubject($mail->getCompiledSubject())
-            ->setFrom('webmaster@ice.cam.ac.uk')
+            ->setFrom($mail->getFromArray())
             ->setTo($mail->getRecipient()->getEmail())
             ->setBody(
                 $mail->getCompiledBodyPlain()

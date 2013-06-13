@@ -52,6 +52,7 @@ class Manager
             $template = new $className();
             if ($template instanceof AbstractTemplate) {
                 $template->setManager($this);
+                $template->setTemplateName($templateName);
                 return $template;
             } else {
                 throw new \RuntimeException("Templates must implement TemplateInterface");

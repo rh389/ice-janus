@@ -31,4 +31,35 @@ interface TemplateInterface
      * @return string
      */
     public function getBodyHtml();
+
+    /**
+     * Returns an array in the form:
+     *
+     * array('john@doe.com' => 'John Doe')
+     *
+     * @return array
+     */
+    public function getFrom();
+
+    /**
+     * Returns an array in the form:
+     *
+     * array(
+     *      array('john@doe.com' => 'John Doe')
+     * )
+     *
+     * @return array
+     */
+    public function getCC();
+
+    /**
+     * Returns an array in the form:
+     *
+     * array(
+     *      array('john@doe.com' => 'John Doe')
+     * )
+     *
+     * @return array
+     */
+    public function getBCC();
 }
