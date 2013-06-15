@@ -7,6 +7,7 @@ use Ice\MailerBundle\Entity\MailRequest;
 use Ice\MailerBundle\Event\MailerEvents;
 use Ice\MailerBundle\Event\RequestEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Symfony\Component\EventDispatcher\EventDispatcher;
 use Doctrine\Bundle\DoctrineBundle\Registry;
 use Ice\MailerBundle\Template\Manager;
 use Swift_Mailer;
@@ -27,6 +28,11 @@ class MailerService implements EventSubscriberInterface
      * @var Swift_Mailer
      */
     private $swiftMailer;
+
+    /**
+     * @var EventDispatcher
+     */
+    private $eventDispatcher;
 
     /**
      * @param \Doctrine\Bundle\DoctrineBundle\Registry $doctrine
@@ -164,5 +170,23 @@ class MailerService implements EventSubscriberInterface
     public function getTemplateManager()
     {
         return $this->templateManager;
+    }
+
+    /**
+     * @param \Symfony\Component\EventDispatcher\EventDispatcher $eventDispatcher
+     * @return MailerService
+     */
+    public function setEventDispatcher($eventDispatcher)
+    {
+        $this->eventDispatcher = $eventDispatcher;
+        return $this;
+    }
+
+    /**
+     * @return \Symfony\Component\EventDispatcher\EventDispatcher
+     */
+    public function getEventDispatcher()
+    {
+        return $this->eventDispatcher;
     }
 }

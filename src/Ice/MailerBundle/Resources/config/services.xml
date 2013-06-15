@@ -10,6 +10,9 @@
             <call method="setDoctrine">
                 <argument type="service" id="doctrine"/>
             </call>
+            <call method="setEventDispatcher">
+                <argument type="service" id="event_dispatcher"/>
+            </call>
             <call method="setTemplateManager">
                 <argument type="service" id="ice_mailer.template_manager"/>
             </call>

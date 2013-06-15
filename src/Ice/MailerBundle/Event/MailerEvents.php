@@ -10,4 +10,6 @@ namespace Ice\MailerBundle\Event;
 class MailerEvents
 {
     const POST_CREATE_REQUEST = 'ice_mailer.post_create_request';
+
+    const PRE_COMPILE_MAIL = 'ice_mailer.pre_compile_mail';
 }
