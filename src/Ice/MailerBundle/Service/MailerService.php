@@ -6,6 +6,7 @@ use Ice\MailerBundle\Entity\Mail;
 use Ice\MailerBundle\Entity\MailRequest;
 use Ice\MailerBundle\Event\MailerEvents;
 use Ice\MailerBundle\Event\RequestEvent;
+use Ice\MailerBundle\Event\TemplateEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 use Doctrine\Bundle\DoctrineBundle\Registry;
@@ -130,6 +131,11 @@ class MailerService implements EventSubscriberInterface
         foreach ($mailRequest->getMails() as $mail) {
 
             $template = $manager->getMail($mailRequest->getTemplateName(), $mail->getVars());
+
+            $this->getEventDispatcher()->dispatch(
+                MailerEvents::PRE_COMPILE_MAIL,
+                (new TemplateEvent())->setTemplate($template)
+            );
 
             $mail->setCompiledBodyPlain($template->getBodyPlain());
             $mail->setCompiledSubject($template->getSubject());

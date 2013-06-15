@@ -62,4 +62,11 @@ interface TemplateInterface
      * @return array
      */
     public function getBCC();
+
+    /**
+     * Returns the reference of this template
+     *
+     * @return string
+     */
+    public function getTemplateName();
 }

@@ -25,6 +25,12 @@
                 <argument type="service" id="templating"/>
             </call>
         </service>
+        <service id="kernel.listener.your_listener_name" class="Ice\MailerBundle\PreCompiler\CourseInformation">
+            <tag name="kernel.event_listener" event="ice_mailer.pre_compile_mail" method="onPreCompile" />
+            <call method="setVeritasClient">
+                <argument type="service" id="veritas.client" />
+            </call>
+        </service>
     </services>
 
 </container>
