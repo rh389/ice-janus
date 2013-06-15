@@ -1,13 +1,13 @@
-Dear {{ recipient.title }} {{ recipient.lastNames }}
+Dear {{ recipient.title|raw }} {{ recipient.lastNames|raw }}
 
 Order reference: {{ booking.orderReference }}
 Order reference: {{ booking.bookingReference }}
 
 We are pleased to confirm your place on the course below:
 
-Course:         {{ course.title }}
+Course:         {{ course.title|raw }}
 Course code:    {{ course.code }}
-Course dates:   {{ course.startDate | format(j M Y)}} - {{ course.endDate | format(j M Y)}}
+Course dates:   {{ course.startDate | date('j M Y')}} - {{ course.endDate | date('j M Y')}}
 
 Studying at the Institute of Continuing Education (ICE)
 Please see our website, http://www.ice.cam.ac.uk/studying-with-us/information-for-students , for information regarding studying at ICE, including the Student Handbook which details important policies relating to your study.

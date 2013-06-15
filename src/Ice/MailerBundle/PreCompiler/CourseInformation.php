@@ -49,6 +49,7 @@ class CourseInformation
             $vars['course'] = [
                 'title' => $course->getTitle(),
                 'startDate' => $course->getStartDate(),
+                'code' => $course->getCode(),
                 'endDate' => $course->getEndDate()
             ];
             $template->setVars($vars);
