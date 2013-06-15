@@ -4,6 +4,12 @@
     "autoload": {
         "psr-0": { "": "src/" }
     },
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "http://satis.internal.admin.cam.ac.uk"
+        }
+    ],
     "require": {
         "php": ">=5.3.3",
         "symfony/symfony": "2.1.*",
@@ -34,6 +40,9 @@
         "doctrine/doctrine-fixtures-bundle": "dev-master",
         "liip/functional-test-bundle": "dev-master",
         "jms/serializer-bundle": "1.0.*@dev",
+        "ice/veritasclient-bundle": "1.*",
+        "ice/mercuryclient-bundle": "2.*",
+        "ice/minervaclient-bundle": "1.*",
         "lexik/form-filter-bundle": "~1.2.0"
     },
     "scripts": {

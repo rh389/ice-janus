@@ -17,3 +17,15 @@ monolog:
             type:  stream
             path:  "%kernel.logs_dir%/%kernel.environment%.log"
             level: debug
+
+#IceMercuryClient configuration
+ice_mercury_client:
+    base_url: https://mercury.ice.cam.ac.uk/api/
+
+#IceJanusClient configuration
+ice_janus_client:
+    base_url: https://janus.ice.cam.ac.uk/api/
+
+#IceVeritasClient configuration
+ice_veritas_client:
+    base_url: https://veritas.ice.cam.ac.uk/api/

@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "5d0e5bdb3943b32f569649bb9ad4fab9",
+    "hash": "720b6eaa12404bbb7c155d0add0e35cb",
     "packages": [
         {
             "name": "dflydev/markdown",
@@ -880,6 +880,152 @@
                 "web service"
             ],
             "time": "2013-01-10 07:11:35"
+        },
+        {
+            "name": "ice/janusclient-bundle",
+            "version": "dev-trunk",
+            "target-dir": "Ice/JanusClientBundle",
+            "source": {
+                "type": "svn",
+                "url": "http://repositories.internal.admin.cam.ac.uk/svn/ice-janusclient",
+                "reference": "/trunk/@56"
+            },
+            "require": {
+                "jms/serializer-bundle": ">=0.12.0@dev",
+                "misd/guzzle-bundle": "@stable"
+            },
+            "type": "symfony-bundle",
+            "autoload": {
+                "psr-0": {
+                    "Ice\\JanusClientBundle": ""
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Stuart Chapman",
+                    "email": "stuart.chapman@admin.cam.ac.uk"
+                },
+                {
+                    "name": "Rob Hogan",
+                    "email": "rob.hogan@admin.cam.ac.uk"
+                }
+            ],
+            "description": "Client for the ICE Janus API",
+            "time": "2013-06-15 22:43:54"
+        },
+        {
+            "name": "ice/mercuryclient-bundle",
+            "version": "2.1.1",
+            "target-dir": "Ice/MercuryClientBundle",
+            "source": {
+                "type": "svn",
+                "url": "http://repositories.internal.admin.cam.ac.uk/svn/ice-mercuryclient",
+                "reference": "/tags/2.1.1/@143"
+            },
+            "require": {
+                "ice/janusclient-bundle": ">=0.2",
+                "ice/minervaclient-bundle": ">=0.1.8",
+                "ice/veritasclient-bundle": ">=0.2.2",
+                "jms/serializer-bundle": ">=0.12.0@dev",
+                "misd/guzzle-bundle": "@stable"
+            },
+            "require-dev": {
+                "liip/functional-test-bundle": "dev-master"
+            },
+            "type": "symfony-bundle",
+            "autoload": {
+                "psr-0": {
+                    "Ice\\MercuryClientBundle": ""
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Rob Hogan",
+                    "email": "rob.hogan@admin.cam.ac.uk"
+                },
+                {
+                    "name": "Stuart Chapman",
+                    "email": "stuart.chapman@admin.cam.ac.uk"
+                }
+            ],
+            "description": "Client for the ICE Mercury API",
+            "time": "2013-06-15 22:22:17"
+        },
+        {
+            "name": "ice/minervaclient-bundle",
+            "version": "1.0.0",
+            "target-dir": "Ice/MinervaClientBundle",
+            "source": {
+                "type": "svn",
+                "url": "http://repositories.internal.admin.cam.ac.uk/svn/ice-minervaclient",
+                "reference": "/tags/1.0.0/@81"
+            },
+            "require": {
+                "jms/serializer-bundle": ">=0.12.0@dev",
+                "misd/guzzle-bundle": "@stable"
+            },
+            "type": "symfony-bundle",
+            "autoload": {
+                "psr-0": {
+                    "Ice\\MinervaClientBundle": ""
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Rob Hogan",
+                    "email": "rob.hogan@admin.cam.ac.uk"
+                },
+                {
+                    "name": "Stuart Chapman",
+                    "email": "stuart.chapman@admin.cam.ac.uk"
+                }
+            ],
+            "description": "Client for the ICE Minerva API",
+            "time": "2013-06-15 22:30:56"
+        },
+        {
+            "name": "ice/veritasclient-bundle",
+            "version": "1.0.1",
+            "target-dir": "Ice/VeritasClientBundle",
+            "source": {
+                "type": "svn",
+                "url": "http://repositories.internal.admin.cam.ac.uk/svn/ice-veritasclient",
+                "reference": "/tags/1.0.1/@50"
+            },
+            "require": {
+                "jms/serializer-bundle": ">=0.12.0@dev",
+                "misd/guzzle-bundle": "@stable"
+            },
+            "type": "symfony-bundle",
+            "autoload": {
+                "psr-0": {
+                    "Ice\\VeritasClientBundle": ""
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Rob Hogan",
+                    "email": "rob.hogan@admin.cam.ac.uk"
+                },
+                {
+                    "name": "Stuart Chapman",
+                    "email": "stuart.chapman@admin.cam.ac.uk"
+                }
+            ],
+            "description": "Client for the ICE Veritas API",
+            "time": "2013-06-15 22:16:02"
         },
         {
             "name": "jdorn/sql-formatter",
@@ -1994,17 +2140,17 @@
             "target-dir": "Sensio/Bundle/FrameworkExtraBundle",
             "source": {
                 "type": "git",
-                "url": "https://github.com/sensiolabs/SensioFrameworkExtraBundle.git",
-                "reference": "v2.1.11"
+                "url": "https://github.com/sensio/SensioFrameworkExtraBundle",
+                "reference": "f050aa93cb1aa780f668020dddd6333b5c5d95c3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sensiolabs/SensioFrameworkExtraBundle/zipball/v2.1.11",
-                "reference": "v2.1.11",
+                "url": "https://github.com/sensio/SensioFrameworkExtraBundle/archive/f050aa93cb1aa780f668020dddd6333b5c5d95c3.zip",
+                "reference": "f050aa93cb1aa780f668020dddd6333b5c5d95c3",
                 "shasum": ""
             },
             "require": {
-                "doctrine/common": ">=2.1,<2.5-dev",
+                "doctrine/common": ">=2.1,<2.4-dev",
                 "symfony/framework-bundle": "2.1.*"
             },
             "type": "symfony-bundle",
@@ -2033,7 +2179,7 @@
                 "annotations",
                 "controllers"
             ],
-            "time": "2013-04-05 06:59:04"
+            "time": "2013-01-04 17:06:26"
         },
         {
             "name": "sensio/generator-bundle",

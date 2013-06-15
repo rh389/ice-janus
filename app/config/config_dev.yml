@@ -24,3 +24,15 @@ monolog:
 
 assetic:
     use_controller: true
+
+#IceMinervaClient configuration
+ice_minerva_client:
+    base_url: https://minerva.dev.ice.internal.admin.cam.ac.uk/app_dev.php/
+
+#IceMercuryClient configuration
+ice_mercury_client:
+    base_url: https://mercury.dev.ice.internal.admin.cam.ac.uk/app_dev.php/api/
+
+#IceVeritasClient configuration
+ice_veritas_client:
+    base_url: https://veritas.dev.ice.internal.admin.cam.ac.uk/app_dev.php/api/

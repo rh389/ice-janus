@@ -121,3 +121,19 @@ sonata_admin:
 
 elnur_blowfish_password_encoder:
     cost: 10
+
+#IceVeritasClient configuration
+ice_veritas_client:
+    username: %veritas_api_username%
+    password: %veritas_api_password%
+
+#IceMinervaClient configuration
+ice_minerva_client:
+    username: %minerva_api_username%
+    password: %minerva_api_password%
+
+#IceMercuryClient configuration
+ice_mercury_client:
+    username: %mercury_api_username%
+    password: %mercury_api_password%
+    gateway_secret: ~

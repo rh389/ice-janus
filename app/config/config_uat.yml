@@ -7,3 +7,15 @@ framework:
 
 swiftmailer:
     delivery_address: 'systemsupport@ice.cam.ac.uk'
+
+#IceMinervaClient configuration
+ice_minerva_client:
+    base_url: https://minerva.uat.ice.internal.admin.cam.ac.uk/
+
+#IceMercuryClient configuration
+ice_mercury_client:
+    base_url: https://mercury.uat.ice.internal.admin.cam.ac.uk/api/
+
+#IceVeritasClient configuration
+ice_veritas_client:
+    base_url: https://veritas.uat.ice.internal.admin.cam.ac.uk/api/
