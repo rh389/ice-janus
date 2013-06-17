@@ -138,6 +138,7 @@ class MailerService implements EventSubscriberInterface
             );
 
             $mail->setCompiledBodyPlain($template->getBodyPlain());
+            $mail->setCompiledBodyHtml($template->getBodyHtml());
             $mail->setCompiledSubject($template->getSubject());
             $mail->setFromArray($template->getFrom());
             $mail->setCompiled(new \DateTime());
@@ -155,6 +156,10 @@ class MailerService implements EventSubscriberInterface
             ->setTo($mail->getRecipient()->getEmail())
             ->setBody(
                 $mail->getCompiledBodyPlain()
+            )
+            ->setBody(
+                $mail->getCompiledBodyHtml(),
+                'text/html'
             )
         ;
         $this->getSwiftMailer()->send($message);

@@ -1,13 +1,16 @@
-Dear {{ recipient.title|raw }} {{ recipient.lastNames|raw }}
+Dear {{ recipient.title|raw }} {{ recipient.lastNames|raw }},
 
 Order reference: {{ booking.orderReference }}
-Order reference: {{ booking.bookingReference }}
+Booking reference: {{ booking.bookingReference }}
 
 We are pleased to confirm your place on the course below:
 
-Course:         {{ course.title|raw }}
-Course code:    {{ course.code }}
-Course dates:   {{ course.startDate | date('j M Y')}} - {{ course.endDate | date('j M Y')}}
+Course:  {{ course.title|raw }}
+Course code:  {{ course.code }}
+Course dates:  {{ course.startDate | date('j M Y')}} - {{ course.endDate | date('j M Y')}}
+{% if accommodationChoiceDescription is defined %}
+Accommodation: {{ accommodationChoiceDescription | raw }}
+{% endif %}
 
 Studying at the Institute of Continuing Education (ICE)
 Please see our website, http://www.ice.cam.ac.uk/studying-with-us/information-for-students , for information regarding studying at ICE, including the Student Handbook which details important policies relating to your study.
@@ -23,3 +26,5 @@ If you would like to contact us regarding this booking, please contact our Admis
 
 For information on our terms and conditions please visit http://www.ice.cam.ac.uk/terms
 Your security is important to us and we ensure your personal information is protected. For details see http://www.ice.cam.ac.uk/privacy
+Registered Address: The University of Cambridge, The Old Schools, Trinity Lane, Cambridge CB2 1TN
+VAT Registration No: 823 8476 09

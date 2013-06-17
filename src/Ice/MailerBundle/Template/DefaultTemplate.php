@@ -37,7 +37,10 @@ class DefaultTemplate extends AbstractTemplate implements TemplateInterface
      */
     public function getBodyHtml()
     {
-        return '';
+        return $this->getManager()->getTemplating()->render(
+            $this->getBodyHtmlTemplate(),
+            $this->getVars()
+        );
     }
 
     /**
@@ -46,6 +49,14 @@ class DefaultTemplate extends AbstractTemplate implements TemplateInterface
     protected function getBodyPlainTemplate()
     {
         return 'IceMailerBundle:'.$this->getTemplateName().':body.plain.twig';
+    }
+
+    /**
+     * @return string
+     */
+    protected function getBodyHtmlTemplate()
+    {
+        return 'IceMailerBundle:'.$this->getTemplateName().':body.html.twig';
     }
 
     /**

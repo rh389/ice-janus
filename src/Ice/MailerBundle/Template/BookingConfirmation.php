@@ -9,7 +9,7 @@ class BookingConfirmation extends DefaultTemplate
     public function getFrom()
     {
         return [
-            'admissions@ice.cam.ac.uk' => 'ICE Admissions'
+            'ice.admissions@ice.cam.ac.uk' => 'ICE Admissions'
         ];
     }
 

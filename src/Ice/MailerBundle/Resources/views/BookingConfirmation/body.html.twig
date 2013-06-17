@@ -1,0 +1,68 @@
+<body>
+<style type="text/css">
+
+    p {
+        margin-bottom: 10px;
+        font-size: 0.8em;
+        font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+    }
+
+    table td {
+        font-size: 0.8em;
+        font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+    }
+
+    h2 {
+        font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+        font-weight: bold;
+        margin-bottom: 5px;
+        font-size: 0.8em;
+    }
+
+    .smallprint {
+        font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+        font-size: 0.7em;
+        margin-top: 40px;
+    }
+</style>
+<p>Dear {{ recipient.title }} {{ recipient.lastNames }},</p>
+<table>
+    <tr><td>Order reference:</td><td>{{ booking.orderReference }}</td></tr>
+    <tr><td>Booking reference:</td><td>{{ booking.bookingReference }}</td></tr>
+</table>
+
+<p>We are pleased to confirm your place on the course below:</p>
+
+<table>
+<tr><td>Course:</td><td>{{ course.title }}</td></tr>
+<tr><td>Course code:</td><td>{{ course.code }}</td></tr>
+<tr><td>Course dates:</td><td>{{ course.startDate | date('j M Y')}} - {{ course.endDate | date('j M Y')}}</td></tr>
+
+{% if accommodationChoiceDescription is defined %}
+    <tr><td>Accommodation:</td><td>{{ accommodationChoiceDescription }}</td></tr>
+{% endif %}
+</table>
+
+<h2>Studying at the Institute of Continuing Education (ICE)</h2>
+<p>
+    Please see <a href="http://www.ice.cam.ac.uk/studying-with-us/information-for-students">our website</a> for information
+    regarding studying at ICE, including the Student Handbook which details important policies relating to your study.
+</p>
+
+<h2>Course materials</h2>
+<p>
+    Course materials for this course will be e-mailed to you  in due course. Please contact us if you have not received these two weeks before the course start date.
+</p>
+
+<h2>Contacting us</h2>
+<p>
+If you would like to contact us regarding this booking, please contact our Admissions Team on <a href="mailto:ice.admissions@ice.cam.ac.uk">ice.admissions@ice.cam.ac.uk</a> or +44 (0)1223 746262.
+</p>
+
+<div class="smallprint">
+For information on our terms and conditions please visit <a href="http://www.ice.cam.ac.uk/terms">http://www.ice.cam.ac.uk/terms</a><br>
+Your security is important to us and we ensure your personal information is protected. For details see <a href="http://www.ice.cam.ac.uk/privacy">http://www.ice.cam.ac.uk/privacy</a><br>
+Registered Address: The University of Cambridge, The Old Schools, Trinity Lane, Cambridge CB2 1TN<br>
+VAT Registration No: 823 8476 09
+</div>
+</body>
