@@ -12,9 +12,4 @@ class BookingConfirmation extends DefaultTemplate
             'ice.admissions@ice.cam.ac.uk' => 'ICE Admissions'
         ];
     }
-
-    public function preCompile()
-    {
-
-    }
 }
