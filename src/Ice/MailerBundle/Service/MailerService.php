@@ -150,19 +150,23 @@ class MailerService implements EventSubscriberInterface
      */
     public function sendCompiledMail(Mail $mail)
     {
-        $message = \Swift_Message::newInstance()
-            ->setSubject($mail->getCompiledSubject())
-            ->setFrom($mail->getFromArray())
-            ->setTo($mail->getRecipient()->getEmail())
-            ->setBody(
-                $mail->getCompiledBodyPlain()
-            )
-            ->setBody(
-                $mail->getCompiledBodyHtml(),
-                'text/html'
-            )
-        ;
-        $this->getSwiftMailer()->send($message);
+        if($mail->getRecipient()->getEmail()) {
+            $message = \Swift_Message::newInstance()
+                ->setSubject($mail->getCompiledSubject())
+                ->setFrom($mail->getFromArray())
+                ->setTo($mail->getRecipient()->getEmail())
+                ->setBody(
+                    $mail->getCompiledBodyPlain()
+                )
+                ->setBody(
+                    $mail->getCompiledBodyHtml(),
+                    'text/html'
+                )
+            ;
+            if ($this->getSwiftMailer()->send($message)) {
+               $mail->setSent(new \DateTime());
+            }
+        }
     }
 
     /**
