@@ -38,6 +38,13 @@
                 <argument type="service" id="minerva.client" />
             </call>
         </service>
+
+        <service id="ice_mailer.order_information_precompiler" class="Ice\MailerBundle\PreCompiler\OrderInformation">
+            <tag name="kernel.event_listener" event="ice_mailer.pre_compile_mail" method="onPreCompile" />
+            <call method="setMercuryClient">
+                <argument type="service" id="mercury.client" />
+            </call>
+        </service>
     </services>
 
 </container>
