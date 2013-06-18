@@ -79,6 +79,13 @@ class Mail
     private $compiled;
 
     /**
+     * @var \DateTime
+     *
+     * @ORM\Column(nullable=true, type="datetime")
+     */
+    private $sent;
+
+    /**
      * Initialise variables
      */
     function __construct()
@@ -210,6 +217,24 @@ class Mail
     public function getCompiled()
     {
         return $this->compiled;
+    }
+
+    /**
+     * @param \DateTime $sent
+     * @return Mail
+     */
+    public function setSent($sent)
+    {
+        $this->sent = $sent;
+        return $this;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getSent()
+    {
+        return $this->sent;
     }
 
     /**
