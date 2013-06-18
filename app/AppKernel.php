@@ -31,6 +31,7 @@ class AppKernel extends Kernel
             new Ice\MinervaClientBundle\IceMinervaClientBundle(),
             new Ice\VeritasClientBundle\IceVeritasClientBundle(),
             new Ice\MercuryClientBundle\IceMercuryClientBundle(),
+            new Ice\JanusClientBundle\IceJanusClientBundle(),
             new Misd\GuzzleBundle\MisdGuzzleBundle(),
             new Sonata\CacheBundle\SonataCacheBundle(),
             new Sonata\BlockBundle\SonataBlockBundle(),
