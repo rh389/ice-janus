@@ -12,6 +12,7 @@ use Symfony\Component\EventDispatcher\EventDispatcher;
 use Doctrine\Bundle\DoctrineBundle\Registry;
 use Ice\MailerBundle\Template\Manager;
 use Swift_Mailer;
+use Symfony\Component\HttpKernel\Log\LoggerInterface;
 
 class MailerService implements EventSubscriberInterface
 {
@@ -34,6 +35,16 @@ class MailerService implements EventSubscriberInterface
      * @var EventDispatcher
      */
     private $eventDispatcher;
+
+    /**
+     * @var \Symfony\Component\HttpKernel\Log\LoggerInterface
+     */
+    private $logger;
+
+    public function __construct(LoggerInterface $logger)
+    {
+        $this->logger = $logger;
+    }
 
     /**
      * @param \Doctrine\Bundle\DoctrineBundle\Registry $doctrine
@@ -115,7 +126,7 @@ class MailerService implements EventSubscriberInterface
             $this->getDoctrine()->getManager()->persist($mailRequest);
             $this->getDoctrine()->getManager()->flush();
         } catch (\Exception $e) {
-            //Swallow all exceptions since this event is passive - we don't want to disrupt the recording of the request
+            $this->logger->err($e->getMessage());
         }
     }
 

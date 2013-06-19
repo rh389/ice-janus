@@ -7,6 +7,8 @@
     <services>
         <service id="ice_mailer" class="Ice\MailerBundle\Service\MailerService" public="true">
             <tag name="kernel.event_subscriber" />
+            <argument type="service" id="monolog.logger.mailer" />
+            <tag name="monolog.logger" channel="mailer" />
             <call method="setDoctrine">
                 <argument type="service" id="doctrine"/>
             </call>

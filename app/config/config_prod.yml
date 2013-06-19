@@ -17,6 +17,11 @@ monolog:
             type:  stream
             path:  "%kernel.logs_dir%/%kernel.environment%.log"
             level: debug
+        mailer:
+            type: stream
+            path: "%kernel.logs_dir%/%kernel.environment%.mailer.log"
+            channels: mailer
+            level: error
 
 #IceMercuryClient configuration
 ice_mercury_client:

@@ -21,6 +21,11 @@ monolog:
         firephp:
             type:  firephp
             level: info
+        mailer:
+            type: stream
+            path: "%kernel.logs_dir%/%kernel.environment%.mailer.log"
+            channels: mailer
+            level: debug
 
 assetic:
     use_controller: true
