@@ -29,7 +29,7 @@ ice_mercury_client:
 
 #IceMinervaClient configuration
 ice_minerva_client:
-    base_url: https://minerva.ice.cam.ac.uk/api/
+    base_url: https://minerva.ice.cam.ac.uk/
 
 #IceVeritasClient configuration
 ice_veritas_client:
