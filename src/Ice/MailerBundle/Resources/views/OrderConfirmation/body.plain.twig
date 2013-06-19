@@ -21,6 +21,7 @@ Course: {{ suborder.description }}
 {% for item in suborder.lineItems %}
 {% set total = total + item.amount %}
 {{ item.description }} - £{{ (item.amount/100)|number_format(2, '.', '') }}
+VAT at 0% - £0.00
 {% endfor %}
 Total: {{ (total/100)|number_format(2, '.', '') }}
 {% endfor %}

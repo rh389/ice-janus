@@ -56,6 +56,7 @@
         {% set total = total + item.amount %}
         <tr><td>{{ item.description }}</td><td>&pound;{{ (item.amount/100)|number_format(2, '.', '') }}</td></tr>
     {% endfor %}
+    <tr><td>VAT at 0%</td><td>&pound;0.00</td></tr>
     <tr><th>Total:</th><td>&pound;{{ (total/100)|number_format(2, '.', '') }}</td></tr>
 </table>
 {% endfor %}
