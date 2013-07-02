@@ -1,9 +1,11 @@
 <?php
 namespace Ice\MailerBundle\Entity;
 
+use Doctrine\Common\Cache\ArrayCache;
 use Doctrine\ORM\Mapping as ORM;
 use Ice\ExternalUserBundle\Entity\User;
 use JMS\Serializer\Annotation as JMS;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Class Mail
@@ -32,7 +34,7 @@ class Mail
     /**
      * @var MailRequest
      *
-     * @ORM\ManyToOne(targetEntity="MailRequest", inversedBy="mail")
+     * @ORM\ManyToOne(targetEntity="MailRequest", inversedBy="mails")
      */
     private $request;
 
@@ -86,11 +88,34 @@ class Mail
     private $sent;
 
     /**
+     * @var ToRecipient[]|ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="ToRecipient", mappedBy="mail", cascade="persist")
+     */
+    protected $toRecipients;
+
+    /**
+     * @var CcRecipient[]|ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="CcRecipient", mappedBy="mail", cascade="persist")
+     */
+    protected $ccRecipients;
+
+    /**
+     * @var BccRecipient[]|ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="BccRecipient", mappedBy="mail", cascade="persist")
+     */
+    protected $bccRecipients;
+
+    /**
      * Initialise variables
      */
     function __construct()
     {
-
+        $this->toRecipients = new ArrayCollection();
+        $this->ccRecipients = new ArrayCollection();
+        $this->bccRecipients = new ArrayCollection();
     }
 
     /**
@@ -306,6 +331,135 @@ class Mail
     {
         $this->setFromAddress(key($fromArray));
         $this->setFromName(current($fromArray));
+        return $this;
+    }
+
+    /**
+     * @param \Doctrine\Common\Collections\ArrayCollection|\Ice\MailerBundle\Entity\BccRecipient[] $bccRecipients
+     * @return Mail
+     */
+    public function setBccRecipients(ArrayCollection $bccRecipients)
+    {
+        $this->bccRecipients = $bccRecipients;
+        return $this;
+    }
+
+    /**
+     * @return \Doctrine\Common\Collections\ArrayCollection|\Ice\MailerBundle\Entity\BccRecipient[]
+     */
+    public function getBccRecipients()
+    {
+        return $this->bccRecipients;
+    }
+
+    /**
+     * @param \Doctrine\Common\Collections\ArrayCollection|\Ice\MailerBundle\Entity\CcRecipient[] $ccRecipients
+     * @return Mail
+     */
+    public function setCcRecipients(ArrayCollection $ccRecipients)
+    {
+        $this->ccRecipients = $ccRecipients;
+        return $this;
+    }
+
+    /**
+     * @return \Doctrine\Common\Collections\ArrayCollection|\Ice\MailerBundle\Entity\CcRecipient[]
+     */
+    public function getCcRecipients()
+    {
+        return $this->ccRecipients;
+    }
+
+    /**
+     * @param \Doctrine\Common\Collections\ArrayCollection|\Ice\MailerBundle\Entity\ToRecipient[] $toRecipients
+     * @return Mail
+     */
+    public function setToRecipients(ArrayCollection $toRecipients)
+    {
+        $this->toRecipients = $toRecipients;
+        return $this;
+    }
+
+    /**
+     * @return \Doctrine\Common\Collections\ArrayCollection|\Ice\MailerBundle\Entity\ToRecipient[]
+     */
+    public function getToRecipients()
+    {
+        return $this->toRecipients;
+    }
+
+    /**
+     * Accepts an array in the form:
+     *
+     * array(
+     *      array('john@doe.com' => 'John Doe')
+     * )
+     *
+     * @param array $recipients
+     * @return Mail
+     */
+    public function setToRecipientsByArray(array $recipients = array())
+    {
+        $collection = new ArrayCollection();
+        foreach ($recipients as $address=>$name) {
+            $collection->add(
+                (new ToRecipient())
+                    ->setMail($this)
+                    ->setAddress($address)
+                    ->setName($name)
+            );
+        }
+        $this->setToRecipients($collection);
+        return $this;
+    }
+
+    /**
+     * Accepts an array in the form:
+     *
+     * array(
+     *      array('john@doe.com' => 'John Doe')
+     * )
+     *
+     * @param array $recipients
+     * @return Mail
+     */
+    public function setCcRecipientsByArray(array $recipients = array())
+    {
+        $collection = new ArrayCollection();
+        foreach ($recipients as $address=>$name) {
+            $collection->add(
+                (new CcRecipient())
+                    ->setMail($this)
+                    ->setAddress($address)
+                    ->setName($name)
+            );
+        }
+        $this->setCcRecipients($collection);
+        return $this;
+    }
+
+    /**
+     * Accepts an array in the form:
+     *
+     * array(
+     *      array('john@doe.com' => 'John Doe')
+     * )
+     *
+     * @param array $recipients
+     * @return Mail
+     */
+    public function setBccRecipientsByArray(array $recipients = array())
+    {
+        $collection = new ArrayCollection();
+        foreach ($recipients as $address=>$name) {
+            $collection->add(
+                (new BccRecipient())
+                    ->setMail($this)
+                    ->setAddress($address)
+                    ->setName($name)
+            );
+        }
+        $this->setBccRecipients($collection);
         return $this;
     }
 }
