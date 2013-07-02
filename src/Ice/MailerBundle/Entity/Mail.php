@@ -88,6 +88,13 @@ class Mail
     private $sent;
 
     /**
+     * @var Sender[]|ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="Sender", mappedBy="mail", cascade="persist")
+     */
+    protected $senders;
+
+    /**
      * @var ToRecipient[]|ArrayCollection
      *
      * @ORM\OneToMany(targetEntity="ToRecipient", mappedBy="mail", cascade="persist")
@@ -116,6 +123,7 @@ class Mail
         $this->toRecipients = new ArrayCollection();
         $this->ccRecipients = new ArrayCollection();
         $this->bccRecipients = new ArrayCollection();
+        $this->senders = new ArrayCollection();
     }
 
     /**
@@ -262,18 +270,6 @@ class Mail
         return $this->sent;
     }
 
-    /**
-     * @return array
-     */
-    public function getVars()
-    {
-        return array_merge(
-            [
-                'recipient'=>$this->getRecipient()
-            ],
-            $this->getRequest()->getVars()
-        );
-    }
 
     /**
      * @param string $fromAddress
@@ -389,6 +385,24 @@ class Mail
     }
 
     /**
+     * @param \Doctrine\Common\Collections\ArrayCollection|\Ice\MailerBundle\Entity\Sender[] $senders
+     * @return Mail
+     */
+    public function setSenders(ArrayCollection $senders)
+    {
+        $this->senders = $senders;
+        return $this;
+    }
+
+    /**
+     * @return \Doctrine\Common\Collections\ArrayCollection|\Ice\MailerBundle\Entity\Sender[]
+     */
+    public function getSenders()
+    {
+        return $this->senders;
+    }
+
+    /**
      * Accepts an array in the form:
      *
      * array('john@doe.com' => 'John Doe')
@@ -461,6 +475,32 @@ class Mail
     }
 
     /**
+     * Accepts an array in the form:
+     *
+     * array(
+     *  'john@doe.com' => 'John Doe',
+     *  'jane@doe.com' => 'Jane Doe'
+     * )
+     *
+     * @param array $senders
+     * @return Mail
+     */
+    public function setSendersByArray(array $senders = array())
+    {
+        $collection = new ArrayCollection();
+        foreach ($senders as $address=>$name) {
+            $collection->add(
+                (new Sender())
+                    ->setMail($this)
+                    ->setAddress($address)
+                    ->setName($name)
+            );
+        }
+        $this->setSenders($collection);
+        return $this;
+    }
+
+    /**
      * Returns an array of the form
      *
      * array(
@@ -515,5 +555,23 @@ class Mail
             $recipients[$entity->getAddress()] = $entity->getName();
         }
         return $recipients;
+    }
+
+    /**
+     * Returns an array of the form
+     *
+     * array(
+     *  'john@doe.com' => 'John Doe'
+     * )
+     *
+     * @return array
+     */
+    public function getSendersByArray()
+    {
+        $senders = [];
+        foreach ($this->getSenders() as $entity) {
+            $senders[$entity->getAddress()] = $entity->getName();
+        }
+        return $senders;
     }
 }

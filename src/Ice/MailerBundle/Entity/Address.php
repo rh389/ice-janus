@@ -9,7 +9,7 @@ use JMS\Serializer\Annotation as JMS;
  * @ORM\InheritanceType("SINGLE_TABLE")
  * @ORM\Table(name="ice_mailer_address")
  * @ORM\DiscriminatorColumn(name="type", type="string")
- * @ORM\DiscriminatorMap({"BCC" = "BccRecipient", "CC" = "CcRecipient", "TO" = "ToRecipient"})
+ * @ORM\DiscriminatorMap({"BCC" = "BccRecipient", "CC" = "CcRecipient", "TO" = "ToRecipient", "FROM" = "Sender"})
  */
 class Address
 {
