@@ -391,9 +391,7 @@ class Mail
     /**
      * Accepts an array in the form:
      *
-     * array(
-     *      array('john@doe.com' => 'John Doe')
-     * )
+     * array('john@doe.com' => 'John Doe')
      *
      * @param array $recipients
      * @return Mail
@@ -416,9 +414,7 @@ class Mail
     /**
      * Accepts an array in the form:
      *
-     * array(
-     *      array('john@doe.com' => 'John Doe')
-     * )
+     * array('john@doe.com' => 'John Doe')
      *
      * @param array $recipients
      * @return Mail
@@ -441,9 +437,7 @@ class Mail
     /**
      * Accepts an array in the form:
      *
-     * array(
-     *      array('john@doe.com' => 'John Doe')
-     * )
+     * array('john@doe.com' => 'John Doe')
      *
      * @param array $recipients
      * @return Mail
