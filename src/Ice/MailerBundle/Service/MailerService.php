@@ -174,7 +174,7 @@ class MailerService implements EventSubscriberInterface
                 ->setFrom($mail->getSendersByArray())
                 ->setCC($mail->getCcRecipientsByArray())
                 ->setBCC($mail->getBccRecipientsByArray())
-                ->setTo($mail->getRecipient()->getEmail())
+                ->setTo($mail->getToRecipientsByArray())
                 ->setBody(
                     $mail->getCompiledBodyPlain()
                 )
@@ -185,6 +185,10 @@ class MailerService implements EventSubscriberInterface
             ;
             if ($this->getSwiftMailer()->send($message)) {
                $mail->setSent(new \DateTime());
+            }
+            else {
+
+                $this->logger->warn('Message not sent to '.print_r($mail->getToRecipientsByArray(), true));
             }
         }
     }
