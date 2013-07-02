@@ -6,10 +6,10 @@ use Symfony\Component\EventDispatcher\Event;
 use Ice\MailerBundle\Entity\Mail;
 
 /**
- * Class TemplateEvent
+ * Class PreCompileEvent
  * @package Ice\MailerBundle\Event
  */
-class TemplateEvent extends Event
+class PreCompileEvent extends Event
 {
     /**
      * @var TemplateInterface
@@ -23,7 +23,7 @@ class TemplateEvent extends Event
 
     /**
      * @param \Ice\MailerBundle\Template\TemplateInterface $template
-     * @return TemplateEvent
+     * @return PreCompileEvent
      */
     public function setTemplate($template)
     {
@@ -41,7 +41,7 @@ class TemplateEvent extends Event
 
     /**
      * @param \Ice\MailerBundle\Entity\Mail $mail
-     * @return TemplateEvent
+     * @return PreCompileEvent
      */
     public function setMail($mail)
     {

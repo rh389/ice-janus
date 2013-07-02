@@ -1,6 +1,8 @@
 <?php
 namespace Ice\MailerBundle\Template;
 
+use Ice\MailerBundle\Entity\Mail;
+
 abstract class AbstractTemplate implements TemplateInterface
 {
     /**
@@ -17,6 +19,11 @@ abstract class AbstractTemplate implements TemplateInterface
      * @var string
      */
     protected $templateName;
+
+    /**
+     * @var Mail
+     */
+    protected $mail;
 
     /**
      * @param string $templateName
@@ -55,6 +62,24 @@ abstract class AbstractTemplate implements TemplateInterface
     }
 
     /**
+     * @param \Ice\MailerBundle\Entity\Mail $mail
+     * @return AbstractTemplate
+     */
+    public function setMail($mail)
+    {
+        $this->mail = $mail;
+        return $this;
+    }
+
+    /**
+     * @return \Ice\MailerBundle\Entity\Mail
+     */
+    public function getMail()
+    {
+        return $this->mail;
+    }
+
+    /**
      * @param array $vars
      * @return AbstractTemplate
      */
@@ -83,6 +108,23 @@ abstract class AbstractTemplate implements TemplateInterface
     {
         return [
             'no-reply@ice.cam.ac.uk' => 'Institute of Continuing Education'
+        ];
+    }
+
+    /**
+     * Returns an array in the form:
+     *
+     * array(
+     *      'john@doe.com' => 'John Doe'
+     * )
+     *
+     * @return array
+     */
+    public function getTo()
+    {
+        $user = $this->getMail()->getRecipient();
+        return [
+            $user->getEmail() => $user->getFullName()
         ];
     }
 

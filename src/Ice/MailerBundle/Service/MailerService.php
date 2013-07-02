@@ -6,7 +6,7 @@ use Ice\MailerBundle\Entity\Mail;
 use Ice\MailerBundle\Entity\MailRequest;
 use Ice\MailerBundle\Event\MailerEvents;
 use Ice\MailerBundle\Event\RequestEvent;
-use Ice\MailerBundle\Event\TemplateEvent;
+use Ice\MailerBundle\Event\PreCompileEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 use Doctrine\Bundle\DoctrineBundle\Registry;
@@ -141,18 +141,25 @@ class MailerService implements EventSubscriberInterface
 
         foreach ($mailRequest->getMails() as $mail) {
 
-            $template = $manager->getMail($mailRequest->getTemplateName(), $mail->getVars());
+            $template = $manager->getTemplateByMail($mail);
 
             $this->getEventDispatcher()->dispatch(
                 MailerEvents::PRE_COMPILE_MAIL,
-                (new TemplateEvent())->setTemplate($template)
+                (new PreCompileEvent())
+                    ->setTemplate($template)
+                    ->setMail($mail)
             );
 
-            $mail->setCompiledBodyPlain($template->getBodyPlain());
-            $mail->setCompiledBodyHtml($template->getBodyHtml());
-            $mail->setCompiledSubject($template->getSubject());
-            $mail->setFromArray($template->getFrom());
-            $mail->setCompiled(new \DateTime());
+            $mail
+                ->setCompiledBodyPlain($template->getBodyPlain())
+                ->setCompiledBodyHtml($template->getBodyHtml())
+                ->setCompiledSubject($template->getSubject())
+                ->setSendersByArray($template->getFrom())
+                ->setToRecipientsByArray($template->getTo())
+                ->setCcRecipientsByArray($template->getCC())
+                ->setBccRecipientsByArray($template->getBCC())
+                ->setCompiled(new \DateTime())
+            ;
         }
     }
 
@@ -164,7 +171,9 @@ class MailerService implements EventSubscriberInterface
         if($mail->getRecipient()->getEmail()) {
             $message = \Swift_Message::newInstance()
                 ->setSubject($mail->getCompiledSubject())
-                ->setFrom($mail->getFromArray())
+                ->setFrom($mail->getSendersByArray())
+                ->setCC($mail->getCcRecipientsByArray())
+                ->setBCC($mail->getBccRecipientsByArray())
                 ->setTo($mail->getRecipient()->getEmail())
                 ->setBody(
                     $mail->getCompiledBodyPlain()

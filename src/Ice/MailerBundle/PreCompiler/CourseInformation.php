@@ -1,7 +1,7 @@
 <?php
 namespace Ice\MailerBundle\PreCompiler;
 
-use Ice\MailerBundle\Event\TemplateEvent;
+use Ice\MailerBundle\Event\PreCompileEvent;
 use Ice\MailerBundle\Template\BookingConfirmation;
 use Ice\VeritasClientBundle\Service\VeritasClient;
 
@@ -37,9 +37,9 @@ class CourseInformation
     /**
      * Inject course information into the template
      *
-     * @param TemplateEvent $event
+     * @param PreCompileEvent $event
      */
-    public function onPreCompile(TemplateEvent $event)
+    public function onPreCompile(PreCompileEvent $event)
     {
         $template = $event->getTemplate();
         if ($template instanceof BookingConfirmation) {

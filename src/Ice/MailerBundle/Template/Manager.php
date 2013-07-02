@@ -2,6 +2,7 @@
 namespace Ice\MailerBundle\Template;
 
 use Symfony\Bundle\TwigBundle\TwigEngine;
+use Ice\MailerBundle\Entity\Mail;
 
 class Manager
 {
@@ -29,20 +30,20 @@ class Manager
     }
 
     /**
-     * @param string $templateName
-     * @param array $vars
+     * @param \Ice\MailerBundle\Entity\Mail $mail
      * @return TemplateInterface
      */
-    public function getMail($templateName, array $vars)
+    public function getTemplateByMail(Mail $mail)
     {
-        $templateClass = $this->loadTemplate($templateName);
-        $templateClass->setVars($vars);
+        $templateClass = $this->loadTemplate($mail->getRequest()->getTemplateName());
+        $templateClass->setMail($mail);
+        $templateClass->setVars($mail->getRequest()->getVars());
         return $templateClass;
     }
 
     /**
      * @param $templateName
-     * @return TemplateInterface
+     * @return TemplateInterface|AbstractTemplate
      * @throws \RuntimeException
      */
     private function loadTemplate($templateName)

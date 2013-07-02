@@ -1,6 +1,8 @@
 <?php
 namespace Ice\MailerBundle\Template;
 
+use Ice\MailerBundle\Entity\Mail;
+
 interface TemplateInterface
 {
     /**
@@ -44,9 +46,16 @@ interface TemplateInterface
     /**
      * Returns an array in the form:
      *
-     * array(
-     *      array('john@doe.com' => 'John Doe')
-     * )
+     * array('john@doe.com' => 'John Doe')
+     *
+     * @return array
+     */
+    public function getTo();
+
+    /**
+     * Returns an array in the form:
+     *
+     * array('john@doe.com' => 'John Doe')
      *
      * @return array
      */
@@ -55,9 +64,7 @@ interface TemplateInterface
     /**
      * Returns an array in the form:
      *
-     * array(
-     *      array('john@doe.com' => 'John Doe')
-     * )
+     * array('john@doe.com' => 'John Doe')
      *
      * @return array
      */
@@ -69,4 +76,11 @@ interface TemplateInterface
      * @return string
      */
     public function getTemplateName();
+
+    /**
+     * Returns the vars passed to this template
+     *
+     * @return array
+     */
+    public function getVars();
 }

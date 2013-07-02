@@ -60,20 +60,6 @@ class Mail
     private $compiledSubject;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(nullable = true, name="from_address", type="string")
-     */
-    private $fromAddress;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(nullable = true, name="from_name", type="string")
-     */
-    private $fromName;
-
-    /**
      * @var \DateTime
      *
      * @ORM\Column(nullable=true, type="datetime")
@@ -268,66 +254,6 @@ class Mail
     public function getSent()
     {
         return $this->sent;
-    }
-
-
-    /**
-     * @param string $fromAddress
-     * @return Mail
-     */
-    public function setFromAddress($fromAddress)
-    {
-        $this->fromAddress = $fromAddress;
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getFromAddress()
-    {
-        return $this->fromAddress;
-    }
-
-    /**
-     * @param string $fromName
-     * @return Mail
-     */
-    public function setFromName($fromName)
-    {
-        $this->fromName = $fromName;
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getFromName()
-    {
-        return $this->fromName;
-    }
-
-    /**
-     * Return an array of the form [ 'john.doe@example.com' => 'John Doe' ]
-     *
-     * @return array
-     */
-    public function getFromArray()
-    {
-        return [
-            $this->getFromAddress() => $this->getFromName()
-        ];
-    }
-
-    /**
-     * @param array $fromArray
-     * @return Mail
-     */
-    public function setFromArray(array $fromArray)
-    {
-        $this->setFromAddress(key($fromArray));
-        $this->setFromName(current($fromArray));
-        return $this;
     }
 
     /**

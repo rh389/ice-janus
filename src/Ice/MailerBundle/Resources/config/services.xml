@@ -47,6 +47,10 @@
                 <argument type="service" id="mercury.client" />
             </call>
         </service>
+
+        <service id="ice_mailer.account_information_precompiler" class="Ice\MailerBundle\PreCompiler\AccountInformation">
+            <tag name="kernel.event_listener" event="ice_mailer.pre_compile_mail" method="onPreCompile" />
+        </service>
     </services>
 
 </container>
