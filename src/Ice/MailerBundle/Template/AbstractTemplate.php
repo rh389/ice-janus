@@ -90,7 +90,7 @@ abstract class AbstractTemplate implements TemplateInterface
      * Returns an array in the form:
      *
      * array(
-     *      array('john@doe.com' => 'John Doe')
+     *      'john@doe.com' => 'John Doe'
      * )
      *
      * @return array
@@ -104,7 +104,7 @@ abstract class AbstractTemplate implements TemplateInterface
      * Returns an array in the form:
      *
      * array(
-     *      array('john@doe.com' => 'John Doe')
+     *      'john@doe.com' => 'John Doe'
      * )
      *
      * @return array
