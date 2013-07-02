@@ -437,7 +437,10 @@ class Mail
     /**
      * Accepts an array in the form:
      *
-     * array('john@doe.com' => 'John Doe')
+     * array(
+     *  'john@doe.com' => 'John Doe',
+     *  'jane@doe.com' => 'Jane Doe'
+     * )
      *
      * @param array $recipients
      * @return Mail
@@ -455,5 +458,62 @@ class Mail
         }
         $this->setBccRecipients($collection);
         return $this;
+    }
+
+    /**
+     * Returns an array of the form
+     *
+     * array(
+     *  'john@doe.com' => 'John Doe',
+     *  'jane@doe.com' => 'Jane Doe'
+     * )
+     *
+     * @return array
+     */
+    public function getToRecipientsByArray()
+    {
+        $recipients = [];
+        foreach ($this->getToRecipients() as $entity) {
+            $recipients[$entity->getAddress()] = $entity->getName();
+        }
+        return $recipients;
+    }
+
+    /**
+     * Returns an array of the form
+     *
+     * array(
+     *  'john@doe.com' => 'John Doe',
+     *  'jane@doe.com' => 'Jane Doe'
+     * )
+     *
+     * @return array
+     */
+    public function getCcRecipientsByArray()
+    {
+        $recipients = [];
+        foreach ($this->getCcRecipients() as $entity) {
+            $recipients[$entity->getAddress()] = $entity->getName();
+        }
+        return $recipients;
+    }
+
+    /**
+     * Returns an array of the form
+     *
+     * array(
+     *  'john@doe.com' => 'John Doe',
+     *  'jane@doe.com' => 'Jane Doe'
+     * )
+     *
+     * @return array
+     */
+    public function getBccRecipientsByArray()
+    {
+        $recipients = [];
+        foreach ($this->getBccRecipients() as $entity) {
+            $recipients[$entity->getAddress()] = $entity->getName();
+        }
+        return $recipients;
     }
 }
