@@ -3,6 +3,7 @@ namespace Ice\MailerBundle\Event;
 
 use Ice\MailerBundle\Template\TemplateInterface;
 use Symfony\Component\EventDispatcher\Event;
+use Ice\MailerBundle\Entity\Mail;
 
 /**
  * Class TemplateEvent
@@ -14,6 +15,11 @@ class TemplateEvent extends Event
      * @var TemplateInterface
      */
     private $template;
+
+    /**
+     * @var Mail
+     */
+    private $mail;
 
     /**
      * @param \Ice\MailerBundle\Template\TemplateInterface $template
@@ -31,5 +37,23 @@ class TemplateEvent extends Event
     public function getTemplate()
     {
         return $this->template;
+    }
+
+    /**
+     * @param \Ice\MailerBundle\Entity\Mail $mail
+     * @return TemplateEvent
+     */
+    public function setMail($mail)
+    {
+        $this->mail = $mail;
+        return $this;
+    }
+
+    /**
+     * @return \Ice\MailerBundle\Entity\Mail
+     */
+    public function getMail()
+    {
+        return $this->mail;
     }
 }
