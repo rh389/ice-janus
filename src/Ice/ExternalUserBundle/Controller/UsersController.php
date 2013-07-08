@@ -83,7 +83,7 @@ class UsersController extends FOSRestController
      * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
      * @return \Symfony\Component\HttpFoundation\Response
      *
-     * @Route("/users/{username}", requirements={"username"="[a-z]{2,}[0-9]+|.+@.+"}, name="get_user")
+     * @Route("/users/{username}", name="get_user")
      * @Method("GET")
      *
      * @ApiDoc(
@@ -130,7 +130,7 @@ class UsersController extends FOSRestController
      * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
      * @return \Symfony\Component\HttpFoundation\Response
      *
-     * @Route("/users/{username}", requirements={"username"="[a-z]{2,}[0-9]+|.+@.+"}, name="update_user")
+     * @Route("/users/{username}", name="update_user")
      * @Method("PUT")
      *
      * @ApiDoc(
@@ -215,7 +215,7 @@ class UsersController extends FOSRestController
     }
 
     /**
-     * @Route("/users/{username}/password", requirements={"username"="[a-z]{2,}[0-9]+|.+@.+"}, name="set_password_user")
+     * @Route("/users/{username}/password", name="set_password_user")
      * @Method("PUT")
      *
      * @ApiDoc(
