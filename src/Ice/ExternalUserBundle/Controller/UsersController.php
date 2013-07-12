@@ -77,32 +77,6 @@ class UsersController extends FOSRestController
         return $this->view($users);
     }
 
-
-    /**
-     * @param $username
-     * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
-     * @return \Symfony\Component\HttpFoundation\Response
-     *
-     * @Route("/users/{username}", name="get_user")
-     * @Method("GET")
-     *
-     * @ApiDoc(
-     *   resource=true,
-     *   description="Returns a single User",
-     *   return="Ice\ExternalUserBundle\Entity\User"
-     * )
-     */
-    public function getUserAction($username)
-    {
-        $user = $this->getUserManager()->findUserByUsernameOrEmail($username);
-
-        if (!$user) {
-            throw $this->createNotFoundException();
-        }
-
-        return $this->view($user, 200);
-    }
-
     /**
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      *
@@ -256,5 +230,30 @@ class UsersController extends FOSRestController
     private function getUserManager()
     {
         return $this->get('fos_user.user_manager');
+    }
+
+    /**
+     * @param $username
+     * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
+     * @return \Symfony\Component\HttpFoundation\Response
+     *
+     * @Route("/users/{username}", name="get_user")
+     * @Method("GET")
+     *
+     * @ApiDoc(
+     *   resource=true,
+     *   description="Returns a single User",
+     *   return="Ice\ExternalUserBundle\Entity\User"
+     * )
+     */
+    public function getUserAction($username)
+    {
+        $user = $this->getUserManager()->findUserByUsernameOrEmail($username);
+
+        if (!$user) {
+            throw $this->createNotFoundException();
+        }
+
+        return $this->view($user, 200);
     }
 }
