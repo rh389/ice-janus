@@ -59,6 +59,27 @@
     <tr><td>VAT at 0%</td><td>&pound;0.00</td></tr>
     <tr><th>Total:</th><td>&pound;{{ (total/100)|number_format(2, '.', '') }}</td></tr>
 </table>
+
+Your payment plan for this booking is '{{ suborder.paymentPlanDescription }}', which breaks down as follows:
+    <table>
+{% for receivable in suborder.paymentGroup.receivables %}
+    {% spaceless %}
+    <tr><td>
+        <span>GBP {{ (receivable.amount/100) | number_format(2, '.', '') }}</span>
+        {% if receivable.amountUnallocated == 0 %}
+            <span> - PAID</span>
+        {% else %}
+            <span> due </span>
+            {% if receivable.dueDate %}
+                <span>{{ receivable.dueDate | date('d/m/Y') }}</span>
+            {% else %}
+                <span>immediately</span>
+            {% endif %}
+        {% endif %}
+    </td></tr>
+    {% endspaceless %}
+{% endfor %}
+    </table>
 {% endfor %}
 
 {% set receivable = order.suborders|first.paymentGroup.receivables|first %}

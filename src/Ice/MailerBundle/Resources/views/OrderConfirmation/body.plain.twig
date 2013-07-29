@@ -5,8 +5,6 @@ Order reference: {{ order.reference }}
 We are pleased to confirm your order for the {{ order.suborders|length > 1 ? 'bookings' : 'booking' }} below:
 {% for suborder in order.suborders %}
 
-
-
 Booking {{ suborder.externalId }}
 Course: {{ suborder.description }}
 {#Course:#}
@@ -24,6 +22,11 @@ Course: {{ suborder.description }}
 VAT at 0% - £0.00
 {% endfor %}
 Total: {{ (total/100)|number_format(2, '.', '') }}
+
+Your payment plan for this booking is '{{ suborder.paymentPlanDescription }}', which breaks down as follows:
+{% for receivable in suborder.paymentGroup.receivables %}
+GBP {{ (receivable.amount/100) | number_format(2, '.', '') }}{% if receivable.amountUnallocated == 0 %} - PAID{% else %} due {% if receivable.dueDate %}{{ receivable.dueDate | date('d/m/Y') }}{% else %}immediately{% endif %}{% endif %}
+{% endfor %}
 {% endfor %}
 
 {% set receivable = order.suborders|first.paymentGroup.receivables|first %}
