@@ -41,6 +41,7 @@
 <h2>Booking {{ suborder.externalId }}</h2>
 <table>
     <tr><th>Course:</th><td>{{ suborder.description }}</td></tr>
+    <tr><th>Payment plan:</th><td>{{ suborder.paymentPlanDescription }}</td></tr>
     {#<tr><td>Course:</td><td></td></tr>#}
     {#<tr><td>Course code:</td><td>{{ course.code }}</td></tr>#}
     {#<tr><td>Course dates:</td><td>{{ course.startDate | date('j M Y')}} - {{ course.endDate | date('j M Y')}}</td></tr>#}
@@ -60,12 +61,13 @@
     <tr><th>Total:</th><td>&pound;{{ (total/100)|number_format(2, '.', '') }}</td></tr>
 </table>
 
-Your payment plan for this booking is '{{ suborder.paymentPlanDescription }}', which breaks down as follows:
+<p>Your payment plan breaks down as follows:</p>
     <table>
 {% for receivable in suborder.paymentGroup.receivables %}
     {% spaceless %}
-    <tr><td>
-        <span>GBP {{ (receivable.amount/100) | number_format(2, '.', '') }}</span>
+    <tr>
+        <td>&pound;{{ (receivable.amount/100) | number_format(2, '.', '') }}</td>
+        <td>
         {% if receivable.amountUnallocated == 0 %}
             <span> - PAID</span>
         {% else %}
@@ -76,6 +78,7 @@ Your payment plan for this booking is '{{ suborder.paymentPlanDescription }}', w
                 <span>immediately</span>
             {% endif %}
         {% endif %}
+        </td>
     </td></tr>
     {% endspaceless %}
 {% endfor %}
