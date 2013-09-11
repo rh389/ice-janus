@@ -26,6 +26,7 @@ Total: {{ (total/100)|number_format(2, '.', '') }}
 Your payment plan for this booking is '{{ suborder.paymentPlanDescription }}', which breaks down as follows:
 {% for receivable in suborder.paymentGroup.receivables %}
 GBP {{ (receivable.amount/100) | number_format(2, '.', '') }}{% if receivable.amountUnallocated == 0 %} - PAID{% else %} due {% if receivable.dueDate %}{{ receivable.dueDate | date('d/m/Y') }}{% else %}immediately{% endif %}{% endif %}
+
 {% endfor %}
 {% endfor %}
 
