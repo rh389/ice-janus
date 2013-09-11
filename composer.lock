@@ -3,8 +3,48 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "921cecc1366d64cacf3f4e2cc6478e77",
+    "hash": "36c9d26907bb0533254653974682a125",
     "packages": [
+        {
+            "name": "cambridgeuniversity/ice-common",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/cambridgeuniversity/ice-common.git",
+                "reference": "ada05bb5970783b6912f6c8759bb98fa2dcd23c8"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/cambridgeuniversity/ice-common/zipball/ada05bb5970783b6912f6c8759bb98fa2dcd23c8",
+                "reference": "ada05bb5970783b6912f6c8759bb98fa2dcd23c8",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Ice\\Common": "src/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Rob Hogan",
+                    "email": "Rob.Hogan@admin.cam.ac.uk"
+                }
+            ],
+            "description": "Common ",
+            "homepage": "http://www.ice.cam.ac.uk",
+            "support": {
+                "source": "https://github.com/cambridgeuniversity/ice-common/tree/master",
+                "issues": "https://github.com/cambridgeuniversity/ice-common/issues"
+            },
+            "time": "2013-09-11 16:55:10"
+        },
         {
             "name": "dflydev/markdown",
             "version": "v1.0.2",
@@ -1119,14 +1159,15 @@
         },
         {
             "name": "ice/veritasclient-bundle",
-            "version": "1.0.1",
+            "version": "1.1.0",
             "target-dir": "Ice/VeritasClientBundle",
             "source": {
                 "type": "svn",
                 "url": "http://repositories.internal.admin.cam.ac.uk/svn/ice-veritasclient",
-                "reference": "/tags/1.0.1/@50"
+                "reference": "/tags/1.1.0/@55"
             },
             "require": {
+                "cambridgeuniversity/ice-common": "@dev",
                 "jms/serializer-bundle": ">=0.12.0@dev",
                 "misd/guzzle-bundle": "@stable"
             },
@@ -1150,7 +1191,7 @@
                 }
             ],
             "description": "Client for the ICE Veritas API",
-            "time": "2013-06-15 22:16:02"
+            "time": "2013-09-11 17:58:40"
         },
         {
             "name": "ircmaxell/password-compat",
@@ -3202,6 +3243,8 @@
         "doctrine/doctrine-migrations-bundle": 20,
         "doctrine/migrations": 20,
         "nelmio/api-doc-bundle": 20,
+        "ice/veritasclient-bundle": 20,
+        "cambridgeuniversity/ice-common": 20,
         "sonata-project/doctrine-orm-admin-bundle": 20
     },
     "platform": {
