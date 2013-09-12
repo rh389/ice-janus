@@ -28,4 +28,19 @@ class BookingConfirmation extends DefaultTemplate
             'ice.admissions@ice.cam.ac.uk'=>'ICE Admissions'
         ];
     }
+
+    /**
+     * @param array $vars
+     * @return AbstractTemplate
+     */
+    public function setVars(array $vars)
+    {
+        if (isset($vars['course'])) {
+            $course = $vars['course'];
+
+            $vars['showSectionStudyingAtICE'] = !$course['isMst'];
+            $vars['showSectionCourseMaterials'] = !$course['isMst'];
+        }
+        return parent::setVars($vars);
+    }
 }
