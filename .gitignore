@@ -1,0 +1,9 @@
+/.idea/
+/web/bundles/
+/app/bootstrap*
+/app/cache/*
+/app/logs/*
+/vendor/
+/bin/
+/app/config/parameters.yml
+/app/config/parameters/parameters_*
