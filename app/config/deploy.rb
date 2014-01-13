@@ -1,21 +1,18 @@
 set :stage_dir,   "app/config/deploy"
 require "capistrano/ext/multistage"
 
-set(:stage_app_server) { "#{app_server}" }
 set(:stage_parameters_file) { "#{parameters_file}" }
 
 set :application, "janus"
-set :deploy_to,   "/home/httpd/sites/#{application}.ice"
+set :deploy_to,   "/home/httpd/sites/janus.ice"
 set :app_path,    "app"
 
 set :user, "httpd"
 
-set :repository,   "http://repositories.internal.admin.cam.ac.uk/svn/ice-#{application}/trunk"
-set :scm,          :subversion
-set :scm_username, "src55"
-set :scm_password, "scm_password"
+set :repository,   "https://github.com/cambridgeuniversity/ice-janus.git"
+set :branch,       "master"
+set :scm,          "git"
 set :deploy_via,   :copy
-
 set :model_manager, "doctrine"
 
 set :use_sudo,      false
