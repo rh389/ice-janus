@@ -33,7 +33,7 @@ class AttributesController extends FOSRestController
      * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
      * @return \FOS\RestBundle\View\View
      *
-     * @Route("users/{username}/attributes/{fieldName}", name="post_attribute")
+     * @Route("api/users/{username}/attributes/{fieldName}", name="post_attribute")
      * @Method("PUT")
      *
      * @ApiDoc(
@@ -68,7 +68,7 @@ class AttributesController extends FOSRestController
      * @param \Ice\ExternalUserBundle\Entity\User $user
      * @return \FOS\RestBundle\View\View
      *
-     * @Route("users/{username}/attributes", name="put_attribute")
+     * @Route("api/users/{username}/attributes", name="put_attribute")
      * @Method("POST")
      *
      * @ApiDoc(
@@ -120,7 +120,7 @@ class AttributesController extends FOSRestController
      * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
      * @return \FOS\RestBundle\View\View
      *
-     * @Route("users/{username}/attributes/{fieldName}", name="get_attribute")
+     * @Route("api/users/{username}/attributes/{fieldName}", name="get_attribute")
      * @Method("GET")
      *
      * @ApiDoc(

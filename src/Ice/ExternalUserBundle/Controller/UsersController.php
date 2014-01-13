@@ -25,7 +25,7 @@ class UsersController extends FOSRestController
     /**
      * @return \Symfony\Component\HttpFoundation\Response
      *
-     * @Route("/users", name="get_users")
+     * @Route("api/users", name="get_users")
      * @Method("GET")
      *
      * @ApiDoc(
@@ -62,7 +62,7 @@ class UsersController extends FOSRestController
      * @param string $term Search term
      * @return \FOS\RestBundle\View\View
      *
-     * @Route("/users/search/{term}", name="search_users")
+     * @Route("api/users/search/{term}", name="search_users")
      * @Method("GET")
      *
      * @ApiDoc(
@@ -80,7 +80,7 @@ class UsersController extends FOSRestController
     /**
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      *
-     * @Route("/users", name="register_user")
+     * @Route("api/users", name="register_user")
      * @Method("POST")
      *
      * @ApiDoc(
@@ -104,7 +104,7 @@ class UsersController extends FOSRestController
      * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
      * @return \Symfony\Component\HttpFoundation\Response
      *
-     * @Route("/users/{username}", name="update_user")
+     * @Route("api/users/{username}", name="update_user")
      * @Method("PUT")
      *
      * @ApiDoc(
@@ -161,7 +161,7 @@ class UsersController extends FOSRestController
     /**
      * @return \Symfony\Component\HttpFoundation\Response
      *
-     * @Route("/users/authenticate", name="authenticate_user")
+     * @Route("api/users/authenticate", name="authenticate_user")
      * @Method("GET")
      *
      * @ApiDoc(
@@ -189,7 +189,7 @@ class UsersController extends FOSRestController
     }
 
     /**
-     * @Route("/users/{username}/password", name="set_password_user")
+     * @Route("api/users/{username}/password", name="set_password_user")
      * @Method("PUT")
      *
      * @ApiDoc(
@@ -237,7 +237,7 @@ class UsersController extends FOSRestController
      * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
      * @return \Symfony\Component\HttpFoundation\Response
      *
-     * @Route("/users/{username}", name="get_user")
+     * @Route("api/users/{username}", name="get_user")
      * @Method("GET")
      *
      * @ApiDoc(

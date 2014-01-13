@@ -1,4 +1,3 @@
-users_api:
+janus:
     resource:   "@IceExternalUserBundle/Controller"
     type:       annotation
-    prefix:     /api
