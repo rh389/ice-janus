@@ -12,4 +12,5 @@ Ice\ExternalUserBundle\Entity\User:
             - Length:
                 groups: [rest_register, rest_set_password]
                 min: 6
-                minMessage: Your password must be at least six characters long
+                # https://github.com/symfony/symfony/issues/4267
+                minMessage: Your password must be at least six characters long|Your password must be at least six characters long
