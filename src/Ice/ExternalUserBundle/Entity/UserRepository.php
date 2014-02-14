@@ -89,6 +89,7 @@ class UserRepository extends EntityRepository
 
         $this->qb = $this->getFindAllQueryBuilder();
         $this->qb
+            ->andWhere('User.enabled = true')
             ->andWhere(
                 $this->qb->expr()->like(
                     "CONCAT(User.firstNames, CONCAT(COALESCE(User.middleNames, ''), User.lastNames))",
