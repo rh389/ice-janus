@@ -40,6 +40,7 @@
         "nelmio/api-doc-bundle": "dev-master",
         "ice/veritasclient-bundle": "1.1.*@dev",
         "cambridgeuniversity/ice-common": "@dev",
+        "cambridgeuniversity/ice-event-bundle": "~1.0",
         "ice/mercuryclient-bundle": "2.*",
         "ice/minervaclient-bundle": "1.*",
         "lexik/form-filter-bundle": "~1.2.0",

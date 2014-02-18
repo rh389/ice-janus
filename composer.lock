@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "36c9d26907bb0533254653974682a125",
+    "hash": "1e8aabfeac7c65eec85130b125ddfe60",
     "packages": [
         {
             "name": "cambridgeuniversity/ice-common",
@@ -44,6 +44,73 @@
                 "issues": "https://github.com/cambridgeuniversity/ice-common/issues"
             },
             "time": "2013-09-11 16:55:10"
+        },
+        {
+            "name": "cambridgeuniversity/ice-domain-event",
+            "version": "1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/cambridgeuniversity/ice-domain-event.git",
+                "reference": "854680c44ee13e5145482c8c05601118138910f3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/cambridgeuniversity/ice-domain-event/zipball/854680c44ee13e5145482c8c05601118138910f3",
+                "reference": "854680c44ee13e5145482c8c05601118138910f3",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "phpspec/phpspec": "2.*@dev"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Ice\\Domain\\Event\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "An ICE-namespaced event library",
+            "time": "2014-02-11 17:30:14"
+        },
+        {
+            "name": "cambridgeuniversity/ice-event-bundle",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/cambridgeuniversity/ice-event-bundle.git",
+                "reference": "f691a0bb54e12fcdb299b81ffa3aff24c10749cd"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/cambridgeuniversity/ice-event-bundle/zipball/f691a0bb54e12fcdb299b81ffa3aff24c10749cd",
+                "reference": "f691a0bb54e12fcdb299b81ffa3aff24c10749cd",
+                "shasum": ""
+            },
+            "require": {
+                "cambridgeuniversity/ice-domain-event": "~1.0",
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "phpspec/phpspec": "2.*@dev"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Ice\\EventBundle\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "A Symfony2 bundle for use of the ICE domain event library",
+            "time": "2014-02-11 17:39:29"
         },
         {
             "name": "dflydev/markdown",
