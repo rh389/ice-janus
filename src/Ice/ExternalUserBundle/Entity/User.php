@@ -37,7 +37,7 @@ use Ice\ExternalUserBundle\Util\String as StringUtil;
  *  ),
  * })
  *
- * @UniqueEntity(fields="emailCanonical", message="This email address is already associated with another account", groups={"rest_register", "rest_update"})
+ * @UniqueEntity(fields="emailCanonical", message="This email address is already associated with another account", groups={"rest_register", "rest_update", "rest_set_email"})
  *
  * @ExclusionPolicy("all")
  */
