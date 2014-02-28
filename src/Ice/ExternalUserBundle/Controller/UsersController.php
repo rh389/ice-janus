@@ -10,7 +10,9 @@ use Ice\ExternalUserBundle\Entity\User,
     Ice\ExternalUserBundle\Form\Type\SetPasswordFormType;
 
 use Ice\ExternalUserBundle\Filter\UserFilterType;
+use Ice\ExternalUserBundle\Form\Type\SetDateOfBirthFormType;
 use Ice\ExternalUserBundle\Form\Type\SetEmailFormType;
+use Ice\ExternalUserBundle\Form\Type\SetNameFormType;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 
 use Symfony\Component\HttpFoundation\Response,
@@ -128,6 +130,87 @@ class UsersController extends FOSRestController
 
         $formName = $this->container->get('ice_external_user.update.form.type');
         return $this->processForm($formName, $user);
+    }
+
+    /**
+     * @param $username
+     * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
+     * @return \Symfony\Component\HttpFoundation\Response
+     *
+     * @Route("api/users/{username}/name", name="update_user_name")
+     * @Method("PUT")
+     *
+     * @ApiDoc(
+     *   resource=true,
+     *   description="Update an existing User's title, first names and last names",
+     *   input="Ice\ExternalUserBundle\Form\Type\SetNameFormType",
+     *   statusCodes={
+     *     200="Returned when User successfully updated",
+     *     400="Returned when there is a validation error"
+     *   }
+     * )
+     */
+    public function putUsersNameAction($username)
+    {
+        $user = $this->getUserManager()->findUserByUsernameOrEmail($username);
+
+        if (!$user) {
+            throw $this->createNotFoundException();
+        }
+
+        $form = $this->createForm(new SetNameFormType(), $user);
+        $form->bind($this->getRequest());
+
+        if ($form->isValid()) {
+            /** @var $manager \FOS\UserBundle\Model\UserManager */
+            $manager = $this->get('fos_user.user_manager');
+            $manager->updateUser($user);
+            $manager->updateCanonicalFields($user);
+
+            return $this->view($user, 200);
+        }
+
+        return $this->view($form, 400);
+    }
+
+    /**
+     * @param $username
+     * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
+     * @return \Symfony\Component\HttpFoundation\Response
+     *
+     * @Route("api/users/{username}/dob", name="update_user_dob")
+     * @Method("PUT")
+     *
+     * @ApiDoc(
+     *   resource=true,
+     *   description="Update an existing User's date of birth",
+     *   input="Ice\ExternalUserBundle\Form\Type\SetDateOfBirthFormType",
+     *   statusCodes={
+     *     200="Returned when User successfully updated",
+     *     400="Returned when there is a validation error"
+     *   }
+     * )
+     */
+    public function putUsersDateOfBirthAction($username)
+    {
+        $user = $this->getUserManager()->findUserByUsernameOrEmail($username);
+
+        if (!$user) {
+            throw $this->createNotFoundException();
+        }
+
+        $form = $this->createForm(new SetDateOfBirthFormType(), $user);
+        $form->bind($this->getRequest());
+
+        if ($form->isValid()) {
+            /** @var $manager \FOS\UserBundle\Model\UserManager */
+            $manager = $this->get('fos_user.user_manager');
+            $manager->updateUser($user);
+
+            return $this->view($user, 200);
+        }
+
+        return $this->view($form, 400);
     }
 
     private function processForm($formName, User $user)
