@@ -53,7 +53,7 @@ class MailRequest
      * @var string
      * @ORM\Column(name="serialized_vars", type="text")
      */
-    private $serializedVars = array();
+    private $serializedVars = "";
 
     /**
      * Initialise variables
