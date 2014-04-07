@@ -4,6 +4,7 @@ namespace Ice\MailerBundle\PreCompiler;
 use Ice\MailerBundle\Event\PreCompileEvent;
 use Ice\MailerBundle\Template\BookingConfirmation;
 use Ice\MailerBundle\Template\CourseApplication;
+use Ice\MailerBundle\Template\DisabilityAndSupportNeeds;
 use Ice\VeritasClientBundle\Service\VeritasClient;
 
 /**
@@ -43,7 +44,10 @@ class CourseInformation
     public function onPreCompile(PreCompileEvent $event)
     {
         $template = $event->getTemplate();
-        if ($template instanceof BookingConfirmation || $template instanceof CourseApplication) {
+        if ($template instanceof BookingConfirmation ||
+            $template instanceof CourseApplication ||
+            $template instanceof DisabilityAndSupportNeeds
+        ) {
             $vars = $template->getVars();
             $courseId = $vars['academicInformation']['courseId'];
             $course = $this->getVeritasClient()->getCourse($courseId);
