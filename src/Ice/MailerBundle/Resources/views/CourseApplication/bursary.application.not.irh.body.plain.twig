@@ -1,6 +1,7 @@
 Thank you for your application for the course: {{ course.title }}. We note you have also applied for a bursary for this course.
 
-Your bursary application will be considered together with your course application, and we will contact you within two to four weeks unless stated otherwise on our website.
+{% include "IceMailerBundle:CourseApplication:application.consideration.html.twig"
+with { 'plainText': true, 'defaultMsg': 'Your bursary application will be considered together with your course application, and we will contact you within two to four weeks unless stated otherwise on our website.' } %}
 
 Should you be successful, we will send you instructions regarding booking your place on the course. Please note: Places are allocated on a first-come, first-served basis and your place on the course is not guaranteed until you have completed your booking.
 
