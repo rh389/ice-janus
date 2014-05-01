@@ -1159,12 +1159,12 @@
         },
         {
             "name": "ice/veritasclient-bundle",
-            "version": "1.1.0",
+            "version": "1.1.1",
             "target-dir": "Ice/VeritasClientBundle",
             "source": {
                 "type": "svn",
                 "url": "http://repositories.internal.admin.cam.ac.uk/svn/ice-veritasclient",
-                "reference": "/tags/1.1.0/@55"
+                "reference": "/tags/1.1.1/@71"
             },
             "require": {
                 "cambridgeuniversity/ice-common": "@dev",
@@ -1191,7 +1191,7 @@
                 }
             ],
             "description": "Client for the ICE Veritas API",
-            "time": "2013-09-11 17:58:40"
+            "time": "2014-05-01 19:17:48"
         },
         {
             "name": "ircmaxell/password-compat",
