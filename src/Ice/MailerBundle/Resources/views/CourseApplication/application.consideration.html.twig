@@ -1,0 +1,12 @@
+{% set showDefault = true %}
+{% for attribute in course.attributes if attribute.name == 'applicationConsiderationDetails' %}
+
+    {% set showDefault = false %}
+
+    {{ plainText ? attribute.value|striptags|raw : attribute.value|raw }}
+
+{% endfor %}
+
+{% if showDefault %}
+    {{ plainText ? defaultMsg|striptags : defaultMsg|raw }}
+{% endif %}

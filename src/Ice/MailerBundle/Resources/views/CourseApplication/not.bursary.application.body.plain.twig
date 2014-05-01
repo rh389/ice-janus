@@ -1,4 +1,5 @@
-Thank you for your application for the course: {{ course.title }}. We will contact you about your application within at least two to four weeks, unless stated otherwise on our website.
+Thank you for your application for the course: {{ course.title }}. {% include "IceMailerBundle:CourseApplication:application.consideration.html.twig"
+with { 'plainText': true, 'defaultMsg': 'We will contact you about your application within at least two to four weeks, unless stated otherwise on our website.' } %}
 
 Should your application be successful, we will send you instructions regarding booking your place on the course. Please note: Places are allocated on a first-come, first-served basis and your place on the course is not guaranteed until you have completed your booking.
 
