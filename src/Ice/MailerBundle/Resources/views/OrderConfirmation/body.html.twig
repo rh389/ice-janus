@@ -35,7 +35,7 @@
     <tr><th>Order reference:</th><td>{{ order.reference }}</td></tr>
 </table>
 
-<p>We are pleased to confirm your order for the {{ order.suborders|length > 1 ? 'bookings' : 'booking' }} below:</p>
+<p>Thank you for your recent payment which has now been recorded against the above order for the {{ order.suborders|length > 1 ? 'bookings' : 'booking' }} below.</p>
 
 {% for suborder in order.suborders %}
 <h2>Booking {{ suborder.externalId }}</h2>
@@ -61,7 +61,7 @@
     <tr><th>Total:</th><td>&pound;{{ (total/100)|number_format(2, '.', '') }}</td></tr>
 </table>
 
-<p>Your payment plan breaks down as follows:</p>
+<p>Your scheduled payments are as follows:</p>
     <table>
 {% for receivable in suborder.paymentGroup.receivables %}
     {% spaceless %}
@@ -89,6 +89,8 @@
 {% if 'ONLINE' == receivable.method %}
 <p>Your payment will appear on your credit or debit card statement with the reference 'www.cam.ac.uk 01223 766733'.</p>
 {% endif %}
+
+<p>Please note: You may receive this email sometime after your original booking, depending on when your payment is processed on our system.</p>
 
 <h2>Contacting us</h2>
 <p>
