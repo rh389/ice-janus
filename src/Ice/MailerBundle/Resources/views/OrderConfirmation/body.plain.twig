@@ -2,11 +2,12 @@ Dear {{ recipient.title }} {{ recipient.lastNames }},
 
 Order reference: {{ order.reference }}
 
-We are pleased to confirm your order for the {{ order.suborders|length > 1 ? 'bookings' : 'booking' }} below:
+Thank you for your recent payment which has now been recorded against the above order for the {{ order.suborders|length > 1 ? 'bookings' : 'booking' }} below.
 {% for suborder in order.suborders %}
 
 Booking {{ suborder.externalId }}
 Course: {{ suborder.description }}
+Payment plan: {{ suborder.paymentPlanDescription }}
 {#Course:#}
 {#Course code:{{ course.code }}#}
 {#Course dates:{{ course.startDate | date('j M Y')}} - {{ course.endDate | date('j M Y')}}#}
@@ -23,7 +24,7 @@ VAT at 0% - £0.00
 {% endfor %}
 Total: {{ (total/100)|number_format(2, '.', '') }}
 
-Your payment plan for this booking is '{{ suborder.paymentPlanDescription }}', which breaks down as follows:
+Your scheduled payments are as follows:
 {% for receivable in suborder.paymentGroup.receivables %}
 GBP {{ (receivable.amount/100) | number_format(2, '.', '') }}{% if receivable.amountUnallocated == 0 %} - PAID{% else %} due {% if receivable.dueDate %}{{ receivable.dueDate | date('d/m/Y') }}{% else %}immediately{% endif %}{% endif %}
 
@@ -34,6 +35,8 @@ GBP {{ (receivable.amount/100) | number_format(2, '.', '') }}{% if receivable.am
 {% if 'ONLINE' == receivable.method %}
 Your payment will appear on your credit or debit card statement with the reference 'www.cam.ac.uk 01223 766733'.
 {% endif %}
+
+Please note: You may receive this email sometime after your original booking, depending on when your payment is processed on our system.
 
 Contacting us
 If you would like to contact us regarding your order, please contact our Admissions Team on ice.admissions@ice.cam.ac.uk or +44 (0)1223 746262.
