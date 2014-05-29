@@ -38,8 +38,12 @@ class BookingConfirmation extends DefaultTemplate
         if (isset($vars['course'])) {
             $course = $vars['course'];
 
-            $vars['showSectionStudyingAtICE'] = !$course['isMst'];
-            $vars['showSectionCourseMaterials'] = !$course['isMst'];
+            $vars['showSectionStudyingAtICE'] = !($course['isMst'] || $course['isOnline']);
+            $vars['showSectionOnlineNextSteps'] = $course['isOnline'];
+            if (!$course['isMst']) {
+                $vars['courseMaterialsDelivery'] = $course['isOnline'] ? 'vle' : 'email';
+            }
+            $vars['contact'] = $course['isOnline'] ? 'online' : 'admissions';
         }
         return parent::setVars($vars);
     }

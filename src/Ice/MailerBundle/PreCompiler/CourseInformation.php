@@ -57,6 +57,7 @@ class CourseInformation
                 'code' => $course->getCode(),
                 'endDate' => $course->getEndDate(),
                 'isMst' => $course->getLevel()->isMst(),
+                'isOnline' => $course->getProgramme()->isOnline(),
                 'attributes' => $course->getAttributes()
             ];
             $template->setVars($vars);
