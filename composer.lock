@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "36c9d26907bb0533254653974682a125",
+    "hash": "f24330fe9a615d137284d0edebbc75d3",
     "packages": [
         {
             "name": "cambridgeuniversity/ice-common",
@@ -1159,22 +1159,32 @@
         },
         {
             "name": "ice/veritasclient-bundle",
-            "version": "1.1.1",
+            "version": "1.6.0",
             "target-dir": "Ice/VeritasClientBundle",
             "source": {
                 "type": "svn",
                 "url": "http://repositories.internal.admin.cam.ac.uk/svn/ice-veritasclient",
-                "reference": "/tags/1.1.1/@71"
+                "reference": "/tags/1.6.0/@80"
             },
             "require": {
-                "cambridgeuniversity/ice-common": "@dev",
                 "jms/serializer-bundle": ">=0.12.0@dev",
                 "misd/guzzle-bundle": "@stable"
+            },
+            "require-dev": {
+                "liip/functional-test-bundle": "dev-master",
+                "symfony/assetic-bundle": "2.1.*",
+                "symfony/console": "2.1.*",
+                "symfony/form": "2.1.*",
+                "symfony/monolog-bundle": "2.1.*",
+                "symfony/symfony": "2.1.*",
+                "symfony/validator": "2.1.*",
+                "twig/extensions": "1.0.*@dev"
             },
             "type": "symfony-bundle",
             "autoload": {
                 "psr-0": {
-                    "Ice\\VeritasClientBundle": ""
+                    "Ice\\VeritasClientBundle": "",
+                    "Ice\\VeritasClientTestBundle": "Tests/Resources/src"
                 }
             },
             "license": [
@@ -1191,7 +1201,7 @@
                 }
             ],
             "description": "Client for the ICE Veritas API",
-            "time": "2014-05-01 19:17:48"
+            "time": "2014-05-29 16:06:58"
         },
         {
             "name": "ircmaxell/password-compat",
@@ -3243,7 +3253,6 @@
         "doctrine/doctrine-migrations-bundle": 20,
         "doctrine/migrations": 20,
         "nelmio/api-doc-bundle": 20,
-        "ice/veritasclient-bundle": 20,
         "cambridgeuniversity/ice-common": 20,
         "sonata-project/doctrine-orm-admin-bundle": 20
     },

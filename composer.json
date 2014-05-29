@@ -38,7 +38,7 @@
         "friendsofsymfony/user-bundle": "*",
         "elnur/blowfish-password-encoder-bundle": "0.4.*",
         "nelmio/api-doc-bundle": "dev-master",
-        "ice/veritasclient-bundle": "1.1.*@dev",
+        "ice/veritasclient-bundle": "~1.6",
         "cambridgeuniversity/ice-common": "@dev",
         "ice/mercuryclient-bundle": "2.*",
         "ice/minervaclient-bundle": "1.*",
