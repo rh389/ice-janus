@@ -4,12 +4,6 @@
     "autoload": {
         "psr-0": { "": "src/" }
     },
-    "repositories": [
-        {
-            "type": "composer",
-            "url": "http://satis.internal.admin.cam.ac.uk"
-        }
-    ],
     "require": {
         "php": ">=5.3.3",
         "symfony/symfony": "2.1.*",
@@ -41,7 +35,7 @@
         "ice/veritasclient-bundle": "~1.6",
         "cambridgeuniversity/ice-common": "@dev",
         "ice/mercuryclient-bundle": "2.*",
-        "ice/minervaclient-bundle": "1.*",
+        "ice/minervaclient-bundle": "~1.8",
         "lexik/form-filter-bundle": "~1.2.0",
 
         "sonata-project/cache-bundle": "*",
