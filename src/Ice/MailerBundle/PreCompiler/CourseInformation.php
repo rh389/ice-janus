@@ -52,6 +52,7 @@ class CourseInformation
             $courseId = $vars['academicInformation']['courseId'];
             $course = $this->getVeritasClient()->getCourse($courseId);
             $vars['course'] = [
+                'webUrl' => 'https://www.ice.cam.ac.uk/component/courses/'.$course->getId(),
                 'title' => $course->getTitle(),
                 'startDate' => $course->getStartDate(),
                 'code' => $course->getCode(),
