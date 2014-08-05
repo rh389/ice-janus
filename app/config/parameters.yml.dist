@@ -13,3 +13,12 @@ parameters:
 
     locale:            en
     secret:            ThisTokenIsNotSoSecretChangeIt
+
+    minerva_api_username: minerva
+    minerva_api_password: password
+    mercury_api_username: mercury
+    mercury_api_password: password
+    janus_api_username: janus
+    janus_api_password: password
+    veritas_api_username: veritas
+    veritas_api_password: password
