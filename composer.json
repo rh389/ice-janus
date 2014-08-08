@@ -2,38 +2,40 @@
     "name": "ice/janus",
     "description": "ICE identity management system",
     "autoload": {
-        "psr-0": { "": "src/" }
+        "psr-0": { "": "src/" },
+        "psr-4": {
+            "Ice\\Features\\Context\\": "features/bootstrap"
+        }
     },
     "require": {
         "php": ">=5.3.3",
         "symfony/symfony": "2.1.*",
         "doctrine/orm": ">=2.2.3,<2.4-dev",
         "doctrine/doctrine-bundle": "1.1.*",
-        "twig/extensions": "1.0.*@dev",
+        "twig/extensions": "1.0.*",
         "symfony/assetic-bundle": "2.1.*",
         "symfony/swiftmailer-bundle": "2.1.*",
         "symfony/monolog-bundle": "2.1.*",
         "sensio/distribution-bundle": "2.1.*",
         "sensio/framework-extra-bundle": "2.1.*",
         "sensio/generator-bundle": "2.1.*",
-        "jms/security-extra-bundle": "1.4.*@dev",
-        "jms/di-extra-bundle": "1.3.*@dev",
-        "kriswallsmith/assetic": "1.1.*@dev",
+        "jms/security-extra-bundle": "1.4.*",
+        "jms/di-extra-bundle": "1.3.*",
+        "kriswallsmith/assetic": "1.1.*",
         "misd/guzzle-bundle": "1.0.*",
         "guzzle/guzzle": "3.4.*",
-        "jms/serializer-bundle": "@dev",
-        "jms/serializer": "@dev",
-        "friendsofsymfony/rest-bundle": "0.11.*@dev",
-        "doctrine/doctrine-fixtures-bundle": "dev-master",
-        "doctrine/data-fixtures": "@dev",
-        "liip/functional-test-bundle": "1.0.*@dev",
-        "doctrine/doctrine-migrations-bundle": "@dev",
-        "doctrine/migrations": "@dev",
+        "jms/serializer-bundle": "*",
+        "jms/serializer": "*",
+        "friendsofsymfony/rest-bundle": "0.11.*",
+        "doctrine/doctrine-fixtures-bundle": "*",
+        "doctrine/data-fixtures": "*",
+        "liip/functional-test-bundle": "1.0.*",
+        "doctrine/doctrine-migrations-bundle": "*@dev",
+        "doctrine/migrations": "1.0.*@dev",
         "friendsofsymfony/user-bundle": "*",
         "elnur/blowfish-password-encoder-bundle": "0.4.*",
-        "nelmio/api-doc-bundle": "dev-master",
+        "nelmio/api-doc-bundle": "2.3.1",
         "ice/veritasclient-bundle": "~1.6",
-        "cambridgeuniversity/ice-common": "@dev",
         "ice/mercuryclient-bundle": "2.*",
         "ice/minervaclient-bundle": "~1.8",
         "lexik/form-filter-bundle": "~1.2.0",
@@ -45,6 +47,14 @@
         "sonata-project/exporter": "*",
         "sonata-project/admin-bundle": "*",
         "sonata-project/doctrine-orm-admin-bundle": "2.1.x-dev"
+    },
+    "require-dev": {
+        "behat/behat": "2.4.*",
+        "behat/mink-extension": "~1.0",
+        "behat/mink-goutte-driver": "~1.0",
+        "behat/mink-selenium2-driver": "~1.0",
+        "behat/symfony2-extension": "*",
+        "nelmio/alice": "~1.0"
     },
     "scripts": {
         "post-install-cmd": [
@@ -59,6 +69,9 @@
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile"
         ]
+    },
+    "config": {
+        "bin-dir": "bin/"
     },
     "minimum-stability": "stable",
     "extra": {

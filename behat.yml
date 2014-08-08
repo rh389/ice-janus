@@ -1,0 +1,20 @@
+default:
+    extensions:
+        Behat\MinkExtension\Extension:
+            base_url: http://localhost:8086/app_test.php/
+            goutte: ~
+            selenium2: ~
+        Behat\Symfony2Extension\Extension: ~
+    paths:
+        features: features
+    context:
+        class:  Ice\Features\Context\FeatureContext
+        parameters:
+          # URL to use against the web server in the features
+          url: http://localhost:8086
+
+          # Path to the document root
+          documentRoot: web
+
+          # How many seconds will we allow the httpd to use when starting?
+          timeout: 1

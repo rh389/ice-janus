@@ -1,8 +1,12 @@
 imports:
     - { resource: config_dev.yml }
 
+parameters:
+    janus_api_password: password
+
 framework:
     test: ~
+    trusted_proxies: [127.0.0.1]
     session:
         storage_id: session.storage.filesystem
 
