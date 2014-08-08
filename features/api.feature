@@ -14,3 +14,4 @@ Feature: API
       | rh1       |
     And I am on "/api/users/rh1"
     Then the response status code should be 200
+    And the response JSON should contain "resources/rh1.json"
