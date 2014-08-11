@@ -4,7 +4,7 @@
     "autoload": {
         "psr-0": { "": "src/" },
         "psr-4": {
-            "Ice\\Features\\Context\\": "features/bootstrap"
+            "Ice\\Features\\": "features"
         }
     },
     "require": {
