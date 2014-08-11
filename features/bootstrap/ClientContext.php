@@ -2,7 +2,9 @@
 
 namespace Ice\Features\Context;
 use Behat\Behat\Exception\PendingException;
+use Behat\Mink\Driver\BrowserKitDriver;
 use Behat\MinkExtension\Context\MinkContext;
+use Goutte\Client;
 use WebDriver\Exception\WebTestAssertion;
 
 class ClientContext extends MinkContext
@@ -29,6 +31,57 @@ class ClientContext extends MinkContext
     public function iUseTheUsernameWithPassword($username, $password)
     {
         $this->getSession()->setBasicAuth($username, $password);
+    }
+
+    /**
+     * @When /^I post "([^"]*)" as "([^"]*)" to "([^"]*)"$/
+     */
+    public function iPostAsTo($path, $requestFormat, $uri)
+    {
+        $filePath = __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . $path;
+
+        if (!file_exists($filePath)) {
+            throw new PendingException($path." does not exist.");
+        }
+
+        $driver = $this->getSession()->getDriver();
+
+        if (!$driver instanceof BrowserKitDriver) {
+            throw new PendingException("POST requests are currently only supported when using the BrowserKit driver");
+        }
+
+        switch ($requestFormat) {
+            case 'json':
+                $driver->getClient()->request(
+                    'POST', $this->locatePath($uri), array(), array(), array('HTTP_CONTENT_TYPE' => 'application/json'),
+                    file_get_contents($filePath)
+                );
+
+                return;
+            default:
+                throw new PendingException("Request format '".$requestFormat."' has not been defined");
+        }
+    }
+
+    /**
+     * @Given /^the response JSON should contain the field "([^"]*)" with value "([^"]*)"$/
+     */
+    public function theResponseJsonShouldContainTheFieldWithValue($field, $value)
+    {
+        $rawResponseBody = $this->getSession()->getPage()->getContent();
+        $responseData = json_decode($rawResponseBody, true);
+
+        if ($responseData === null) {
+            throw new WebTestAssertion("The response body is not json:\n".$rawResponseBody);
+        }
+
+        if (!array_key_exists($field, $responseData)) {
+            throw new WebTestAssertion(sprintf("The field '%s' is not present in the response", $field));
+        }
+
+        if ($responseData[$field] != $value) {
+            throw new WebTestAssertion(sprintf("Field '%s' has value '%s', expected '%s'", $field, $responseData[$field], $value));
+        }
     }
 
     /**
