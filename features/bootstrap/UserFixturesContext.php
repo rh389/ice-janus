@@ -24,14 +24,24 @@ class UserFixturesContext extends BehatContext implements KernelAwareInterface
 
         foreach ($courses->getHash() as $row) {
             //$id = $this->getRepositories()->getUnits()->getNextId();
-            $fixtures['\Ice\ExternalUserBundle\Entity\User']['user' . $row['username']] = array(
+            $fixtures['\Ice\ExternalUserBundle\Entity\User']['user:' . $row['username']] = array(
                 'username' => $row['username'],
+                'usernameCanonical' => $row['username'],
                 'plainPassword' => isset($row['password']) ? $row['password'] : 'password',
                 'enabled' => isset($row['enabled']) ? $row['enabled'] : true,
                 'title' => isset($row['title']) ? $row['title'] : 'Mr',
                 'firstNames' => isset($row['first_names']) ? $row['first_names'] : 'Rob',
                 'lastNames' => isset($row['last_names']) ? $row['last_names'] : 'Hogan',
                 'email' => isset($row['email']) ? $row['email'] : null
+            );
+
+            preg_match('#(\w+)(\d+)#', $row['username'], $usernameParts);
+            $fixtures['\Ice\UsernameGeneratorBundle\Entity\Username']['username:' . $row['username']] = array(
+                'generatedUsername' => $row['username'],
+                'initials' => $usernameParts[1],
+                'sequence' => intval($usernameParts[2]),
+                'generatedAt' => new \DateTime(),
+                '__construct' => ['%s']
             );
         }
         $this->getMainContext()->getSubcontext('fixtures')->loadFixtures($fixtures);
