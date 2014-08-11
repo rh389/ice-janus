@@ -31,3 +31,13 @@ Feature: API
     When I post "resources/request-create-user-with-email.json" as "json" to "/api/users"
     Then the response status code should be 400
     And the response JSON should contain "resources/response-create-user-duplicate-email.json"
+
+  Scenario: Setting a password
+    Given there are users
+      | username  | email               | password    |
+      | rh1       | rh389@my-email.com  | oldPassword |
+    When I put "resources/request-put-password.json" as "json" to "/api/users/rh1/password"
+    Then the response status code should be 204
+    When I use the username "rh389@my-email.com" with password "newPassword"
+    And I go to "/api/users/authenticate"
+    Then the response status code should be 200
