@@ -1,7 +1,6 @@
 {
-    "id": 1,
     "username": "rh1",
-    "enabled": false,
+    "enabled": true,
     "title": "Mr",
     "firstNames": "Rob",
     "lastNames": "Hogan"

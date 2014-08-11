@@ -26,10 +26,12 @@ class UserFixturesContext extends BehatContext implements KernelAwareInterface
             //$id = $this->getRepositories()->getUnits()->getNextId();
             $fixtures['\Ice\ExternalUserBundle\Entity\User']['user' . $row['username']] = array(
                 'username' => $row['username'],
-                'password' => isset($row['password']) ? $row['password'] : 'password',
+                'plainPassword' => isset($row['password']) ? $row['password'] : 'password',
+                'enabled' => isset($row['enabled']) ? $row['enabled'] : true,
                 'title' => isset($row['title']) ? $row['title'] : 'Mr',
                 'firstNames' => isset($row['first_names']) ? $row['first_names'] : 'Rob',
-                'lastNames' => isset($row['last_names']) ? $row['last_names'] : 'Hogan'
+                'lastNames' => isset($row['last_names']) ? $row['last_names'] : 'Hogan',
+                'email' => isset($row['email']) ? $row['email'] : null
             );
         }
         $this->getMainContext()->getSubcontext('fixtures')->loadFixtures($fixtures);
