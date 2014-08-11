@@ -34,9 +34,9 @@ class ClientContext extends MinkContext
     }
 
     /**
-     * @When /^I post "([^"]*)" as "([^"]*)" to "([^"]*)"$/
+     * @When /^I (post|put) "([^"]*)" as "([^"]*)" to "([^"]*)"$/
      */
-    public function iPostAsTo($path, $requestFormat, $uri)
+    public function iPostOrPutAsTo($method, $path, $requestFormat, $uri)
     {
         $filePath = __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . $path;
 
@@ -47,13 +47,13 @@ class ClientContext extends MinkContext
         $driver = $this->getSession()->getDriver();
 
         if (!$driver instanceof BrowserKitDriver) {
-            throw new PendingException("POST requests are currently only supported when using the BrowserKit driver");
+            throw new PendingException("POST and PUT requests are currently only supported when using the BrowserKit driver");
         }
 
         switch ($requestFormat) {
             case 'json':
                 $driver->getClient()->request(
-                    'POST', $this->locatePath($uri), array(), array(), array('HTTP_CONTENT_TYPE' => 'application/json'),
+                    strtoupper($method), $this->locatePath($uri), array(), array(), array('HTTP_CONTENT_TYPE' => 'application/json'),
                     file_get_contents($filePath)
                 );
 
