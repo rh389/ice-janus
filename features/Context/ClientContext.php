@@ -2,9 +2,13 @@
 
 namespace Ice\Features\Context;
 use Behat\Behat\Exception\PendingException;
+use Behat\Gherkin\Node\PyStringNode;
 use Behat\Mink\Driver\BrowserKitDriver;
+use Behat\Mink\Exception\ExpectationException;
+use Behat\Mink\Exception\UnsupportedDriverActionException;
 use Behat\MinkExtension\Context\MinkContext;
-use Goutte\Client;
+use Behat\Symfony2Extension\Driver\KernelDriver;
+use Symfony\Component\HttpKernel\Profiler\Profile;
 use WebDriver\Exception\WebTestAssertion;
 
 class ClientContext extends MinkContext
@@ -23,6 +27,7 @@ class ClientContext extends MinkContext
     public function iAmConnectingWithHttps()
     {
         $this->getSession()->setRequestHeader('X-Forwarded-Proto', 'https');
+        $this->getSession()->setRequestHeader('HTTP_X_FORWARDED_PROTO', 'https');
     }
 
     /**
@@ -50,10 +55,15 @@ class ClientContext extends MinkContext
             throw new PendingException("POST and PUT requests are currently only supported when using the BrowserKit driver");
         }
 
+        if (!$driver instanceof KernelDriver) {
+            $uri = $this->locatePath($uri);
+        }
+
         switch ($requestFormat) {
             case 'json':
+
                 $driver->getClient()->request(
-                    strtoupper($method), $this->locatePath($uri), array(), array(), array('HTTP_CONTENT_TYPE' => 'application/json'),
+                    strtoupper($method), $uri, array(), array(), array('HTTP_CONTENT_TYPE' => 'application/json'),
                     file_get_contents($filePath)
                 );
 
@@ -151,5 +161,82 @@ class ClientContext extends MinkContext
             }
         }
         return $difference;
+    }
+
+    /**
+     * @return Profile
+     * @throws \RuntimeException
+     * @throws \Behat\Mink\Exception\UnsupportedDriverActionException
+     */
+    public function getSymfonyProfile()
+    {
+        $driver = $this->getSession()->getDriver();
+        if (!$driver instanceof KernelDriver) {
+            throw new UnsupportedDriverActionException(
+                'You need to tag the scenario with '.
+                '"@mink:symfony2". Using the profiler is not '.
+                'supported by %s', $driver
+            );
+        }
+
+        $profile = $driver->getClient()->getProfile();
+        if (false === $profile) {
+            throw new \RuntimeException(
+                'The profiler is disabled. Activate it by setting '.
+                'framework.profiler.only_exceptions to false in '.
+                'your config'
+            );
+        }
+
+        return $profile;
+    }
+
+    /**
+     * @Given /^I should get an email on "(?P<email>[^"]+)" with:$/
+     */
+    public function iShouldGetAnEmailWithText($email, PyStringNode $text)
+    {
+        $error     = sprintf('No message sent to "%s"', $email);
+        $profile   = $this->getSymfonyProfile();
+        $collector = $profile->getCollector('swiftmailer');
+
+        foreach ($collector->getMessages() as $message) {
+            // Checking the recipient email and the X-Swift-To
+            // header to handle the RedirectingPlugin.
+            // If the recipient is not the expected one, check
+            // the next mail.
+            $correctRecipient = array_key_exists(
+                $email, $message->getTo()
+            );
+            $headers = $message->getHeaders();
+            $correctXToHeader = false;
+            if ($headers->has('X-Swift-To')) {
+                $correctXToHeader = array_key_exists($email,
+                    $headers->get('X-Swift-To')->getFieldBodyModel()
+                );
+            }
+
+            if (!$correctRecipient && !$correctXToHeader) {
+                continue;
+            }
+
+            if ($text->getRaw() == "" || (strpos($message->getBody(), $text->getRaw()) !== false)) {
+                return;
+            }
+
+            $error = sprintf(
+                'An email has been found for "%s" but without '.
+                'the text "%s".', $email, $text->getRaw()
+            );
+        }
+        throw new ExpectationException($error, $this->getSession());
+    }
+
+    /**
+     * @Given /^I should get an email on "(?P<email>[^"]+)"$/
+     */
+    public function iShouldGetAnEmail($email)
+    {
+        $this->iShouldGetAnEmailWithText($email, new PyStringNode(""));
     }
 }
