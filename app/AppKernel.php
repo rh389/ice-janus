@@ -48,6 +48,8 @@ class AppKernel extends Kernel
 
         if ('test' === $this->getEnvironment()) {
             $bundles[] = new Liip\FunctionalTestBundle\LiipFunctionalTestBundle();
+            $bundles[] = new Ice\DoctrineMockOfVeritasClientBundle\IceDoctrineMockOfVeritasClientBundle();
+            $bundles[] = new Ice\DoctrineMockOfMinervaClientBundle\IceDoctrineMockOfMinervaClientBundle();
         }
 
         return $bundles;

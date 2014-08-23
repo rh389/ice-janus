@@ -1,0 +1,14 @@
+{
+  "to": "rh1",
+  "template_name": "BookingConfirmation",
+  "vars": {
+    "academicInformation": {
+      "courseId": 2892,
+      "iceId": "rh1"
+    },
+    "booking": {
+        "bookingReference": "IB-TEST",
+        "orderReference": "IO-TEST"
+    }
+  }
+}
