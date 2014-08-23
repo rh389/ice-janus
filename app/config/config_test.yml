@@ -3,6 +3,8 @@ imports:
 
 parameters:
     janus_api_password: password
+    minerva_api_password: password
+    veritas_api_password: password
 
 framework:
     test: ~
@@ -24,6 +26,22 @@ doctrine:
             default:
                 driver:   pdo_sqlite
                 path:     %kernel.cache_dir%/test.db
-
-liip_functional_test:
-    cache_sqlite_db: true
+    orm:
+        entity_managers:
+            default:
+                auto_mapping:         false
+                mappings:
+                    IceDoctrineMockOfVeritasClientBundle:
+                        mapping:              true
+                        type:                 yml
+                        dir:                  Mapping
+                        alias:                ~
+                        prefix:               Ice\VeritasClientBundle\Entity
+                        is_bundle:            true
+                    IceDoctrineMockOfMinervaClientBundle:
+                        mapping:              true
+                        type:                 yml
+                        dir:                  Mapping
+                        alias:                ~
+                        prefix:               Ice\MinervaClientBundle\Entity
+                        is_bundle:            true

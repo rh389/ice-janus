@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "108de5965a5e92a44ef4c273f8fdb3cc",
+    "hash": "70970238959123d7358bdc5202682a29",
     "packages": [
         {
             "name": "dflydev/markdown",
@@ -1341,17 +1341,16 @@
         },
         {
             "name": "ice/minervaclient-bundle",
-            "version": "1.8.3",
-            "target-dir": "Ice/MinervaClientBundle",
+            "version": "1.9.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/cambridgeuniversity/ice-minervaclient.git",
-                "reference": "69fdd6a087e9482081917b06b3ae258d60812661"
+                "reference": "5a6e839cb6b4ab493834265e70e651e4d2c0f469"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/cambridgeuniversity/ice-minervaclient/zipball/69fdd6a087e9482081917b06b3ae258d60812661",
-                "reference": "69fdd6a087e9482081917b06b3ae258d60812661",
+                "url": "https://api.github.com/repos/cambridgeuniversity/ice-minervaclient/zipball/5a6e839cb6b4ab493834265e70e651e4d2c0f469",
+                "reference": "5a6e839cb6b4ab493834265e70e651e4d2c0f469",
                 "shasum": ""
             },
             "require": {
@@ -1361,7 +1360,7 @@
             "type": "symfony-bundle",
             "autoload": {
                 "psr-0": {
-                    "Ice\\MinervaClientBundle": ""
+                    "": "src"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -1379,16 +1378,21 @@
                 }
             ],
             "description": "Client for the ICE Minerva API",
-            "time": "2014-05-07 10:11:46"
+            "time": "2014-08-23 13:58:32"
         },
         {
             "name": "ice/veritasclient-bundle",
-            "version": "1.6.0",
-            "target-dir": "Ice/VeritasClientBundle",
+            "version": "1.7.0",
             "source": {
-                "type": "svn",
-                "url": "http://repositories.internal.admin.cam.ac.uk/svn/ice-veritasclient",
-                "reference": "/tags/1.6.0/@80"
+                "type": "git",
+                "url": "https://github.com/cambridgeuniversity/ice-veritasclient.git",
+                "reference": "0fe3f57e5f029fcccb65429e83ddd360c269dfe5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/cambridgeuniversity/ice-veritasclient/zipball/0fe3f57e5f029fcccb65429e83ddd360c269dfe5",
+                "reference": "0fe3f57e5f029fcccb65429e83ddd360c269dfe5",
+                "shasum": ""
             },
             "require": {
                 "jms/serializer-bundle": ">=0.12.0@dev",
@@ -1407,25 +1411,27 @@
             "type": "symfony-bundle",
             "autoload": {
                 "psr-0": {
-                    "Ice\\VeritasClientBundle": "",
-                    "Ice\\VeritasClientTestBundle": "Tests/Resources/src"
+                    "Ice\\VeritasClientTestBundle": "tests/Resources/src",
+                    "tests": "",
+                    "": "src"
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
             "authors": [
                 {
-                    "name": "Rob Hogan",
-                    "email": "rob.hogan@admin.cam.ac.uk"
-                },
-                {
                     "name": "Stuart Chapman",
                     "email": "stuart.chapman@admin.cam.ac.uk"
+                },
+                {
+                    "name": "Rob Hogan",
+                    "email": "rob.hogan@admin.cam.ac.uk"
                 }
             ],
             "description": "Client for the ICE Veritas API",
-            "time": "2014-05-29 16:06:58"
+            "time": "2014-08-15 16:35:19"
         },
         {
             "name": "ircmaxell/password-compat",

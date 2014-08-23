@@ -39,6 +39,8 @@ class AliceFixturesContext extends BehatContext implements FixturesContext, Kern
     public function __construct()
     {
         $this->useContext('userFixtures', new UserFixturesContext());
+        $this->useContext('courseFixtures', new VeritasClientFixturesContext());
+        $this->useContext('bookingFixtures', new MinervaClientFixturesContext());
     }
 
     public function setKernel(KernelInterface $kernel)
@@ -64,8 +66,8 @@ class AliceFixturesContext extends BehatContext implements FixturesContext, Kern
     public function loadFixtures(array $fixtures)
     {
         $objects = $this->loader->load($fixtures);
-
         $this->persister->persist($objects);
+        $this->getEntityManager()->clear();
     }
 
     /**

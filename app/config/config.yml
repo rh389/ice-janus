@@ -51,7 +51,38 @@ doctrine:
 
     orm:
         auto_generate_proxy_classes: "%kernel.debug%"
-        auto_mapping: true
+        entity_managers:
+            default:
+                auto_mapping:         false
+                mappings:
+                    FOSUserBundle:
+                        mapping:              true
+                        type:                 xml
+                        dir:                  Resources\config\doctrine
+                        alias:                ~
+                        prefix:               FOS\UserBundle\Entity
+                        is_bundle:            true
+                    IceExternalUserBundle:
+                        mapping:              true
+                        type:                 annotation
+                        dir:                  Entity
+                        alias:                ~
+                        prefix:               Ice\ExternalUserBundle\Entity
+                        is_bundle:            true
+                    IceUsernameGeneratorBundle:
+                        mapping:              true
+                        type:                 annotation
+                        dir:                  Entity
+                        alias:                ~
+                        prefix:               Ice\UsernameGeneratorBundle\Entity
+                        is_bundle:            true
+                    IceMailerBundle:
+                        mapping:              true
+                        type:                 annotation
+                        dir:                  Entity
+                        alias:                ~
+                        prefix:               Ice\MailerBundle\Entity
+                        is_bundle:            true
 
 # Swiftmailer Configuration
 swiftmailer:
@@ -136,4 +167,4 @@ ice_minerva_client:
 ice_mercury_client:
     username: %mercury_api_username%
     password: %mercury_api_password%
-    gateway_secret: K7Se4reKetr3
+    gateway_secret: ~

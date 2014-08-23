@@ -35,9 +35,9 @@
         "friendsofsymfony/user-bundle": "*",
         "elnur/blowfish-password-encoder-bundle": "0.4.*",
         "nelmio/api-doc-bundle": "2.3.1",
-        "ice/veritasclient-bundle": "~1.6",
+        "ice/veritasclient-bundle": "~1.7",
         "ice/mercuryclient-bundle": "2.*",
-        "ice/minervaclient-bundle": "~1.8",
+        "ice/minervaclient-bundle": "~1.9",
         "lexik/form-filter-bundle": "~1.2.0",
 
         "sonata-project/cache-bundle": "*",
