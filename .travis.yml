@@ -10,6 +10,7 @@ php:
 
 install:
  - mv app/config/parameters.yml.dist app/config/parameters.yml
+ - composer self-update
  - composer install
 
 script: bin/behat
