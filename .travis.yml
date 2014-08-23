@@ -9,7 +9,7 @@ php:
  - 5.4
 
 install:
- - mv app/config/parameters.yml.dist app/config parameters.yml
+ - mv app/config/parameters.yml.dist app/config/parameters.yml
  - composer install
 
 script: bin/behat
